@@ -1,6 +1,6 @@
 """
-@api {get} /hospital/:id Request Hospital information
-@apiName Hospital Display
+@api {get} /hospital/:id Request Hospital Information
+@apiName Hospital-Display
 @apiGroup Hospital
 @apiDescription Display information about a hospital.
 
@@ -19,7 +19,7 @@
 """
 
 @api {get} /hospitals/:query Request List of Hospitals
-@apiName Hospital List
+@apiName Hospital-List
 @apiGroup Hospital
 @apiDescription Dispaly all hospitals based on query
 

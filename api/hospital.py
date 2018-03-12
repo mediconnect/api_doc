@@ -15,7 +15,8 @@
 @apiSuccess	{String} hospital.url 		Hospital Website Link.
 
 @apiError ObjectNotFound The <code>id</code> of the Hospital was not found.
-
+"""
+"""
 
 @api {get} /hospitals/:query Request List of Hospitals
 @apiName Hospital List

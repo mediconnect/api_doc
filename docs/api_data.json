@@ -1,6 +1,69 @@
 [
   {
     "type": "get",
+    "url": "/disease/:id",
+    "title": "Request Disease Information",
+    "name": "DiseaseDisplay",
+    "group": "Disease",
+    "description": "<p>Display information about a disease.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Disease unique ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Disease name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "keyword",
+            "description": "<p>Disease keyword</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "image",
+            "description": "<p>Disease image</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "DiseaseNotFound",
+            "description": "<p>The <code>id</code> of the Disease was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/disease.py",
+    "groupTitle": "Disease"
+  },
+  {
+    "type": "get",
     "url": "/hospital/:id",
     "title": "Request Hospital Information",
     "name": "Hospital_Display",
@@ -516,6 +579,112 @@
             "group": "Parameter",
             "type": "DateTime",
             "optional": false,
+            "field": "current_date_time",
+            "description": "<p>Mandatory Datetime of first step completed.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ReservationExpired",
+            "description": "<p>The slots reserved expired after 30 min.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/reservations.py",
+    "groupTitle": "Reservation"
+  },
+  {
+    "type": "post",
+    "url": "/reserve/:id/2",
+    "title": "Second step",
+    "name": "ReservationSecondStep",
+    "group": "Reservation",
+    "description": "<p>Second step of reservation, fill in hospital/disease/document info, associate dcument_id</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "reservation_id",
+            "description": "<p>Mandatory Reservation unique ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "DateTime",
+            "optional": false,
+            "field": "reservation_slot",
+            "description": "<p>Mandatory slot for Reservation.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "diagnosed_hospital",
+            "description": "<p>Mandatory diagnose-hospital.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "diagnosed_doctor",
+            "description": "<p>Mandatory diagnose-doctor.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "diagnosed_doctor_contact",
+            "description": "<p>Mandatory diagnose-doctor contact info.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object[]",
+            "optional": false,
+            "field": "documents",
+            "description": "<p>Mandatory list of documents uploaded.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Stinrg",
+            "optional": false,
+            "field": "document.description",
+            "description": "<p>Mandatory document description</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "document.file_path",
+            "description": "<p>Mandatory file_path</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "document.name",
+            "description": "<p>Mandatory document name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "document.note",
+            "description": "<p>Mandatory note for document</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "DateTime",
+            "optional": false,
             "field": "date_time",
             "description": "<p>Mandatory Datetime of first step completed.</p>"
           }
@@ -537,6 +706,62 @@
     "version": "0.0.0",
     "filename": "api/reservations.py",
     "groupTitle": "Reservation"
+  },
+  {
+    "type": "get",
+    "url": "/slot/:hospital_id/:disease_id",
+    "title": "Request Slot Information",
+    "name": "SlotDisplay",
+    "group": "Slot",
+    "description": "<p>Display information about a slot.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "hospital_id",
+            "description": "<p>Hospital ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "disease_id",
+            "description": "<p>Disease ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number[4]",
+            "optional": false,
+            "field": "available",
+            "description": "<p>Abailable slots for the next four weeks.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "SlotNotFound",
+            "description": "<p>The combination of <code>hospital_id</code> and <code>disease_id</code> of the Slot was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/slot.py",
+    "groupTitle": "Slot"
   },
   {
     "type": "get",

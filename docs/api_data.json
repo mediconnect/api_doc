@@ -63,6 +63,154 @@
     "groupTitle": "Disease"
   },
   {
+    "type": "post",
+    "url": "/document",
+    "title": "Create Document",
+    "name": "CreateDocument",
+    "group": "Document",
+    "description": "<p>Create document.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Stinrg",
+            "optional": false,
+            "field": "document.description",
+            "description": "<p>Mandatory document description</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "document.file_path",
+            "description": "<p>Mandatory file_path</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "document.name",
+            "description": "<p>Mandatory document name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "document.note",
+            "description": "<p>Optional note for document.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "DateTime",
+            "optional": false,
+            "field": "document.upload_at",
+            "description": "<p>Mandatory document upload time.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "document.id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RequiredFieldBlank",
+            "description": "<p>Any mandatory form is blank.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/document.py",
+    "groupTitle": "Document"
+  },
+  {
+    "type": "get",
+    "url": "/document",
+    "title": "Request Document Info",
+    "name": "RequestDocument",
+    "group": "Document",
+    "description": "<p>Request document information.</p>",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "document",
+            "description": "<p>Document Object</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Stinrg",
+            "optional": false,
+            "field": "document.description",
+            "description": "<p>Document description</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "document.file_path",
+            "description": "<p>File_path</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "document.name",
+            "description": "<p>Document name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "document.note",
+            "description": "<p>Note for document</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "document.upload_at",
+            "description": "<p>Document upload time.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "DocumentNotFound",
+            "description": "<p>The <code>id</code> of the document doesn't exist.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/document.py",
+    "groupTitle": "Document"
+  },
+  {
     "type": "get",
     "url": "/hospital/:id",
     "title": "Request Hospital Information",
@@ -444,77 +592,6 @@
   },
   {
     "type": "post",
-    "url": "/patient/:patient_id/visit_history/add",
-    "title": "Create patient previous hospital visit history",
-    "name": "UpdatePatient",
-    "group": "Patient",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "patient_id",
-            "description": "<p>Mandatory unique Patient ID.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "hospital_name",
-            "description": "<p>Mandatory hospital visited.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "doctor_name",
-            "description": "<p>Mandatory doctor consulted.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "contact_info",
-            "description": "<p>Mandatory doctor contact info.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "disease_category",
-            "description": "<p>Mandatory main disease category for the visit.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "DateTime",
-            "optional": true,
-            "field": "visit_date",
-            "description": "<p>Optional visit date.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "visit_id",
-            "description": "<p>On success, return visit history id.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "api/patient.py",
-    "groupTitle": "Patient"
-  },
-  {
-    "type": "post",
     "url": "/patient/:patient_id/update",
     "title": "Update patient",
     "name": "UpdatePatient",
@@ -614,6 +691,274 @@
   },
   {
     "type": "post",
+    "url": "/patient/:patient_id/visit_history/add",
+    "title": "Create patient previous hospital visit history",
+    "name": "UpdatePatient",
+    "group": "Patient",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "patient_id",
+            "description": "<p>Mandatory unique Patient ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "hospital_name",
+            "description": "<p>Mandatory hospital visited.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "doctor_name",
+            "description": "<p>Mandatory doctor consulted.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contact_info",
+            "description": "<p>Mandatory doctor contact info.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "disease_category",
+            "description": "<p>Mandatory main disease category for the visit.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "DateTime",
+            "optional": true,
+            "field": "visit_date",
+            "description": "<p>Optional visit date.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "visit_id",
+            "description": "<p>On success, return visit history id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/patient.py",
+    "groupTitle": "Patient"
+  },
+  {
+    "type": "get",
+    "url": "/requirement/:hospital_id/:disease_id",
+    "title": "Request Document Requirement",
+    "name": "DocumentRequirement",
+    "group": "Requirement",
+    "description": "<p>Display document requirement.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "hospital_id",
+            "description": "<p>Hospital ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "disease_id",
+            "description": "<p>Disease ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "requirements",
+            "description": "<p>Document requirements for this combination of Hospital and Disease.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RequirementNotFound",
+            "description": "<p>The combination of <code>hospital_id</code> and <code>disease_id</code> of the Requirement was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/requirement.py",
+    "groupTitle": "Requirement"
+  },
+  {
+    "type": "post",
+    "url": "/reserve/:id",
+    "title": "Commit reservation to the database.",
+    "name": "PostReservation",
+    "group": "Reservation",
+    "description": "<p>Store the created reservation in the database.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "confirm",
+            "description": "<p>Confirmation that the reservation should be saved in the database.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "DateTime",
+            "optional": false,
+            "field": "date_time",
+            "description": "<p>Mandatory Datetime of commit to be made.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID of reservation.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ReservationExpired",
+            "description": "<p>The slots reserved expired after 30 min.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/reservations.py",
+    "groupTitle": "Reservation"
+  },
+  {
+    "type": "get",
+    "url": "/reserve/:id/",
+    "title": "Request reservation info",
+    "name": "RequestReservationInfo",
+    "group": "Reservation",
+    "description": "<p>Request reservation information.</p>",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "reservation",
+            "description": "<p>Reservation Object</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diagnosed_hospital",
+            "description": "<p>Diagnose-hospital name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diagnosed_doctor",
+            "description": "<p>Diagnose-doctor name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diagnosed_doctor_contact",
+            "description": "<p>Diagnose-doctor contact info.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reservation_patient_id",
+            "description": "<p>Unique ID for patient.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "slot_number",
+            "description": "<p>Slot number at submit.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "documents_ids",
+            "description": "<p>Associated Document IDs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "note",
+            "description": "<p>Note for the reservation.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ReservationNotFound",
+            "description": "<p>The <code>id</code> of the required reservation doesn't exist.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/reservations.py",
+    "groupTitle": "Reservation"
+  },
+  {
+    "type": "post",
     "url": "/reserve/:id/1",
     "title": "First step",
     "name": "ReservationFirstStep",
@@ -654,6 +999,12 @@
             "optional": false,
             "field": "ReservationExpired",
             "description": "<p>The slots reserved expired after 30 min.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RequiredFieldBlank",
+            "description": "<p>Any mandatory form is blank.</p>"
           }
         ]
       }
@@ -709,45 +1060,24 @@
           },
           {
             "group": "Parameter",
+            "type": "String[]",
+            "optional": false,
+            "field": "required_documents_types",
+            "description": "<p>Mandatory require-documents ytpes.</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "Object[]",
             "optional": false,
-            "field": "documents",
-            "description": "<p>Mandatory list of documents uploaded.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Stinrg",
-            "optional": false,
-            "field": "document.description",
-            "description": "<p>Mandatory document description</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "document.file_path",
-            "description": "<p>Mandatory file_path</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "document.name",
-            "description": "<p>Mandatory document name</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "document.note",
-            "description": "<p>Mandatory note for document</p>"
+            "field": "documents_ids",
+            "description": "<p>Mandatory document IDs.</p>"
           },
           {
             "group": "Parameter",
             "type": "DateTime",
             "optional": false,
             "field": "date_time",
-            "description": "<p>Mandatory Datetime of first step completed.</p>"
+            "description": "<p>Mandatory Datetime of second step completed.</p>"
           }
         ]
       }
@@ -760,6 +1090,12 @@
             "optional": false,
             "field": "ReservationExpired",
             "description": "<p>The slots reserved expired after 30 min.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RequiredFieldBlank",
+            "description": "<p>Any mandatory form is blank.</p>"
           }
         ]
       }
@@ -899,23 +1235,23 @@
           {
             "group": "Success 200",
             "type": "String",
-            "optional": false,
+            "optional": true,
             "field": "user.wechat",
             "description": "<p>Optional User wechat.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
-            "optional": false,
+            "optional": true,
             "field": "user.qq",
             "description": "<p>Optional User qq.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
-            "optional": false,
+            "optional": true,
             "field": "user.gender",
-            "description": "<p>Optional User gender.</p> <blockquote> <blockquote> <blockquote> <blockquote> <blockquote> <blockquote> <blockquote> <p>fcfb94715fbd7a0012666285f6770c6794ff998b</p> </blockquote> </blockquote> </blockquote> </blockquote> </blockquote> </blockquote> </blockquote>"
+            "description": "<p>Optional User gender.</p>"
           }
         ]
       }

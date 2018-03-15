@@ -592,6 +592,77 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/patient/:patient_id/visit_history/add",
+    "title": "Create patient previous hospital visit history",
+    "name": "UpdatePatient",
+    "group": "Patient",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "patient_id",
+            "description": "<p>Mandatory unique Patient ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "hospital_name",
+            "description": "<p>Mandatory hospital visited.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "doctor_name",
+            "description": "<p>Mandatory doctor consulted.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contact_info",
+            "description": "<p>Mandatory doctor contact info.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "disease_category",
+            "description": "<p>Mandatory main disease category for the visit.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "DateTime",
+            "optional": true,
+            "field": "visit_date",
+            "description": "<p>Optional visit date.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "visit_id",
+            "description": "<p>On success, return visit history id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/patient.py",
+    "groupTitle": "Patient"
+  },
+  {
+    "type": "post",
     "url": "/patient/:patient_id/update",
     "title": "Update patient",
     "name": "UpdatePatient",
@@ -681,77 +752,6 @@ define({ "api": [
             "optional": false,
             "field": "msg",
             "description": "<p>Successfully update patient.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "api/patient.py",
-    "groupTitle": "Patient"
-  },
-  {
-    "type": "post",
-    "url": "/patient/:patient_id/visit_history/add",
-    "title": "Create patient previous hospital visit history",
-    "name": "UpdatePatient",
-    "group": "Patient",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "patient_id",
-            "description": "<p>Mandatory unique Patient ID.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "hospital_name",
-            "description": "<p>Mandatory hospital visited.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "doctor_name",
-            "description": "<p>Mandatory doctor consulted.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "contact_info",
-            "description": "<p>Mandatory doctor contact info.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "disease_category",
-            "description": "<p>Mandatory main disease category for the visit.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "DateTime",
-            "optional": true,
-            "field": "visit_date",
-            "description": "<p>Optional visit date.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "visit_id",
-            "description": "<p>On success, return visit history id.</p>"
           }
         ]
       }
@@ -1222,6 +1222,222 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "api/slot.py",
     "groupTitle": "Slot"
+  },
+  {
+    "type": "get",
+    "url": "/reservations/:query",
+    "title": "Request list of Reservations",
+    "name": "ListReservation",
+    "group": "Supervisor",
+    "description": "<p>Request a list of reservation based on query.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter/sort the reservations.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Pagination.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "total_page",
+            "description": "<p>Total pages.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "reservations",
+            "description": "<p>List of filterd/sorted reservations.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reservation.id",
+            "description": "<p>Reservation unique id.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.customer.name",
+            "description": "<p>Customer name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservaiton.reservation_patient.name",
+            "description": "<p>Reservation_patient name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.disease.name",
+            "description": "<p>Disease name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.hospital.name",
+            "description": "<p>Hospital name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.translator_C2E_name",
+            "description": "<p>C2E_Translator name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.translator_E2C_name",
+            "description": "<p>E2C_Translaotr name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.status",
+            "description": "<p>Reservation status.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservaiton.trans_status",
+            "description": "<p>Reservation translating status.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "reservation.deadline",
+            "description": "<p>Reservation deadline to upload to hospital.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "reservation.trans_deadline",
+            "description": "<p>Reservation translating deadline.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "reservation.last_upload",
+            "description": "<p>Last upload DateTime of documents associated.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.url",
+            "description": "<p>Link to reservation detail.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "reservation.re_assigned",
+            "description": "<p>Whether reservation has been reassigned.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ReservationNotFound",
+            "description": "<p>The required reservations based on <code>query</code> are not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "post",
+    "url": "/supervisor/login/",
+    "title": "Supervisor Login",
+    "name": "SupervisorLogin",
+    "description": "<p>Handle supervisor login request.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "get",
+    "url": "/summary",
+    "title": "Summarize Website Stats",
+    "name": "SupervisorSummary",
+    "group": "Supervisor",
+    "description": "<p>Request a summary of the website's stats.</p>",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "summary",
+            "description": "<p>Whatever summary we want to display for the supervisor.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/supervisor.py",
+    "groupTitle": "Supervisor"
   },
   {
     "type": "get",

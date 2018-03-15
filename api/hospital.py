@@ -1,6 +1,6 @@
 """
 @api {get} /hospital/:id Request Hospital Information
-@apiName Hospital-Display
+@apiName HospitalDisplay
 @apiGroup Hospital
 @apiDescription Display information about a hospital.
 
@@ -16,10 +16,11 @@
 
 @apiError ObjectNotFound The <code>id</code> of the Hospital was not found.
 """
-"""
 
+
+"""
 @api {get} /hospitals/:query Request List of Hospitals
-@apiName Hospital-List
+@apiName HospitalList
 @apiGroup Hospital
 @apiDescription Dispaly all hospitals based on query
 

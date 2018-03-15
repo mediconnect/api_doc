@@ -11,14 +11,14 @@
 """
 
 """
-@api {get} /user/:id/info Request User Info
+@api {get} /user/info Request User Info
 @apiName UserInfo
 @apiDescription Request user infomation.
 @apiGroup User
 
-@apiParam {Number}	 id	 		Mandatory unique User ID.
+@apiParam {Number}	 id	 Mandatory unique User ID.
 
-@apiSuccess {Object} user 		User Object.
+@apiSuccess {Object} user 				User Object.
 @apiSuccess	{String} user.first_name	Mandatory User first name.
 @apiSuccess	{String} user.last_name		Mandatory User last name.
 @apiSuccess	{Number} user.age			Optional User age.
@@ -31,5 +31,20 @@
 
 @apiError UserNotFound The <code>id</code> of the user was not found.
 
+@apiVersion 0.0.0
+"""
+
+"""
+@api {get} /user/get_stored_patient_ids Request Stored Patiente_IDs
+@apiName GetStoredPatientIds
+@apiDescription Request a list of stored patient_ids.
+@apiGroup User
+
+@apiParam {Number}	id Mandatory unique User ID.
+
+@apiSuccess {Number[]}	patient_ids 	Mandatory Patient IDs.
+@apiSuccess	{String[]}	patient_names	Mandatory Patient Names.
+
+@apiError UserNotFound	The <code>id</code> of the user was not found.	
 @apiVersion 0.0.0
 """

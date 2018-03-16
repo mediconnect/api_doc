@@ -169,6 +169,22 @@
 
 
 """
+@api {post} /supervisor/reset_link 	Send reset link via email
+@apiName SendResetLink
+@apiGroup Supervisor
+@apiDescription Send reset link to users.
+
+@apiParam {String} email_address	Mandatory to_email address.
+@apiParam {Number} id 				Mandatory unique User id.
+@apiParam {String} token			Mandatory hashed token for temporary reset link.
+
+@apiError RequiredFieldBlank Any mandatory form is blank.
+
+@apiVersion 0.0.0
+"""
+
+
+"""
 @api {get} /supervisor/reservations/:query Request list of Reservations
 @apiName ListReservation
 @apiGroup Supervisor
@@ -270,6 +286,7 @@
 @apiParam {Number} disease_id 	Mandatory Disease ID.
 @apiParam {String} category 	Mandatory questionnaire category.
 
+@apiSuccess {Object}   document Questionnaire Document.
 @apiSuccess {String[]} formats 	Question formats.
 @apiSuccess {String[]} contents Quesiton contents.
 @apiSuccess {String[]} choices 	Quesiton choices. 
@@ -338,6 +355,23 @@
 
 @apiError QuestionnaireNotFound 	The requested <code>id</code> of questionnaire is not found.
 @apiError TranslatorNotFound 		The requested <code>id</code> of translator is not found.
+
+@apiVersion 0.0.0
+"""
+
+
+"""
+@api {post} /supervisor/questionnaire_link 	Send qestionnaire link via email
+@apiName SendResetLink
+@apiGroup Supervisor
+@apiDescription Send reset link to users.
+
+@apiParam {String} email_address	Mandatory to_email address.
+@apiParam {Number} id 				Mandatory unique User id.
+@apiParam {Number} reservation_id   Mandatory unique Reservation id.
+@apiParam {String} token			Mandatory hashed token for temporary reset link.
+
+@apiError RequiredFieldBlank Any mandatory form is blank.
 
 @apiVersion 0.0.0
 """

@@ -25,10 +25,9 @@
 @apiSuccess {String} user.address Mandatory User address.
 @apiSuccess {String} user.email Mandatory User email.
 @apiSuccess {String} user.phone Mandatory User phone.
-@apiSuccess {String} user.wechat Optional User wechat.
-@apiSuccess {String} user.qq Optional User qq.
-@apiSuccess {String} user.gender Optional User gender.
->>>>>>> fcfb94715fbd7a0012666285f6770c6794ff998b
+@apiSuccess {String} [user.wechat] Optional User wechat.
+@apiSuccess {String} [user.qq] Optional User qq.
+@apiSuccess {String} [user.gender] Optional User gender.
 
 @apiError UserNotFound The <code>id</code> of the user was not found.
 
@@ -36,7 +35,6 @@
 """
 
 """
-<<<<<<< HEAD
 @api {get} /user/get_stored_patient_ids Request Stored Patiente_IDs
 @apiName GetStoredPatientIds
 @apiDescription Request a list of stored patient_ids.

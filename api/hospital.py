@@ -26,14 +26,14 @@
 
 @apiParam {Srtring} query 				Query to filter/sort Hospitals
 
-@apiSuccess {Object[]} 	hospitals 		List of filtered/sorted Hospitals.
-@apiSuccess {Number}	page			pagination
-@apiSuccess {String} name 				Hospital Name.
-@apiSuccess {Number} hospital.rank 		Hospital General Rank.
-@apiSuccess {String} hospital.location 	Hospital Location.
-@apiSuccess {String} hospital.image 	Hospital Image.
-@apiSuccess {String} hospital.intro 	Hospital Brief Introduction.
-@apiSuccess	{String} hospital.url 		Hospital Website Link.
+@apiSuccess {Object[]} 	hospitals 			List of filtered/sorted Hospitals.
+@apiSuccess {Number}	page				pagination
+@apiSuccess {String} 	name 				Hospital Name.
+@apiSuccess {Number} 	hospital.rank 		Hospital General Rank.
+@apiSuccess {String} 	hospital.location 	Hospital Location.
+@apiSuccess {String} 	hospital.image 		Hospital Image.
+@apiSuccess {String} 	hospital.intro 		Hospital Brief Introduction.
+@apiSuccess	{String} 	hospital.url 		Hospital Website Link.
 
 @apiVersion 0.0.0
 """

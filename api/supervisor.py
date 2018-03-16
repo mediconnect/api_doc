@@ -9,6 +9,27 @@
 
 @apiVersion 0.0.0
 """
+"""
+@api {post} /supervisor/register Create Supervisor
+@apiName CreateSupervisor
+@apiDescription Create a supervisor type of user.
+@apiGroup Supervisor
+
+@apiParam {String} email Mandatory email address.
+@apiParam {String} password Mandatory password.
+@apiParam {String} password_confirmation Mandatory confirmation password.
+@apiParam {String} name Mandatory name.
+@apiParam {String} address Mandatory address.
+@apiParam {Number} tel Mandatory phone number.
+
+@apiSuccess {Number} id Registered supervisor id.
+
+@apiError EmailAlreadyExists The email exists in the DB.
+@apiError PasswordDoesNotMath The password does not match password_confirmation.
+@apiError RequiredFieldBlank Any mandatory form is blank.
+
+@apiVersion 0.0.0
+"""
 
 """
 @api {get} /summary Summarize Website Stats
@@ -109,6 +130,88 @@
 @apiSuccess {Object[]} documents 	List of Document Objects
 
 @apiError ReservationNotFound The required <code>id</code> of reservation is not found.
+
+@apiVersion 0.0.0
+"""
+
+"""
+@api {get} /supervisor/questionnaire/:hospital_id/:disease_id/:category Request Questionnaire
+@apiName RequestQuestionnaire
+@apiDescription Request questionnaire information.
+@apiGroup Questionnaire
+
+@apiParam {Number} hospital_id 	Mandatory Hospital ID.
+@apiParam {Number} disease_id 	Mandatory Disease ID.
+@apiParam {String} category 	Mandatory questionnaire category.
+
+@apiSuccess {String[]} formats 	Question formats.
+@apiSuccess {String[]} contents Quesiton contents.
+@apiSuccess {String[]} choices 	Quesiton choices. 
+@apiSuccess {Number}   translaotr_E2C.id The id of translator assigned.
+@apiSuccess {Boolean}	translated 	Whther the questionnaire has been translated.
+
+@apiSuccessExample {json} Success-response:
+	HTTP/1.1/ 200 OK
+	{
+		"formats":[	"Multiple Choice",
+					"Short Answer",
+					"Multiple Choice",
+					],
+		"contents":["Who is your daddy?",
+					"Who is your second daddy?",
+					"Who is your mom?",
+					]
+		"choices":[	"A$Alen|B$Bob|C$Charles",
+					"",
+					"A$Alex|B$Bruce|C$Champ",
+					]
+	} 
+
+@apiError QuestionnaireNotFound 	The requested <code>id</code> of questionnaire is not found.
+
+@apiVersion 0.0.0
+"""
+
+"""
+@api {post} /supervisor/questionnaire/:hospital_id/:disease_id/:category Create Questionnaire
+@apiName CreateQuestionnaire
+@apiDescription Create a Questionnaire.
+@apiGroup Questionnaire
+
+@apiParam {Number} hospital_id 	Mandatory Hospital ID.
+@apiParam {Number} disease_id 	Mandatory Disease ID.
+@apiParam {String} category 	Mandatory questionnaire category.
+@apiParam {String[]} formats 	Mandatory question formats.
+@apiParam {String[]} contents 	Mandatory quesiton contents.
+@apiParam {String[]} choices 	Mandatory quesiton choices. 
+@apiParam {Number} translator_C2E.id 	Mandatory translator assigned ID.
+
+@apiSuccess {Number} questionnaire_id 	Questionnaire ID.
+
+@apiError RequiredFieldBlank Any mandatory form is blank.
+@apiError TranslatorNotFound 		The requested <code>id</code> of translator is not found.
+
+@apiVersion 0.0.0
+
+"""
+"""
+@api {put} /supervisor/questionnaire/:hospital_id/:disease_id/:category Update Questionnaire
+@apiName UpdateQuestionnaire
+@apiDescription Update a Questionnaire.
+@apiGroup Questionnaire
+
+@apiParam {Number} hospital_id 	Mandatory Hospital ID.
+@apiParam {Number} disease_id 	Mandatory Disease ID.
+@apiParam {String} category 	Mandatory questionnaire category.
+@apiParam {String[]} [formats] 	Optional question formats.
+@apiParam {String[]} [contents] Optional quesiton contents.
+@apiParam {String[]} [choices] 	Optional quesiton choices. 
+@apiParam {Numebr} 	 [translator_C2E.id] Optional translator assigned ID.
+
+@apiSuccess {Number} questionnaire_id 	Questionnaire ID.
+
+@apiError QuestionnaireNotFound 	The requested <code>id</code> of questionnaire is not found.
+@apiError TranslatorNotFound 		The requested <code>id</code> of translator is not found.
 
 @apiVersion 0.0.0
 """

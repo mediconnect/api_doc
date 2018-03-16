@@ -4,7 +4,7 @@
 @apiGroup Document
 @apiDescription Create document.
 
-@apiParam {Stinrg}		document.description 			Mandatory document description
+@apiParam {String}		document.description 			Mandatory document description
 @apiParam {String}		document.file_path				Mandatory file_path
 @apiParam {String}		document.name 					Mandatory document name
 @apiParam {String} 		[document.note]					Optional note for document.	

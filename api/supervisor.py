@@ -9,6 +9,8 @@
 
 @apiVersion 0.0.0
 """
+
+
 """
 @api {post} /supervisor/register Create Supervisor
 @apiName CreateSupervisor
@@ -31,6 +33,25 @@
 @apiVersion 0.0.0
 """
 
+
+"""
+@api {post} /supervisor/password Validate password
+@apiName ValidatePassword
+@apiDescription Validate supervisor's password input to authorize operations.
+@apiGroup Supervisor
+
+@apiParam {Number} id 				Unique Supervisor ID
+@apiParam {String} password 		Mandatory password
+@apiParam {Number} [status_code] 	Optional status code for stage control
+
+@apiSuccess {String} token 			Token generated for authorization
+
+@apiError SupervisorNotFound 	The requested <code>id</code> of supervisor is not found. 
+
+@apiVersion 0.0.0
+"""
+
+
 """
 @api {get} /summary Summarize Website Stats
 @apiName SupervisorSummary
@@ -41,6 +62,111 @@
 
 @apiVersion 0.0.0
 """
+
+"""
+@api {get} /supervisor/user/:role/:query Request list of User
+@apiName ListCustomers
+@apiGroup Supervisor
+@apiDescription Request a list of customers based on query.
+
+@apiParam {String} query	Query to filter/sort the customers.
+@apiParam {Number} role 	Type of users to list.
+
+@apiSuccess {Number}	page					Pagination.
+@apiSuccess {Number}	total_page				Total pages.
+@apiSuccess {Object[]} 	users 					List of filterd/sorted users.
+
+
+@apiVersion 0.0.0
+"""
+
+"""
+@api {get} /supervisor/user/ Request User Info
+@apiName UserInfo
+@apiDescription Request user infomation.
+@apiGroup Supervisor
+
+@apiParam {Number} id Mandatory unique User ID.
+
+@apiSuccess {Object} user User Object.
+@apiSuccess {String} user.first_name Mandatory User first name.
+@apiSuccess {String} user.last_name Mandatory User last name.
+@apiSuccess {Number} user.age Optional User age.
+@apiSuccess {String} user.address Mandatory User address.
+@apiSuccess {String} user.email Mandatory User email.
+@apiSuccess {String} user.phone Mandatory User phone.
+@apiSuccess {String} [user.wechat] Optional User wechat.
+@apiSuccess {String} [user.qq] Optional User qq.
+@apiSuccess {String} [user.gender] Optional User gender.
+
+@apiError UserNotFound The <code>id</code> of the user was not found.
+
+@apiVersion 0.0.0
+"""
+
+"""
+@api {post} /supervisor/create Create User
+@apiName CreateSupervisor
+@apiDescription Create a supervisor type of user.
+@apiGroup Supervisor
+
+@apiParam {Number} role  Mandatory user type.
+@apiParam {String} email Mandatory email address.
+@apiParam {String} password Mandatory password.
+@apiParam {String} password_confirmation Mandatory confirmation password.
+@apiParam {String} name Mandatory name.
+@apiParam {String} address Mandatory address.
+@apiParam {Number} tel Mandatory phone number.
+
+@apiSuccess {Number} id Registered supervisor id.
+
+@apiError EmailAlreadyExists The email exists in the DB.
+@apiError PasswordDoesNotMath The password does not match password_confirmation.
+@apiError RequiredFieldBlank Any mandatory form is blank.
+
+@apiVersion 0.0.0
+"""
+
+"""
+@api {put} /supervisor/user/ Update User Info
+@apiName UpdateUser
+@apiDescription Update user infomation.
+@apiGroup Supervisor
+
+@apiParam {Number} id Mandatory unique User ID.
+@apiParam {String} [user.first_name] Optional User first name.
+@apiParam {String} [user.last_name] Optional User last name.
+@apiParam {Number} [user.age Optional] Optional User age.
+@apiParam {String} [user.address] Optional User address.
+@apiParam {String} [user.email] Optional User email.
+@apiParam {String} [user.phone] Optional User phone.
+@apiParam {String} [user.wechat] Optional User wechat.
+@apiParam {String} [user.qq] Optional User qq.
+@apiParam {String} [user.gender] Optional User gender.
+
+@apiParam {String} token 	Mandatory token for authorizing operation.
+
+@apiError UserNotFound 		The <code>id</code> of the user was not found.
+@apiError AuthorizationFailed The operation is not authorized.
+
+@apiVersion 0.0.0
+"""
+
+"""
+@api {delete} /supervisor/user/ Delete
+@apiName Delete
+@apiDescription Delete user.
+@apiGroup Supervisor
+
+@apiParam {Number} id Mandatory unique User ID.
+@apiParam {String} token 	Mandatory token for authorizing operation.
+
+@apiError UserNotFound 		The <code>id</code> of the user was not found.
+@apiError AuthorizationFailed The operation is not authorized.
+
+@apiVersion 0.0.0
+"""
+
 
 """
 @api {get} /supervisor/reservations/:query Request list of Reservations

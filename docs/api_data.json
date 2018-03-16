@@ -1224,8 +1224,114 @@
     "groupTitle": "Slot"
   },
   {
+    "type": "put",
+    "url": "/slot/:hospital_id/:disease_id",
+    "title": "Update Slot Information",
+    "name": "UpdateSlot",
+    "group": "Slot",
+    "description": "<p>Update a slot.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "hospital_id",
+            "description": "<p>Hospital ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "disease_id",
+            "description": "<p>Disease ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number[4]",
+            "optional": false,
+            "field": "available",
+            "description": "<p>Abailable slots for the next four weeks.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token to verify authorization.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "SlotNotFound",
+            "description": "<p>The combination of <code>hospital_id</code> and <code>disease_id</code> of the Slot was not found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidAuthorization",
+            "description": "<p>This operation is invalid at this stage.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/slot.py",
+    "groupTitle": "Slot"
+  },
+  {
+    "type": "delete",
+    "url": "/supervisor/reservation/:id",
+    "title": "Delete a Reservation",
+    "name": "Delete_Reservation",
+    "group": "Supervisor",
+    "description": "<p>Remove a Reservation from Database.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID of a Reservation.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token to verify authorization.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidAuthorization",
+            "description": "<p>This operation is invalid at this stage.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
     "type": "get",
-    "url": "/reservations/:query",
+    "url": "/supervisor/reservations/:query",
     "title": "Request list of Reservations",
     "name": "ListReservation",
     "group": "Supervisor",
@@ -1266,6 +1372,99 @@
             "optional": false,
             "field": "reservations",
             "description": "<p>List of filterd/sorted reservations.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "get",
+    "url": "/supervisor/reservation/documents/:id/:type",
+    "title": "Request Documents associated with a Reservation",
+    "name": "ReservationDocuments",
+    "group": "Supervisor",
+    "description": "<p>Request the documents associated with a reservation.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Reservation unique ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Document type</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "documents",
+            "description": "<p>List of Document Objects</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ReservationNotFound",
+            "description": "<p>The required <code>id</code> of reservation is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "get",
+    "url": "/supervisor/reservation/:id",
+    "title": "Request info of a Reservation",
+    "name": "ReservationInfo",
+    "group": "Supervisor",
+    "description": "<p>Request the informaiton of a Reservation.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID of a Reservation.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "reservation",
+            "description": "<p>Reservation Object.</p>"
           },
           {
             "group": "Success 200",
@@ -1353,13 +1552,6 @@
           },
           {
             "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "reservation.url",
-            "description": "<p>Link to reservation detail.</p>"
-          },
-          {
-            "group": "Success 200",
             "type": "Boolean",
             "optional": false,
             "field": "reservation.re_assigned",
@@ -1375,7 +1567,7 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "ReservationNotFound",
-            "description": "<p>The required reservations based on <code>query</code> are not found.</p>"
+            "description": "<p>The required <code>id</code> of reservation is not found.</p>"
           }
         ]
       }
@@ -1431,6 +1623,83 @@
             "optional": false,
             "field": "summary",
             "description": "<p>Whatever summary we want to display for the supervisor.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "put",
+    "url": "/supervisor/reservation/:id",
+    "title": "Update a Reservation",
+    "name": "Update_Reservation",
+    "group": "Supervisor",
+    "description": "<p>Update the informaiton of a Reservation.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID of a Reservation.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "translator_C2E.id",
+            "description": "<p>New C2E_Translator id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "translator_E2C.id",
+            "description": "<p>New E2C_Translaotr id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>New reservation status.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "trans_status",
+            "description": "<p>New translating status.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token to verify authorization.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ReservationNotFound",
+            "description": "<p>The required <code>id</code> of reservation is not found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidAuthorization",
+            "description": "<p>The operation is invalid at this stage.</p>"
           }
         ]
       }

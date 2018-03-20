@@ -47,8 +47,9 @@
 
 @apiError UserNotFound	The <code>id</code> of the user was not found.	
 @apiVersion 0.0.0
+"""
 
-
+"""
 @api {post} /user/register/ User Register
 @apiName UserRegister
 @apiDescription Handle user registration request.
@@ -64,6 +65,43 @@
 @apiSuccess {Number} id Registered user id.
 
 @apiError EmailAlreadyExists The email exists in the DB.
+@apiError PasswordDoesNotMath The password does not match password_confirmation.
+@apiError RequiredFieldBlank Any mandatory form is blank.
+
+@apiVersion 0.0.0
+"""
+
+"""
+@api {post} /user/forget_password Forget Password 
+@apiName UserForgetPassword
+@apiDescription Handle request from user that forgets password.
+@apiGroup User
+
+@apiParam {String} email Mandatory email address.
+@apiParam {String} captcha Validation code for identifying robot.
+
+@apiError CaptchaDoesNotMatch The captcha does not match database entry. 
+@apiError EmailDoesNotExist The queried email does not exist in the database.
+
+@apiVersion 0.0.0
+"""
+
+"""
+@api {post} /user/update_profile Update User Profile Information
+@apiName UserUpdateProfile
+@apiDescription Update user profile information.
+@apiGroup User
+
+@apiParam {String} name Mandatory user name.
+@apiParam {String} email Mandatory email address.
+@apiParam {String} address Mandatory address.
+@apiParam {Number} tel Mandatory phone number.
+@apiParam {String} old_password Mandatory old password.
+@apiParam {String} password Mandatory password.
+@apiParam {String} password_confirmation Mandatory confirmation password.
+
+@apiError EmailAlreadyExists The email address changes but also duplicate with another existing email address.
+@apiError WrongPassword The old password does not match the existing password in the database.
 @apiError PasswordDoesNotMath The password does not match password_confirmation.
 @apiError RequiredFieldBlank Any mandatory form is blank.
 

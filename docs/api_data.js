@@ -1869,77 +1869,77 @@ define({ "api": [
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "user_id",
+            "field": "reservation.user_id",
             "description": "<p>Unique ID for customer.</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "patient_id",
+            "field": "reservation.patient_id",
             "description": "<p>Unique ID for patient.</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "hospital_id",
+            "field": "reservation.hospital_id",
             "description": "<p>Unique ID for hospital.</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "disease_id",
+            "field": "reservation.disease_id",
             "description": "<p>Unique ID for disease.</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "slot_id",
+            "field": "reservation.slot_id",
             "description": "<p>ID for reservation slot.</p>"
           },
           {
             "group": "Success 200",
             "type": "DateTime",
             "optional": false,
-            "field": "ctime",
+            "field": "reservation.ctime",
             "description": "<p>Time of creation.</p>"
           },
           {
             "group": "Success 200",
             "type": "DateTime",
             "optional": false,
-            "field": "commit_at",
+            "field": "reservation.commit_at",
             "description": "<p>Time of submission.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "first_hospital",
+            "field": "reservation.first_hospital",
             "description": "<p>Diagnose-hospital name.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "first_doctor_name",
+            "field": "reservation.first_doctor_name",
             "description": "<p>Diagnose-doctor name.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "first_doctor_contact",
+            "field": "reservation.first_doctor_contact",
             "description": "<p>Diagnose-doctor contact info.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "note",
+            "field": "reservation.note",
             "description": "<p>Note for the reservation.</p>"
           }
         ]

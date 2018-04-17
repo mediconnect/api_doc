@@ -41,17 +41,17 @@
 @apiDescription Request reservation information.
 
 @apiSuccess {Object}		reservation 					Reservation Object
-@apiSuccess {Number} 		user_id 						Unique ID for customer.
-@apiSuccess {Number} 		patient_id 						Unique ID for patient.
-@apiSuccess {Number} 		hospital_id 					Unique ID for hospital.
-@apiSuccess {Number} 		disease_id 						Unique ID for disease.
-@apiSuccess {Number}		slot_id							ID for reservation slot.
-@apiSuccess {DateTime}		ctime							Time of creation.
-@apiSuccess {DateTime} 		commit_at 						Time of submission.
-@apiSuccess {String}		first_hospital					Diagnose-hospital name.
-@apiSuccess {String}		first_doctor_name				Diagnose-doctor name.
-@apiSuccess {String}		first_doctor_contact			Diagnose-doctor contact info.	
-@apiSuccess {String}		note							Note for the reservation.
+@apiSuccess {Number} 		reservation.user_id 						Unique ID for customer.
+@apiSuccess {Number} 		reservation.patient_id 						Unique ID for patient.
+@apiSuccess {Number} 		reservation.hospital_id 					Unique ID for hospital.
+@apiSuccess {Number} 		reservation.disease_id 						Unique ID for disease.
+@apiSuccess {Number}		reservation.slot_id							ID for reservation slot.
+@apiSuccess {DateTime}		reservation.ctime							Time of creation.
+@apiSuccess {DateTime} 		reservation.commit_at 						Time of submission.
+@apiSuccess {String}		reservation.first_hospital					Diagnose-hospital name.
+@apiSuccess {String}		reservation.first_doctor_name				Diagnose-doctor name.
+@apiSuccess {String}		reservation.first_doctor_contact			Diagnose-doctor contact info.	
+@apiSuccess {String}		reservation.note							Note for the reservation.
 
 @apiError ReservationNotFound	The <code>id</code> of the required reservation doesn't exist.
 

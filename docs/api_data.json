@@ -1867,21 +1867,28 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservation.res_id",
+            "description": "<p>Reservation ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
             "optional": false,
             "field": "reservation.user_id",
             "description": "<p>Unique ID for customer.</p>"
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "UUID",
             "optional": false,
             "field": "reservation.patient_id",
             "description": "<p>Unique ID for patient.</p>"
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "UUID",
             "optional": false,
             "field": "reservation.hospital_id",
             "description": "<p>Unique ID for hospital.</p>"
@@ -1895,9 +1902,9 @@
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "UUID",
             "optional": false,
-            "field": "reservation.slot_id",
+            "field": "reservation.timeslot_id",
             "description": "<p>ID for reservation slot.</p>"
           },
           {
@@ -2036,21 +2043,21 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "UUID",
             "optional": false,
             "field": "user_id",
             "description": "<p>Mandatory customer ID.</p>"
           },
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "UUID",
             "optional": false,
             "field": "patient_id",
             "description": "<p>Mandatory patient ID.</p>"
           },
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "UUID",
             "optional": false,
             "field": "hospital_id",
             "description": "<p>Mandatory hospital ID.</p>"
@@ -2064,9 +2071,9 @@
           },
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "UUID",
             "optional": false,
-            "field": "slot_id",
+            "field": "timeslot_id",
             "description": "<p>Mandatory reservation slot ID.</p>"
           }
         ]
@@ -2106,16 +2113,16 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "UUID",
             "optional": false,
             "field": "reservation_id",
             "description": "<p>Mandatory Reservation unique ID.</p>"
           },
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "UUID",
             "optional": true,
-            "field": "slot_id",
+            "field": "timeslot_id",
             "description": "<p>Optional reservation slot ID.</p>"
           },
           {
@@ -2167,7 +2174,7 @@
   },
   {
     "type": "get",
-    "url": "/slot/:hospital_id/:disease_id",
+    "url": "/slot/availability",
     "title": "Request Slot Information",
     "name": "SlotDisplay",
     "group": "Slot",
@@ -2177,16 +2184,16 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "UUID",
             "optional": false,
-            "field": "hospital_id",
+            "field": "hospital",
             "description": "<p>Hospital ID</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "disease_id",
+            "field": "disease",
             "description": "<p>Disease ID</p>"
           }
         ]
@@ -2197,10 +2204,38 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Number[4]",
+            "type": "Object[4]",
             "optional": false,
             "field": "available",
             "description": "<p>Abailable slots for the next four weeks.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "available.hospital",
+            "description": "<p>hospital id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "available.disease",
+            "description": "<p>disease id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "available.week_start",
+            "description": "<p>time of week start</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "available.availability",
+            "description": "<p>slots left</p>"
           }
         ]
       }
@@ -2223,8 +2258,8 @@
   },
   {
     "type": "put",
-    "url": "/slot/:hospital_id/:disease_id",
-    "title": "Update Slot Information",
+    "url": "/slot/batch/create",
+    "title": "Create or Update Slot Information",
     "name": "UpdateSlot",
     "group": "Slot",
     "description": "<p>Update a slot.</p>",
@@ -2233,31 +2268,107 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "Object[]",
             "optional": false,
-            "field": "hospital_id",
-            "description": "<p>Hospital ID</p>"
+            "field": "hospital_list",
+            "description": "<p>hospital list</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "hospital_list.hospital_id",
+            "description": "<p>hospital ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object[]",
+            "optional": false,
+            "field": "hospital_list.disease_list",
+            "description": "<p>disease list</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "hospital_list.disease_list.disease_id",
+            "description": "<p>disease ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object[]",
+            "optional": false,
+            "field": "hospital_list.disease_list.date_slots",
+            "description": "<p>available slots on dates</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Date",
+            "optional": false,
+            "field": "hospital_list.disease_list.date_slots.dates",
+            "description": "<p>slot date</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "disease_id",
-            "description": "<p>Disease ID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number[4]",
-            "optional": false,
-            "field": "available",
-            "description": "<p>Abailable slots for the next four weeks.</p>"
+            "field": "hospital_list.disease_list.date_slots.quantity",
+            "description": "<p>slot total availablity</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "token",
-            "description": "<p>Token to verify authorization.</p>"
+            "field": "hospital_list.disease_list.date_slots.type",
+            "description": "<p>&quot;add&quot; or &quot;change&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID[]",
+            "optional": false,
+            "field": "created",
+            "description": "<p>Successfully created slots</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID[]",
+            "optional": false,
+            "field": "updated",
+            "description": "<p>Successfully updated slots</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Slots runs into errors</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "error.time_slot",
+            "description": "<p>Slot ID runs into errors</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "error.error",
+            "description": "<p>Type of error</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "error.detail",
+            "description": "<p>detail reason</p>"
           }
         ]
       }

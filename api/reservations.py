@@ -4,11 +4,11 @@
 @apiGroup Reservation
 @apiDescription Create Reservation instance, also record the creation time
 
-@apiParam {Number} 		user_id 					Mandatory customer ID.
-@apiParam {Number} 		patient_id 					Mandatory patient ID.
-@apiParam {Number} 		hospital_id					Mandatory hospital ID.
+@apiParam {UUID} 		user_id 					Mandatory customer ID.
+@apiParam {UUID} 		patient_id 					Mandatory patient ID.
+@apiParam {UUID} 		hospital_id					Mandatory hospital ID.
 @apiParam {Number} 		disease_id 					Mandatory disease ID.
-@apiParam {Number} 		slot_id						Mandatory reservation slot ID.
+@apiParam {UUID} 		timeslot_id					Mandatory reservation slot ID.
 
 @apiError ReservationExpired 			The slots reserved expired after 30 min.
 @apiError RequiredFieldBlank 			Any mandatory form is blank.
@@ -22,8 +22,8 @@
 @apiGroup Reservation
 @apiDescription Update reservation info: fill in previous info
 
-@apiParam {Number} 		reservation_id 						Mandatory Reservation unique ID.
-@apiParam {Number} 		[slot_id] 							Optional reservation slot ID.
+@apiParam {UUID} 		reservation_id 						Mandatory Reservation unique ID.
+@apiParam {UUID} 		[timeslot_id] 						Optional reservation slot ID.
 @apiParam {String}		[first_diagnosed_hospital]			Optional diagnose-hospital.
 @apiParam {String}		[first_diagnosed_doctor]			Optional diagnose-doctor.
 @apiParam {String}		[first_diagnosed_doctor_contact]	Optional diagnose-doctor contact info.
@@ -41,11 +41,12 @@
 @apiDescription Request reservation information.
 
 @apiSuccess {Object}		reservation 					Reservation Object
-@apiSuccess {Number} 		reservation.user_id 						Unique ID for customer.
-@apiSuccess {Number} 		reservation.patient_id 						Unique ID for patient.
-@apiSuccess {Number} 		reservation.hospital_id 					Unique ID for hospital.
+@apiSuccess {UUID}			reservation.res_id 							Reservation ID
+@apiSuccess {UUID} 			reservation.user_id 						Unique ID for customer.
+@apiSuccess {UUID} 			reservation.patient_id 						Unique ID for patient.
+@apiSuccess {UUID} 			reservation.hospital_id 					Unique ID for hospital.
 @apiSuccess {Number} 		reservation.disease_id 						Unique ID for disease.
-@apiSuccess {Number}		reservation.slot_id							ID for reservation slot.
+@apiSuccess {UUID}			reservation.timeslot_id						ID for reservation slot.
 @apiSuccess {DateTime}		reservation.ctime							Time of creation.
 @apiSuccess {DateTime} 		reservation.commit_at 						Time of submission.
 @apiSuccess {String}		reservation.first_hospital					Diagnose-hospital name.

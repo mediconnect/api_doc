@@ -44,7 +44,7 @@
 @apiParam {String} password 		Mandatory password
 @apiParam {Number} [status_code] 	Optional status code for stage control
 
-@apiSuccess {String} token 			Token generated for authorization
+@apiSuccess {Number} token			A token that can be verified at backend to grant operation
 
 @apiError SupervisorNotFound 	The requested <code>id</code> of supervisor is not found. 
 
@@ -83,7 +83,7 @@
 """
 @api {get} /supervisor/user/ Request User Info
 @apiName UserInfo
-@apiDescription Request user infomation.
+@apiDescription Request user info.
 @apiGroup Supervisor
 
 @apiParam {Number} id Mandatory unique User ID.
@@ -130,7 +130,7 @@
 """
 @api {put} /supervisor/user/ Update User Info
 @apiName UpdateUser
-@apiDescription Update user infomation.
+@apiDescription Update user info.
 @apiGroup Supervisor
 
 @apiParam {Number} id Mandatory unique User ID.
@@ -194,7 +194,7 @@
 
 @apiSuccess {Number}	page					Pagination.
 @apiSuccess {Number}	total_page				Total pages.
-@apiSuccess {Object[]} 	reservations 			List of filterd/sorted reservations.
+@apiSuccess {Object[]} 	reservations 			List of filtered/sorted reservations.
 
 
 @apiVersion 0.0.0
@@ -205,20 +205,20 @@
 @api {get} /supervisor/reservation/:id Request info of a Reservation
 @apiName ReservationInfo
 @apiGroup Supervisor
-@apiDescription Request the informaiton of a Reservation.
+@apiDescription Request the inf of a Reservation.
 
 @apiParam {Number} id 	Unique ID of a Reservation.
 
 @apiSuccess {Object}	reservation 			Reservation Object.
 @apiSuccess {Number} 	reservation.id			Reservation unique id.
 @apiSuccess	{String}	reservation.customer.name	Customer name.
-@apiSuccess {String} 	reservaiton.reservation_patient.name Reservation_patient name.
+@apiSuccess {String} 	reservation.reservation_patient.name Reservation_patient name.
 @apiSuccess {String}	reservation.disease.name 	Disease name.
 @apiSuccess {String}	reservation.hospital.name 	Hospital name.
 @apiSuccess {String} 	reservation.translator_C2E_name C2E_Translator name.
 @apiSuccess {String} 	reservation.translator_E2C_name E2C_Translaotr name.
 @apiSuccess {String}	reservation.status		Reservation status.
-@apiSuccess {String} 	reservaiton.trans_status 	Reservation translating status.
+@apiSuccess {String} 	reservation.trans_status 	Reservation translating status.
 @apiSuccess {DateTime}	reservation.deadline 	Reservation deadline to upload to hospital.
 @apiSuccess {DateTime}	reservation.trans_deadline 	Reservation translating deadline. 
 @apiSuccess {DateTime} 	reservation.last_upload 	Last upload DateTime of documents associated.
@@ -233,11 +233,11 @@
 @api {put} /supervisor/reservation/:id Update a Reservation
 @apiName Update Reservation
 @apiGroup Supervisor
-@apiDescription Update the informaiton of a Reservation.
+@apiDescription Update the info of a Reservation.
 
 @apiParam {Number} 	id 							Unique ID of a Reservation.
 @apiParam {Number} 	translator_C2E.id 			New C2E_Translator id.
-@apiParam {Number} 	translator_E2C.id 			New E2C_Translaotr id.
+@apiParam {Number} 	translator_E2C.id 			New E2C_Translator id.
 @apiParam {Number}	status						New reservation status.
 @apiParam {Number} 	trans_status 				New translating status.
 @apiParam {String} 	token 						Token to verify authorization.
@@ -349,7 +349,7 @@
 @apiParam {String[]} [formats] 	Optional question formats.
 @apiParam {String[]} [contents] Optional quesiton contents.
 @apiParam {String[]} [choices] 	Optional quesiton choices. 
-@apiParam {Numebr} 	 [translator_C2E.id] Optional translator assigned ID.
+@apiParam {Number} 	 [translator_C2E.id] Optional translator assigned ID.
 
 @apiSuccess {Number} questionnaire_id 	Questionnaire ID.
 

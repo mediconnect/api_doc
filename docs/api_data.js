@@ -1676,7 +1676,7 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Numebr",
+            "type": "Number",
             "optional": true,
             "field": "translator_C2E.id",
             "description": "<p>Optional translator assigned ID.</p>"
@@ -2786,7 +2786,7 @@ define({ "api": [
             "type": "Object[]",
             "optional": false,
             "field": "reservations",
-            "description": "<p>List of filterd/sorted reservations.</p>"
+            "description": "<p>List of filtered/sorted reservations.</p>"
           }
         ]
       }
@@ -2857,7 +2857,7 @@ define({ "api": [
     "title": "Request info of a Reservation",
     "name": "ReservationInfo",
     "group": "Supervisor",
-    "description": "<p>Request the informaiton of a Reservation.</p>",
+    "description": "<p>Request the inf of a Reservation.</p>",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -2899,7 +2899,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "reservaiton.reservation_patient.name",
+            "field": "reservation.reservation_patient.name",
             "description": "<p>Reservation_patient name.</p>"
           },
           {
@@ -2941,7 +2941,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "reservaiton.trans_status",
+            "field": "reservation.trans_status",
             "description": "<p>Reservation translating status.</p>"
           },
           {
@@ -3158,7 +3158,7 @@ define({ "api": [
     "url": "/supervisor/user/",
     "title": "Update User Info",
     "name": "UpdateUser",
-    "description": "<p>Update user infomation.</p>",
+    "description": "<p>Update user info.</p>",
     "group": "Supervisor",
     "parameter": {
       "fields": {
@@ -3271,7 +3271,7 @@ define({ "api": [
     "title": "Update a Reservation",
     "name": "Update_Reservation",
     "group": "Supervisor",
-    "description": "<p>Update the informaiton of a Reservation.</p>",
+    "description": "<p>Update the info of a Reservation.</p>",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -3294,7 +3294,7 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "translator_E2C.id",
-            "description": "<p>New E2C_Translaotr id.</p>"
+            "description": "<p>New E2C_Translator id.</p>"
           },
           {
             "group": "Parameter",
@@ -3347,7 +3347,7 @@ define({ "api": [
     "url": "/supervisor/user/",
     "title": "Request User Info",
     "name": "UserInfo",
-    "description": "<p>Request user infomation.</p>",
+    "description": "<p>Request user info.</p>",
     "group": "Supervisor",
     "parameter": {
       "fields": {
@@ -3493,10 +3493,10 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Number",
             "optional": false,
             "field": "token",
-            "description": "<p>Token generated for authorization</p>"
+            "description": "<p>A token that can be verified at backend to grant operation</p>"
           }
         ]
       }

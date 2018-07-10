@@ -87,4 +87,50 @@
 @apiVersion 0.0.0
 """
 
+"""
+@api {put} /reservation/admin/:id Supervisor's operation to update a Reservation
+@apiName Update Reservation
+@apiGroup Reservation/admin
+@apiDescription Update the info of a Reservation.
 
+@apiParam {Number} 	id 							Unique ID of a Reservation.
+@apiParam {Number} 	translator_C2E.id 			New C2E_Translator id.
+@apiParam {Number} 	translator_E2C.id 			New E2C_Translator id.
+@apiParam {Number}	status						New reservation status.
+@apiParam {Number} 	trans_status 				New translating status.
+@apiParam {String} 	token 						Token to verify authorization.
+
+@apiError ReservationNotFound 		The required <code>id</code> of reservation is not found.
+@apiError InvalidAuthorization 			The operation is invalid at this stage. 
+
+@apiVersion 0.0.0
+"""
+
+"""
+@api {delete} /reservation/admin/:id Supervisor's operation to delete a Reservation
+@apiName Delete Reservation
+@apiGroup Reservation/admin
+@apiDescription Remove a Reservation from Database.
+
+@apiParam {Number} 	id 				Unique ID of a Reservation.
+@apiParam {String} 	token 			Token to verify authorization.
+
+@apiError InvalidAuthorization		This operation is invalid at this stage.
+"""
+
+"""
+@api {put} /translator/reservation/:id Translator's operation to update a Reservation
+@apiName Update Reservation
+@apiGroup Reservation/translate
+@apiDescription Update the informaiton of a Reservation.
+
+@apiParam {Number} 	id 							Unique ID of a Reservation.
+@apiParam {Number}	status						New reservation status.
+@apiParam {Number} 	trans_status 				New translating status.
+@apiParam {String} 	token 						Token to verify authorization.
+
+@apiError ReservationNotFound 		The required <code>id</code> of reservation is not found.
+@apiError InvalidAuthorization 			The operation is invalid at this stage. 
+
+@apiVersion 0.0.0
+"""

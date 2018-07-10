@@ -167,6 +167,27 @@
 @apiVersion 0.0.0
 """
 
+"""
+@api {post} /supervisor/register/translator SUpervisor's operation to create Translator
+@apiName CreateTranslator
+@apiDescription Create a translator type of user.
+@apiGroup Supervisor
+
+@apiParam {String} email Mandatory email address.
+@apiParam {String} password Mandatory password.
+@apiParam {String} password_confirmation Mandatory confirmation password.
+@apiParam {String} name Mandatory name.
+@apiParam {String} address Mandatory address.
+@apiParam {Number} tel Mandatory phone number.
+
+@apiSuccess {Number} id Registered translator id.
+
+@apiError EmailAlreadyExists The email exists in the DB.
+@apiError PasswordDoesNotMath The password does not match password_confirmation.
+@apiError RequiredFieldBlank Any mandatory form is blank.
+
+@apiVersion 0.0.0
+"""
 
 """
 @api {post} /supervisor/reset_link 	Send reset link via email
@@ -227,37 +248,6 @@
 @apiError ReservationNotFound The required <code>id</code> of reservation is not found.
 
 @apiVersion 0.0.0
-"""
-
-"""
-@api {put} /supervisor/reservation/:id Update a Reservation
-@apiName Update Reservation
-@apiGroup Supervisor
-@apiDescription Update the info of a Reservation.
-
-@apiParam {Number} 	id 							Unique ID of a Reservation.
-@apiParam {Number} 	translator_C2E.id 			New C2E_Translator id.
-@apiParam {Number} 	translator_E2C.id 			New E2C_Translator id.
-@apiParam {Number}	status						New reservation status.
-@apiParam {Number} 	trans_status 				New translating status.
-@apiParam {String} 	token 						Token to verify authorization.
-
-@apiError ReservationNotFound 		The required <code>id</code> of reservation is not found.
-@apiError InvalidAuthorization 			The operation is invalid at this stage. 
-
-@apiVersion 0.0.0
-"""
-
-"""
-@api {delete} /supervisor/reservation/:id Delete a Reservation
-@apiName Delete Reservation
-@apiGroup Supervisor
-@apiDescription Remove a Reservation from Database.
-
-@apiParam {Number} 	id 				Unique ID of a Reservation.
-@apiParam {String} 	token 			Token to verify authorization.
-
-@apiError InvalidAuthorization		This operation is invalid at this stage.
 """
 
 """

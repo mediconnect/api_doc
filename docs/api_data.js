@@ -2173,6 +2173,189 @@ define({ "api": [
     "groupTitle": "Reservation"
   },
   {
+    "type": "delete",
+    "url": "/reservation/admin/:id",
+    "title": "Supervisor's operation to delete a Reservation",
+    "name": "Delete_Reservation",
+    "group": "Reservation_admin",
+    "description": "<p>Remove a Reservation from Database.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID of a Reservation.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token to verify authorization.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidAuthorization",
+            "description": "<p>This operation is invalid at this stage.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/reservations.py",
+    "groupTitle": "Reservation_admin"
+  },
+  {
+    "type": "put",
+    "url": "/reservation/admin/:id",
+    "title": "Supervisor's operation to update a Reservation",
+    "name": "Update_Reservation",
+    "group": "Reservation_admin",
+    "description": "<p>Update the info of a Reservation.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID of a Reservation.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "translator_C2E.id",
+            "description": "<p>New C2E_Translator id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "translator_E2C.id",
+            "description": "<p>New E2C_Translator id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>New reservation status.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "trans_status",
+            "description": "<p>New translating status.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token to verify authorization.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ReservationNotFound",
+            "description": "<p>The required <code>id</code> of reservation is not found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidAuthorization",
+            "description": "<p>The operation is invalid at this stage.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/reservations.py",
+    "groupTitle": "Reservation_admin"
+  },
+  {
+    "type": "put",
+    "url": "/translator/reservation/:id",
+    "title": "Translator's operation to update a Reservation",
+    "name": "Update_Reservation",
+    "group": "Reservation_translate",
+    "description": "<p>Update the informaiton of a Reservation.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID of a Reservation.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>New reservation status.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "trans_status",
+            "description": "<p>New translating status.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token to verify authorization.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ReservationNotFound",
+            "description": "<p>The required <code>id</code> of reservation is not found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidAuthorization",
+            "description": "<p>The operation is invalid at this stage.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/reservations.py",
+    "groupTitle": "Reservation_translate"
+  },
+  {
     "type": "get",
     "url": "/slot/availability",
     "title": "Request Slot Information",
@@ -2595,6 +2778,102 @@ define({ "api": [
     "groupTitle": "Supervisor"
   },
   {
+    "type": "post",
+    "url": "/supervisor/register/translator",
+    "title": "SUpervisor's operation to create Translator",
+    "name": "CreateTranslator",
+    "description": "<p>Create a translator type of user.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password_confirmation",
+            "description": "<p>Mandatory confirmation password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Mandatory name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>Mandatory address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "tel",
+            "description": "<p>Mandatory phone number.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Registered translator id.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "EmailAlreadyExists",
+            "description": "<p>The email exists in the DB.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "PasswordDoesNotMath",
+            "description": "<p>The password does not match password_confirmation.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RequiredFieldBlank",
+            "description": "<p>Any mandatory form is blank.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
     "type": "delete",
     "url": "/supervisor/user/",
     "title": "Delete",
@@ -2635,49 +2914,6 @@ define({ "api": [
             "optional": false,
             "field": "AuthorizationFailed",
             "description": "<p>The operation is not authorized.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "api/supervisor.py",
-    "groupTitle": "Supervisor"
-  },
-  {
-    "type": "delete",
-    "url": "/supervisor/reservation/:id",
-    "title": "Delete a Reservation",
-    "name": "Delete_Reservation",
-    "group": "Supervisor",
-    "description": "<p>Remove a Reservation from Database.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Unique ID of a Reservation.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "token",
-            "description": "<p>Token to verify authorization.</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "InvalidAuthorization",
-            "description": "<p>This operation is invalid at this stage.</p>"
           }
         ]
       }
@@ -2993,8 +3229,8 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/supervisor/questionnaire_link",
-    "title": "Send qestionnaire link via email",
+    "url": "/supervisor/reset_link",
+    "title": "Send reset link via email",
     "name": "SendResetLink",
     "group": "Supervisor",
     "description": "<p>Send reset link to users.</p>",
@@ -3014,13 +3250,6 @@ define({ "api": [
             "optional": false,
             "field": "id",
             "description": "<p>Mandatory unique User id.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "reservation_id",
-            "description": "<p>Mandatory unique Reservation id.</p>"
           },
           {
             "group": "Parameter",
@@ -3050,8 +3279,8 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/supervisor/reset_link",
-    "title": "Send reset link via email",
+    "url": "/supervisor/questionnaire_link",
+    "title": "Send qestionnaire link via email",
     "name": "SendResetLink",
     "group": "Supervisor",
     "description": "<p>Send reset link to users.</p>",
@@ -3071,6 +3300,13 @@ define({ "api": [
             "optional": false,
             "field": "id",
             "description": "<p>Mandatory unique User id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "reservation_id",
+            "description": "<p>Mandatory unique Reservation id.</p>"
           },
           {
             "group": "Parameter",
@@ -3266,83 +3502,6 @@ define({ "api": [
     "groupTitle": "Supervisor"
   },
   {
-    "type": "put",
-    "url": "/supervisor/reservation/:id",
-    "title": "Update a Reservation",
-    "name": "Update_Reservation",
-    "group": "Supervisor",
-    "description": "<p>Update the info of a Reservation.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Unique ID of a Reservation.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "translator_C2E.id",
-            "description": "<p>New C2E_Translator id.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "translator_E2C.id",
-            "description": "<p>New E2C_Translator id.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "status",
-            "description": "<p>New reservation status.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "trans_status",
-            "description": "<p>New translating status.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "token",
-            "description": "<p>Token to verify authorization.</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "ReservationNotFound",
-            "description": "<p>The required <code>id</code> of reservation is not found.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "InvalidAuthorization",
-            "description": "<p>The operation is invalid at this stage.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "api/supervisor.py",
-    "groupTitle": "Supervisor"
-  },
-  {
     "type": "get",
     "url": "/supervisor/user/",
     "title": "Request User Info",
@@ -3516,102 +3675,6 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "api/supervisor.py",
     "groupTitle": "Supervisor"
-  },
-  {
-    "type": "post",
-    "url": "/translator/register",
-    "title": "Create Translator",
-    "name": "CreateTranslator",
-    "description": "<p>Create a translator type of user.</p>",
-    "group": "Translator",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "email",
-            "description": "<p>Mandatory email address.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>Mandatory password.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password_confirmation",
-            "description": "<p>Mandatory confirmation password.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>Mandatory name.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "address",
-            "description": "<p>Mandatory address.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "tel",
-            "description": "<p>Mandatory phone number.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Registered translator id.</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "EmailAlreadyExists",
-            "description": "<p>The email exists in the DB.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "PasswordDoesNotMath",
-            "description": "<p>The password does not match password_confirmation.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "RequiredFieldBlank",
-            "description": "<p>Any mandatory form is blank.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "api/translator.py",
-    "groupTitle": "Translator"
   },
   {
     "type": "get",
@@ -3806,69 +3869,6 @@ define({ "api": [
             "optional": false,
             "field": "password",
             "description": "<p>Mandatory password.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "api/translator.py",
-    "groupTitle": "Translator"
-  },
-  {
-    "type": "put",
-    "url": "/translator/reservation/:id",
-    "title": "Update a Reservation",
-    "name": "Update_Reservation",
-    "group": "Translator",
-    "description": "<p>Update the informaiton of a Reservation.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Unique ID of a Reservation.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "status",
-            "description": "<p>New reservation status.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "trans_status",
-            "description": "<p>New translating status.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "token",
-            "description": "<p>Token to verify authorization.</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "ReservationNotFound",
-            "description": "<p>The required <code>id</code> of reservation is not found.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "InvalidAuthorization",
-            "description": "<p>The operation is invalid at this stage.</p>"
           }
         ]
       }

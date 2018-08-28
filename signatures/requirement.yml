@@ -1,0 +1,21 @@
+Requirement:
+  DocumentRequirement:
+    path: /requirement/:hospital_id/:disease_id
+    method: GET
+    title: Request Document Requirement
+    description: Display document requirement.
+    params:
+      disease_id:
+        type: Number
+        description: Disease ID
+      hospital_id:
+        type: Number
+        description: Hospital ID
+    returns:
+      requirements:
+        type: String[]
+        description: Document requirements for this combination of Hospital and Disease.
+    errors:
+      RequirementNotFound:
+        description: The combination of <code>hospital_id</code> and <code>disease_id</code>
+          of the Requirement was not found.

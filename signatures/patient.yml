@@ -1,0 +1,108 @@
+Patient:
+  CreatePatient:
+    path: /patient/create
+    method: POST
+    title: Create patient
+    params:
+      birthdate:
+        type: DateTime
+        description: Mandatory birthdate.
+      first_name:
+        type: String
+        description: Mandatory first name.
+      first_name_pinyin:
+        type: String
+        description: Mandatory first name pinyin.
+      gender:
+        type: String
+        description: Mandatory gender with default "M".
+      last_name:
+        type: String
+        description: Mandatory last name.
+      last_name_pinyin:
+        type: String
+        description: Mandatory last name pinyin.
+      note:
+        type: optional<String>
+        description: Optional note.
+      passport_number:
+        type: String
+        description: Mandatory passport number.
+      relationship:
+        type: String
+        description: Mandatory replationship with user.
+      user_id:
+        type: Number
+        description: Mandatory unique User ID.
+    returns:
+      patient_id:
+        type: String
+        description: On Successful creation, return patient_id.
+    errors: {}
+  UpdatePatient:
+    path: /patient/:patient_id/visit_history/add
+    method: POST
+    title: Create patient previous hospital visit history
+    params:
+      contact_info:
+        type: String
+        description: Mandatory doctor contact info.
+      disease_category:
+        type: String
+        description: Mandatory main disease category for the visit.
+      doctor_name:
+        type: String
+        description: Mandatory doctor consulted.
+      hospital_name:
+        type: String
+        description: Mandatory hospital visited.
+      patient_id:
+        type: Number
+        description: Mandatory unique Patient ID.
+      visit_date:
+        type: optional<DateTime>
+        description: Optional visit date.
+    returns:
+      visit_id:
+        type: String
+        description: On success, return visit history id.
+    errors: {}
+  PatientInfo:
+    path: /patient/:id/info
+    method: GET
+    title: Request patient info
+    params:
+      id:
+        type: Number
+        description: Mandatory unique Patient ID.
+    returns:
+      birthdate:
+        type: DateTime
+        description: Mandatory birthdate.
+      first_name:
+        type: String
+        description: Mandatory first name.
+      first_name_pinyin:
+        type: String
+        description: Mandatory first name pinyin.
+      gender:
+        type: String
+        description: Mandatory gender with default "M".
+      last_name:
+        type: String
+        description: Mandatory last name.
+      last_name_pinyin:
+        type: String
+        description: Mandatory last name pinyin.
+      note:
+        type: String
+        description: Optional note.
+      passport_number:
+        type: String
+        description: Mandatory passport number.
+      relationship:
+        type: String
+        description: Mandatory replationship with user.
+    errors:
+      PatientNotFound:
+        description: The <code>id</code> of patient is not found.

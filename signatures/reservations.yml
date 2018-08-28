@@ -137,3 +137,69 @@ Reservation:
     errors:
       PaymentFailed:
         description: The payment is not able to be processed.
+Reservation/admin:
+  Update Reservation:
+    path: /reservation/admin/:id
+    method: PUT
+    title: Supervisor's operation to update a Reservation
+    description: Update the info of a Reservation.
+    params:
+      id:
+        type: Number
+        description: New E2C_Translator id.
+      status:
+        type: Number
+        description: New reservation status.
+      token:
+        type: String
+        description: Token to verify authorization.
+      trans_status:
+        type: Number
+        description: New translating status.
+    returns: {}
+    errors:
+      InvalidAuthorization:
+        description: The operation is invalid at this stage.
+      ReservationNotFound:
+        description: The required <code>id</code> of reservation is not found.
+  Delete Reservation:
+    path: /reservation/admin/:id
+    method: DELETE
+    title: Supervisor's operation to delete a Reservation
+    description: Remove a Reservation from Database.
+    params:
+      id:
+        type: Number
+        description: Unique ID of a Reservation.
+      token:
+        type: String
+        description: Token to verify authorization.
+    returns: {}
+    errors:
+      InvalidAuthorization:
+        description: This operation is invalid at this stage.
+Reservation/translate:
+  Update Reservation:
+    path: /translator/reservation/:id
+    method: PUT
+    title: Translator's operation to update a Reservation
+    description: Update the informaiton of a Reservation.
+    params:
+      id:
+        type: Number
+        description: Unique ID of a Reservation.
+      status:
+        type: Number
+        description: New reservation status.
+      token:
+        type: String
+        description: Token to verify authorization.
+      trans_status:
+        type: Number
+        description: New translating status.
+    returns: {}
+    errors:
+      InvalidAuthorization:
+        description: The operation is invalid at this stage.
+      ReservationNotFound:
+        description: The required <code>id</code> of reservation is not found.

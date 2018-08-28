@@ -174,7 +174,7 @@ class API(APIBaseSerializer):
 def main(source, cache="build/"):
     all_files = glob.glob(os.path.join(source, "*.yml"))
 
-    if not os.path.exist(cache):
+    if not os.path.exists(cache):
         os.mkdir(cache)
 
     for fname in all_files:

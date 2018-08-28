@@ -97,7 +97,7 @@ Questionnaire:
         type: Number
         description: Mandatory Hospital ID.
       id:
-        type: optional<Numebr>
+        type: optional<Number>
         description: Optional translator assigned ID.
     returns:
       questionnaire_id:
@@ -178,8 +178,8 @@ Supervisor:
         description: Optional status code for stage control
     returns:
       token:
-        type: String
-        description: Token generated for authorization
+        type: Number
+        description: A token that can be verified at backend to grant operation
     errors:
       SupervisorNotFound:
         description: The requested <code>id</code> of supervisor is not found.
@@ -221,7 +221,7 @@ Supervisor:
     path: /supervisor/user/
     method: GET
     title: Request User Info
-    description: Request user infomation.
+    description: Request user info.
     params:
       id:
         type: Number
@@ -265,7 +265,7 @@ Supervisor:
     path: /supervisor/user/
     method: PUT
     title: Update User Info
-    description: Update user infomation.
+    description: Update user info.
     params:
       address:
         type: optional<String>
@@ -324,6 +324,41 @@ Supervisor:
         description: The operation is not authorized.
       UserNotFound:
         description: The <code>id</code> of the user was not found.
+  CreateTranslator:
+    path: /supervisor/register/translator
+    method: POST
+    title: SUpervisor's operation to create Translator
+    description: Create a translator type of user.
+    params:
+      address:
+        type: String
+        description: Mandatory address.
+      email:
+        type: String
+        description: Mandatory email address.
+      name:
+        type: String
+        description: Mandatory name.
+      password:
+        type: String
+        description: Mandatory password.
+      password_confirmation:
+        type: String
+        description: Mandatory confirmation password.
+      tel:
+        type: Number
+        description: Mandatory phone number.
+    returns:
+      id:
+        type: Number
+        description: Registered translator id.
+    errors:
+      EmailAlreadyExists:
+        description: The email exists in the DB.
+      PasswordDoesNotMath:
+        description: The password does not match password_confirmation.
+      RequiredFieldBlank:
+        description: Any mandatory form is blank.
   SendResetLink:
     path: /supervisor/questionnaire_link
     method: POST
@@ -361,7 +396,7 @@ Supervisor:
         description: Pagination.
       reservations:
         type: Object[]
-        description: List of filterd/sorted reservations.
+        description: List of filtered/sorted reservations.
       total_page:
         type: Number
         description: Total pages.
@@ -370,15 +405,12 @@ Supervisor:
     path: /supervisor/reservation/:id
     method: GET
     title: Request info of a Reservation
-    description: Request the informaiton of a Reservation.
+    description: Request the inf of a Reservation.
     params:
       id:
         type: Number
         description: Unique ID of a Reservation.
     returns:
-      name:
-        type: String
-        description: Reservation_patient name.
       reservation:
         type: Object
         description: Reservation Object.
@@ -394,7 +426,7 @@ Supervisor:
             description: Last upload DateTime of documents associated.
           name:
             type: String
-            description: Hospital name.
+            description: Reservation_patient name.
           re_assigned:
             type: Boolean
             description: Whether reservation has been reassigned.
@@ -404,58 +436,18 @@ Supervisor:
           trans_deadline:
             type: DateTime
             description: Reservation translating deadline.
+          trans_status:
+            type: String
+            description: Reservation translating status.
           translator_C2E_name:
             type: String
             description: C2E_Translator name.
           translator_E2C_name:
             type: String
             description: E2C_Translaotr name.
-      trans_status:
-        type: String
-        description: Reservation translating status.
     errors:
       ReservationNotFound:
         description: The required <code>id</code> of reservation is not found.
-  Update Reservation:
-    path: /supervisor/reservation/:id
-    method: PUT
-    title: Update a Reservation
-    description: Update the informaiton of a Reservation.
-    params:
-      id:
-        type: Number
-        description: New E2C_Translaotr id.
-      status:
-        type: Number
-        description: New reservation status.
-      token:
-        type: String
-        description: Token to verify authorization.
-      trans_status:
-        type: Number
-        description: New translating status.
-    returns: {}
-    errors:
-      InvalidAuthorization:
-        description: The operation is invalid at this stage.
-      ReservationNotFound:
-        description: The required <code>id</code> of reservation is not found.
-  Delete Reservation:
-    path: /supervisor/reservation/:id
-    method: DELETE
-    title: Delete a Reservation
-    description: Remove a Reservation from Database.
-    params:
-      id:
-        type: Number
-        description: Unique ID of a Reservation.
-      token:
-        type: String
-        description: Token to verify authorization.
-    returns: {}
-    errors:
-      InvalidAuthorization:
-        description: This operation is invalid at this stage.
   ReservationDocuments:
     path: /supervisor/reservation/documents/:id/:type
     method: GET

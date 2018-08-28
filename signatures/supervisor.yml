@@ -1,0 +1,477 @@
+Questionnaire:
+  RequestQuestionnaire:
+    path: /supervisor/questionnaire/:hospital_id/:disease_id/:category
+    method: GET
+    title: Request Questionnaire
+    description: Request questionnaire information.
+    params:
+      category:
+        type: String
+        description: Mandatory questionnaire category.
+      disease_id:
+        type: Number
+        description: Mandatory Disease ID.
+      hospital_id:
+        type: Number
+        description: Mandatory Hospital ID.
+    returns:
+      choices:
+        type: String[]
+        description: Quesiton choices.
+      contents:
+        type: String[]
+        description: Quesiton contents.
+      document:
+        type: Object
+        description: Questionnaire Document.
+      formats:
+        type: String[]
+        description: Question formats.
+      id:
+        type: Number
+        description: The id of translator assigned.
+      translated:
+        type: Boolean
+        description: Whther the questionnaire has been translated.
+    errors:
+      QuestionnaireNotFound:
+        description: The requested <code>id</code> of questionnaire is not found.
+  CreateQuestionnaire:
+    path: /supervisor/questionnaire/:hospital_id/:disease_id/:category
+    method: POST
+    title: Create Questionnaire
+    description: Create a Questionnaire.
+    params:
+      category:
+        type: String
+        description: Mandatory questionnaire category.
+      choices:
+        type: String[]
+        description: Mandatory quesiton choices.
+      contents:
+        type: String[]
+        description: Mandatory quesiton contents.
+      disease_id:
+        type: Number
+        description: Mandatory Disease ID.
+      formats:
+        type: String[]
+        description: Mandatory question formats.
+      hospital_id:
+        type: Number
+        description: Mandatory Hospital ID.
+      id:
+        type: Number
+        description: Mandatory translator assigned ID.
+    returns:
+      questionnaire_id:
+        type: Number
+        description: Questionnaire ID.
+    errors:
+      RequiredFieldBlank:
+        description: Any mandatory form is blank.
+      TranslatorNotFound:
+        description: The requested <code>id</code> of translator is not found.
+  UpdateQuestionnaire:
+    path: /supervisor/questionnaire/:hospital_id/:disease_id/:category
+    method: PUT
+    title: Update Questionnaire
+    description: Update a Questionnaire.
+    params:
+      category:
+        type: String
+        description: Mandatory questionnaire category.
+      choices:
+        type: optional<String[]>
+        description: Optional quesiton choices.
+      contents:
+        type: optional<String[]>
+        description: Optional quesiton contents.
+      disease_id:
+        type: Number
+        description: Mandatory Disease ID.
+      formats:
+        type: optional<String[]>
+        description: Optional question formats.
+      hospital_id:
+        type: Number
+        description: Mandatory Hospital ID.
+      id:
+        type: optional<Numebr>
+        description: Optional translator assigned ID.
+    returns:
+      questionnaire_id:
+        type: Number
+        description: Questionnaire ID.
+    errors:
+      QuestionnaireNotFound:
+        description: The requested <code>id</code> of questionnaire is not found.
+      TranslatorNotFound:
+        description: The requested <code>id</code> of translator is not found.
+Supervisor:
+  SupervisorLogin:
+    path: /supervisor/login/
+    method: POST
+    title: Supervisor Login
+    description: Handle supervisor login request.
+    params:
+      email:
+        type: String
+        description: Mandatory email address.
+      password:
+        type: String
+        description: Mandatory password.
+    returns: {}
+    errors: {}
+  CreateSupervisor:
+    path: /supervisor/create
+    method: POST
+    title: Create User
+    description: Create a supervisor type of user.
+    params:
+      address:
+        type: String
+        description: Mandatory address.
+      email:
+        type: String
+        description: Mandatory email address.
+      name:
+        type: String
+        description: Mandatory name.
+      password:
+        type: String
+        description: Mandatory password.
+      password_confirmation:
+        type: String
+        description: Mandatory confirmation password.
+      role:
+        type: Number
+        description: Mandatory user type.
+      tel:
+        type: Number
+        description: Mandatory phone number.
+    returns:
+      id:
+        type: Number
+        description: Registered supervisor id.
+    errors:
+      EmailAlreadyExists:
+        description: The email exists in the DB.
+      PasswordDoesNotMath:
+        description: The password does not match password_confirmation.
+      RequiredFieldBlank:
+        description: Any mandatory form is blank.
+  ValidatePassword:
+    path: /supervisor/password
+    method: POST
+    title: Validate password
+    description: Validate supervisor's password input to authorize operations.
+    params:
+      id:
+        type: Number
+        description: Unique Supervisor ID
+      password:
+        type: String
+        description: Mandatory password
+      status_code:
+        type: optional<Number>
+        description: Optional status code for stage control
+    returns:
+      token:
+        type: String
+        description: Token generated for authorization
+    errors:
+      SupervisorNotFound:
+        description: The requested <code>id</code> of supervisor is not found.
+  SupervisorSummary:
+    path: /summary
+    method: GET
+    title: Summarize Website Stats
+    description: Request a summary of the website's stats.
+    params: {}
+    returns:
+      summary:
+        type: String
+        description: Whatever summary we want to display for the supervisor.
+    errors: {}
+  ListCustomers:
+    path: /supervisor/user/:role/:query
+    method: GET
+    title: Request list of User
+    description: Request a list of customers based on query.
+    params:
+      query:
+        type: String
+        description: Query to filter/sort the customers.
+      role:
+        type: Number
+        description: Type of users to list.
+    returns:
+      page:
+        type: Number
+        description: Pagination.
+      total_page:
+        type: Number
+        description: Total pages.
+      users:
+        type: Object[]
+        description: List of filterd/sorted users.
+    errors: {}
+  UserInfo:
+    path: /supervisor/user/
+    method: GET
+    title: Request User Info
+    description: Request user infomation.
+    params:
+      id:
+        type: Number
+        description: Mandatory unique User ID.
+    returns:
+      user:
+        type: Object
+        description: User Object.
+        fields:
+          address:
+            type: String
+            description: Mandatory User address.
+          age:
+            type: Number
+            description: Optional User age.
+          email:
+            type: String
+            description: Mandatory User email.
+          first_name:
+            type: String
+            description: Mandatory User first name.
+          gender:
+            type: optional<String>
+            description: Optional User gender.
+          last_name:
+            type: String
+            description: Mandatory User last name.
+          phone:
+            type: String
+            description: Mandatory User phone.
+          qq:
+            type: optional<String>
+            description: Optional User qq.
+          wechat:
+            type: optional<String>
+            description: Optional User wechat.
+    errors:
+      UserNotFound:
+        description: The <code>id</code> of the user was not found.
+  UpdateUser:
+    path: /supervisor/user/
+    method: PUT
+    title: Update User Info
+    description: Update user infomation.
+    params:
+      address:
+        type: optional<String>
+        description: Optional User address.
+      age:
+        type: Number
+        description: Optional] Optional User age.
+      email:
+        type: optional<String>
+        description: Optional User email.
+      first_name:
+        type: optional<String>
+        description: Optional User first name.
+      gender:
+        type: optional<String>
+        description: Optional User gender.
+      id:
+        type: Number
+        description: Mandatory unique User ID.
+      last_name:
+        type: optional<String>
+        description: Optional User last name.
+      phone:
+        type: optional<String>
+        description: Optional User phone.
+      qq:
+        type: optional<String>
+        description: Optional User qq.
+      token:
+        type: String
+        description: Mandatory token for authorizing operation.
+      wechat:
+        type: optional<String>
+        description: Optional User wechat.
+    returns: {}
+    errors:
+      AuthorizationFailed:
+        description: The operation is not authorized.
+      UserNotFound:
+        description: The <code>id</code> of the user was not found.
+  Delete:
+    path: /supervisor/user/
+    method: DELETE
+    title: Delete
+    description: Delete user.
+    params:
+      id:
+        type: Number
+        description: Mandatory unique User ID.
+      token:
+        type: String
+        description: Mandatory token for authorizing operation.
+    returns: {}
+    errors:
+      AuthorizationFailed:
+        description: The operation is not authorized.
+      UserNotFound:
+        description: The <code>id</code> of the user was not found.
+  SendResetLink:
+    path: /supervisor/questionnaire_link
+    method: POST
+    title: Send qestionnaire link via email
+    description: Send reset link to users.
+    params:
+      email_address:
+        type: String
+        description: Mandatory to_email address.
+      id:
+        type: Number
+        description: Mandatory unique User id.
+      reservation_id:
+        type: Number
+        description: Mandatory unique Reservation id.
+      token:
+        type: String
+        description: Mandatory hashed token for temporary reset link.
+    returns: {}
+    errors:
+      RequiredFieldBlank:
+        description: Any mandatory form is blank.
+  ListReservation:
+    path: /supervisor/reservations/:query
+    method: GET
+    title: Request list of Reservations
+    description: Request a list of reservation based on query.
+    params:
+      query:
+        type: String
+        description: Query to filter/sort the reservations.
+    returns:
+      page:
+        type: Number
+        description: Pagination.
+      reservations:
+        type: Object[]
+        description: List of filterd/sorted reservations.
+      total_page:
+        type: Number
+        description: Total pages.
+    errors: {}
+  ReservationInfo:
+    path: /supervisor/reservation/:id
+    method: GET
+    title: Request info of a Reservation
+    description: Request the informaiton of a Reservation.
+    params:
+      id:
+        type: Number
+        description: Unique ID of a Reservation.
+    returns:
+      name:
+        type: String
+        description: Reservation_patient name.
+      reservation:
+        type: Object
+        description: Reservation Object.
+        fields:
+          deadline:
+            type: DateTime
+            description: Reservation deadline to upload to hospital.
+          id:
+            type: Number
+            description: Reservation unique id.
+          last_upload:
+            type: DateTime
+            description: Last upload DateTime of documents associated.
+          name:
+            type: String
+            description: Hospital name.
+          re_assigned:
+            type: Boolean
+            description: Whether reservation has been reassigned.
+          status:
+            type: String
+            description: Reservation status.
+          trans_deadline:
+            type: DateTime
+            description: Reservation translating deadline.
+          translator_C2E_name:
+            type: String
+            description: C2E_Translator name.
+          translator_E2C_name:
+            type: String
+            description: E2C_Translaotr name.
+      trans_status:
+        type: String
+        description: Reservation translating status.
+    errors:
+      ReservationNotFound:
+        description: The required <code>id</code> of reservation is not found.
+  Update Reservation:
+    path: /supervisor/reservation/:id
+    method: PUT
+    title: Update a Reservation
+    description: Update the informaiton of a Reservation.
+    params:
+      id:
+        type: Number
+        description: New E2C_Translaotr id.
+      status:
+        type: Number
+        description: New reservation status.
+      token:
+        type: String
+        description: Token to verify authorization.
+      trans_status:
+        type: Number
+        description: New translating status.
+    returns: {}
+    errors:
+      InvalidAuthorization:
+        description: The operation is invalid at this stage.
+      ReservationNotFound:
+        description: The required <code>id</code> of reservation is not found.
+  Delete Reservation:
+    path: /supervisor/reservation/:id
+    method: DELETE
+    title: Delete a Reservation
+    description: Remove a Reservation from Database.
+    params:
+      id:
+        type: Number
+        description: Unique ID of a Reservation.
+      token:
+        type: String
+        description: Token to verify authorization.
+    returns: {}
+    errors:
+      InvalidAuthorization:
+        description: This operation is invalid at this stage.
+  ReservationDocuments:
+    path: /supervisor/reservation/documents/:id/:type
+    method: GET
+    title: Request Documents associated with a Reservation
+    description: Request the documents associated with a reservation.
+    params:
+      type:
+        type: String
+        description: Document type
+      id:
+        type: Number
+        description: Reservation unique ID.
+    returns:
+      documents:
+        type: Object[]
+        description: List of Document Objects
+    errors:
+      ReservationNotFound:
+        description: The required <code>id</code> of reservation is not found.

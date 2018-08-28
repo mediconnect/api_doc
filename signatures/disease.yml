@@ -1,0 +1,23 @@
+Disease:
+  DiseaseDisplay:
+    path: /disease/:id
+    method: GET
+    title: Request Disease Information
+    description: Display information about a disease.
+    params:
+      id:
+        type: Number
+        description: Disease unique ID
+    returns:
+      image:
+        type: String
+        description: Disease image
+      keyword:
+        type: String
+        description: Disease keyword
+      name:
+        type: String
+        description: Disease name
+    errors:
+      DiseaseNotFound:
+        description: The <code>id</code> of the Disease was not found.

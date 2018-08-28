@@ -1,0 +1,170 @@
+Customer:
+  CustomerLogin:
+    path: /customer/login/
+    method: POST
+    title: Customer Login
+    description: Handle customer login request.
+    params:
+      email:
+        type: String
+        description: Mandatory email address.
+      password:
+        type: String
+        description: Mandatory password.
+    returns: {}
+    errors: {}
+  CustomerInfo:
+    path: /customer/info
+    method: GET
+    title: Request Customer Info
+    description: Request customer infomation.
+    params:
+      id:
+        type: Number
+        description: Mandatory unique Customer ID.
+    returns:
+      customer:
+        type: Object
+        description: Customer Object.
+        fields:
+          address:
+            type: String
+            description: Mandatory Customer address.
+          age:
+            type: Number
+            description: Optional Customer age.
+          email:
+            type: String
+            description: Mandatory Customer email.
+          first_name:
+            type: String
+            description: Mandatory Customer first name.
+          gender:
+            type: optional<String>
+            description: Optional Customer gender.
+          last_name:
+            type: String
+            description: Mandatory Customer last name.
+          phone:
+            type: String
+            description: Mandatory Customer phone.
+          qq:
+            type: optional<String>
+            description: Optional Customer qq.
+          wechat:
+            type: optional<String>
+            description: Optional Customer wechat.
+    errors:
+      CustomerNotFound:
+        description: The <code>id</code> of the customer was not found.
+  GetStoredPatientIds:
+    path: /customer/get_stored_patient_ids
+    method: GET
+    title: Request Stored Patiente_IDs
+    description: Request a list of stored patient_ids.
+    params:
+      id:
+        type: Number
+        description: Mandatory unique Customer ID.
+    returns:
+      patient_ids:
+        type: Number[]
+        description: Mandatory Patient IDs.
+      patient_names:
+        type: String[]
+        description: Mandatory Patient Names.
+    errors:
+      CustomerNotFound:
+        description: The <code>id</code> of the customer was not found.
+  CustomerRegister:
+    path: /customer/register/
+    method: POST
+    title: Customer Register
+    description: Handle customer registration request.
+    params:
+      address:
+        type: String
+        description: Mandatory address.
+      email:
+        type: String
+        description: Mandatory email address.
+      name:
+        type: String
+        description: Mandatory name.
+      password:
+        type: String
+        description: Mandatory password.
+      password_confirmation:
+        type: String
+        description: Mandatory confirmation password.
+      tel:
+        type: Number
+        description: Mandatory phone number.
+    returns:
+      id:
+        type: Number
+        description: Registered customer id.
+    errors:
+      EmailAlreadyExists:
+        description: The email exists in the DB.
+      PasswordDoesNotMath:
+        description: The password does not match password_confirmation.
+      RequiredFieldBlank:
+        description: Any mandatory form is blank.
+  CustomerForgetPassword:
+    path: /customer/forget_password
+    method: POST
+    title: Forget Password
+    description: Handle request from customer that forgets password.
+    params:
+      captcha:
+        type: String
+        description: Validation code for identifying robot.
+      email:
+        type: String
+        description: Mandatory email address.
+    returns: {}
+    errors:
+      CaptchaDoesNotMatch:
+        description: The captcha does not match database entry.
+      EmailDoesNotExist:
+        description: The queried email does not exist in the database.
+  CustomerUpdateProfile:
+    path: /customer/update_profile
+    method: POST
+    title: Update Customer Profile Information
+    description: Update customer profile information.
+    params:
+      address:
+        type: String
+        description: Mandatory address.
+      email:
+        type: String
+        description: Mandatory email address.
+      name:
+        type: String
+        description: Mandatory customer name.
+      old_password:
+        type: String
+        description: Mandatory old password.
+      password:
+        type: String
+        description: Mandatory password.
+      password_confirmation:
+        type: String
+        description: Mandatory confirmation password.
+      tel:
+        type: Number
+        description: Mandatory phone number.
+    returns: {}
+    errors:
+      EmailAlreadyExists:
+        description: The email address changes but also duplicate with another existing
+          email address.
+      PasswordDoesNotMath:
+        description: The password does not match password_confirmation.
+      RequiredFieldBlank:
+        description: Any mandatory form is blank.
+      WrongPassword:
+        description: The old password does not match the existing password in the
+          database.

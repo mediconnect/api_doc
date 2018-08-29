@@ -124,9 +124,9 @@ Supervisor:
     returns: {}
     errors: {}
   CreateSupervisor:
-    path: /supervisor/create
+    path: /supervisor/register
     method: POST
-    title: Create User
+    title: Create Supervisor
     description: Create a supervisor type of user.
     params:
       address:
@@ -144,9 +144,6 @@ Supervisor:
       password_confirmation:
         type: String
         description: Mandatory confirmation password.
-      role:
-        type: Number
-        description: Mandatory user type.
       tel:
         type: Number
         description: Mandatory phone number.
@@ -261,6 +258,44 @@ Supervisor:
     errors:
       UserNotFound:
         description: The <code>id</code> of the user was not found.
+  CreateUser:
+    path: /supervisor/create
+    method: POST
+    title: Create User
+    description: Create a supervisor type of user.
+    params:
+      address:
+        type: String
+        description: Mandatory address.
+      email:
+        type: String
+        description: Mandatory email address.
+      name:
+        type: String
+        description: Mandatory name.
+      password:
+        type: String
+        description: Mandatory password.
+      password_confirmation:
+        type: String
+        description: Mandatory confirmation password.
+      role:
+        type: Number
+        description: Mandatory user type.
+      tel:
+        type: Number
+        description: Mandatory phone number.
+    returns:
+      id:
+        type: Number
+        description: Registered supervisor id.
+    errors:
+      EmailAlreadyExists:
+        description: The email exists in the DB.
+      PasswordDoesNotMath:
+        description: The password does not match password_confirmation.
+      RequiredFieldBlank:
+        description: Any mandatory form is blank.
   UpdateUser:
     path: /supervisor/user/
     method: PUT
@@ -360,9 +395,9 @@ Supervisor:
       RequiredFieldBlank:
         description: Any mandatory form is blank.
   SendResetLink:
-    path: /supervisor/questionnaire_link
+    path: /supervisor/reset_link
     method: POST
-    title: Send qestionnaire link via email
+    title: Send reset link via email
     description: Send reset link to users.
     params:
       email_address:
@@ -371,9 +406,6 @@ Supervisor:
       id:
         type: Number
         description: Mandatory unique User id.
-      reservation_id:
-        type: Number
-        description: Mandatory unique Reservation id.
       token:
         type: String
         description: Mandatory hashed token for temporary reset link.
@@ -467,3 +499,25 @@ Supervisor:
     errors:
       ReservationNotFound:
         description: The required <code>id</code> of reservation is not found.
+  SendQuestionnaireLink:
+    path: /supervisor/questionnaire_link
+    method: POST
+    title: Send qestionnaire link via email
+    description: Send reset link to users.
+    params:
+      email_address:
+        type: String
+        description: Mandatory to_email address.
+      id:
+        type: Number
+        description: Mandatory unique User id.
+      reservation_id:
+        type: Number
+        description: Mandatory unique Reservation id.
+      token:
+        type: String
+        description: Mandatory hashed token for temporary reset link.
+    returns: {}
+    errors:
+      RequiredFieldBlank:
+        description: Any mandatory form is blank.

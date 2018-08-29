@@ -40,6 +40,46 @@ Patient:
         description: On Successful creation, return patient_id.
     errors: {}
   UpdatePatient:
+    path: /patient/:patient_id/update
+    method: POST
+    title: Update patient
+    params:
+      birthdate:
+        type: optional<DateTime>
+        description: Mandatory birthdate.
+      first_name:
+        type: optional<String>
+        description: Mandatory first name.
+      first_name_pinyin:
+        type: optional<String>
+        description: Mandatory first name pinyin.
+      gender:
+        type: optional<String>
+        description: Mandatory gender with default "M".
+      last_name:
+        type: optional<String>
+        description: Mandatory last name.
+      last_name_pinyin:
+        type: optional<String>
+        description: Mandatory last name pinyin.
+      note:
+        type: optional<String>
+        description: Optional note.
+      passport_number:
+        type: optional<String>
+        description: Mandatory passport number.
+      patient_id:
+        type: Number
+        description: Mandatory unique Patient ID.
+      relationship:
+        type: optional<String>
+        description: Mandatory replationship with user.
+    returns:
+      msg:
+        type: String
+        description: Successfully update patient.
+    errors: {}
+  UpdatePatientHistory:
     path: /patient/:patient_id/visit_history/add
     method: POST
     title: Create patient previous hospital visit history

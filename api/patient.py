@@ -42,7 +42,7 @@
 
 """
 @api {post} /patient/:patient_id/visit_history/add	Create patient previous hospital visit history
-@apiName UpdatePatient
+@apiName UpdatePatientHistory
 @apiGroup Patient
 
 @apiParam {Number}	 patient_id				Mandatory unique Patient ID.

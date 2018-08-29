@@ -106,7 +106,7 @@
 
 """
 @api {post} /supervisor/create Create User
-@apiName CreateSupervisor
+@apiName CreateUser
 @apiDescription Create a supervisor type of user.
 @apiGroup Supervisor
 
@@ -352,7 +352,7 @@
 
 """
 @api {post} /supervisor/questionnaire_link 	Send qestionnaire link via email
-@apiName SendResetLink
+@apiName SendQuestionnaireLink
 @apiGroup Supervisor
 @apiDescription Send reset link to users.
 

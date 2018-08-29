@@ -1,0 +1,62 @@
+Miscellaneous:
+  ContactInfo:
+    path: /contact
+    method: GET
+    title: Request contact info
+    description: Display contact information of the website.
+    params: {}
+    returns:
+      info:
+        type: String
+        description: Whatever information we want to show the customers.
+    errors: {}
+  SendEmail:
+    path: /contact
+    method: POST
+    title: Send email
+    description: Send email to the company.
+    params:
+      content:
+        type: String
+        description: Mandatory email content.
+      email_address:
+        type: String
+        description: Mandatory email address.
+      subject:
+        type: String
+        description: Mandatory subject of the email to be sent.
+    returns:
+      Email:
+        type: String
+        description: sent.
+    errors:
+      RequiredFieldBlank:
+        description: Any mandatory form is blank.
+  RequestQuestionnaire:
+    path: /questionnaire/:id/:token
+    method: GET
+    title: Request Questionnaire
+    description: Request questionnaire information.
+    params:
+      id:
+        type: Number
+        description: Unique Questionnaire ID.
+      token:
+        type: String
+        description: Token for authorization.
+    returns:
+      choices:
+        type: String[]
+        description: Quesiton choices.
+      contents:
+        type: String[]
+        description: Quesiton contents.
+      document:
+        type: Object
+        description: Questionnaire Document.
+      formats:
+        type: String[]
+        description: Question formats.
+    errors:
+      QuestionnaireNotFound:
+        description: The requested <code>id</code> of questionnaire is not found.

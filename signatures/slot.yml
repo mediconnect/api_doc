@@ -1,0 +1,93 @@
+Slot:
+  SlotDisplay:
+    path: /slot/availability
+    method: GET
+    title: Request Slot Information
+    description: Display information about a slot.
+    params:
+      disease:
+        type: Number
+        description: Disease ID
+      hospital:
+        type: UUID
+        description: Hospital ID
+    returns:
+      available:
+        type: Object[4]
+        description: Abailable slots for the next four weeks.
+        fields:
+          availability:
+            type: Number
+            description: slots left
+          disease:
+            type: UUID
+            description: disease id
+          hospital:
+            type: UUID
+            description: hospital id
+          week_start:
+            type: Date
+            description: time of week start
+    errors:
+      SlotNotFound:
+        description: The combination of <code>hospital_id</code> and <code>disease_id</code>
+          of the Slot was not found.
+  UpdateSlot:
+    path: /slot/batch/create
+    method: PUT
+    title: Create or Update Slot Information
+    description: Update a slot.
+    params:
+      hospital_list:
+        type: Object[]
+        description: hospital list
+        fields:
+          disease_list:
+            type: Object[]
+            description: disease list
+            fields:
+              date_slots:
+                type: Object[]
+                description: available slots on dates
+                fields:
+                  type:
+                    type: String
+                    description: '"add" or "change"'
+                  dates:
+                    type: Date
+                    description: slot date
+                  quantity:
+                    type: Number
+                    description: slot total availablity
+              disease_id:
+                type: UUID
+                description: disease ID
+          hospital_id:
+            type: UUID
+            description: hospital ID
+    returns:
+      created:
+        type: UUID[]
+        description: Successfully created slots
+      error:
+        type: Object[]
+        description: Slots runs into errors
+        fields:
+          detail:
+            type: UUID
+            description: detail reason
+          error:
+            type: UUID
+            description: Type of error
+          time_slot:
+            type: UUID
+            description: Slot ID runs into errors
+      updated:
+        type: UUID[]
+        description: Successfully updated slots
+    errors:
+      InvalidAuthorization:
+        description: This operation is invalid at this stage.
+      SlotNotFound:
+        description: The combination of <code>hospital_id</code> and <code>disease_id</code>
+          of the Slot was not found.

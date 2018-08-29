@@ -1,0 +1,71 @@
+Hospital:
+  HospitalDisplay:
+    path: /hospital/:id
+    method: GET
+    title: Request Hospital Information
+    description: Display information about a hospital.
+    params:
+      id:
+        type: Number
+        description: Hospital unique ID
+    returns:
+      hospital:
+        type: Object
+        description: Hospital Object.
+        fields:
+          image:
+            type: String
+            description: Hospital Image.
+          intro:
+            type: String
+            description: Hospital Brief Introduction.
+          location:
+            type: String
+            description: Hospital Location.
+          rank:
+            type: Number
+            description: Hospital General Rank.
+          url:
+            type: String
+            description: Hospital Website Link.
+      name:
+        type: String
+        description: Hospital Name.
+    errors:
+      ObjectNotFound:
+        description: The <code>id</code> of the Hospital was not found.
+  HospitalList:
+    path: /hospitals/:query
+    method: GET
+    title: Request List of Hospitals
+    description: Dispaly all hospitals based on query
+    params:
+      query:
+        type: Srtring
+        description: Query to filter/sort Hospitals
+    returns:
+      hospitals:
+        type: Object[]
+        description: List of filtered/sorted Hospitals.
+      image:
+        type: String
+        description: Hospital Image.
+      intro:
+        type: String
+        description: Hospital Brief Introduction.
+      location:
+        type: String
+        description: Hospital Location.
+      name:
+        type: String
+        description: Hospital Name.
+      page:
+        type: Number
+        description: pagination
+      rank:
+        type: Number
+        description: Hospital General Rank.
+      url:
+        type: String
+        description: Hospital Website Link.
+    errors: {}

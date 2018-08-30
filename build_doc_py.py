@@ -173,7 +173,7 @@ class API(APIBaseSerializer):
 
 def main(source, cache="build/"):
     all_files = glob.glob(os.path.join(source, "*.yml"))
-
+    assert len(all_files), "Failed to find any yaml api signature files."
     if not os.path.exists(cache):
         os.mkdir(cache)
 

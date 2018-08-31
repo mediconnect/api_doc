@@ -1,0 +1,57 @@
+Document:
+  CreateDocument:
+    path: /document
+    method: POST
+    title: Create Document
+    description: Create document.
+    params:
+      description:
+        type: String
+        description: Mandatory document description
+      file_path:
+        type: String
+        description: Mandatory file_path
+      name:
+        type: String
+        description: Mandatory document name
+      note:
+        type: optional<String>
+        description: Optional note for document.
+      upload_at:
+        type: DateTime
+        description: Mandatory document upload time.
+    returns:
+      id:
+        type: Number
+    errors:
+      RequiredFieldBlank:
+        description: Any mandatory form is blank.
+  RequestDocument:
+    path: /document
+    method: GET
+    title: Request Document Info
+    description: Request document information.
+    params: {}
+    returns:
+      document:
+        type: Object
+        description: Document Object
+        fields:
+          description:
+            type: Stinrg
+            description: Document description
+          file_path:
+            type: String
+            description: File_path
+          name:
+            type: String
+            description: Document name
+          note:
+            type: optional<String>
+            description: Note for document
+          upload_at:
+            type: DateTime
+            description: Document upload time.
+    errors:
+      DocumentNotFound:
+        description: The <code>id</code> of the document doesn't exist.

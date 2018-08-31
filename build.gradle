@@ -1,0 +1,48 @@
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+
+task compileYaml {
+    group "CompileYaml";
+
+    doLast {
+        def taskCmd = "python3 build_doc_py.py -s signatures";
+        println taskCmd;
+        def process = Runtime.getRuntime().exec(taskCmd);
+        def stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+        def stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        if (process.waitFor() != 0) {
+            println "\n===ERROR==="
+            stderr.lines().forEach({s -> println s});
+            throw new Exception("Task Failed");
+        }
+        println "\n===OUTPUT==="
+        stdout.lines().forEach({s -> println s});
+        println "============"
+    }
+}
+
+task produceApiDoc {
+    group "CompileDoc"
+
+    doLast {
+        def taskCmd = "apidoc.cmd -i build -o docs";
+        println taskCmd;
+        def process = Runtime.getRuntime().exec(taskCmd);
+        def stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+        def stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        if (process.waitFor() != 0) {
+            println "\n===ERROR==="
+            stderr.lines().forEach({s -> println s});
+            throw new Exception("Task Failed");
+        }
+        println "\n===OUTPUT==="
+        stdout.lines().forEach({s -> println s});
+        println "============"
+    }
+}
+produceApiDoc.dependsOn compileYaml
+
+task build {
+
+}
+build.dependsOn produceApiDoc

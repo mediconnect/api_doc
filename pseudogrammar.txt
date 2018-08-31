@@ -1,0 +1,36 @@
+#define main_group_structure:
+<apiGroup>:
+    <apiName>:
+        method: <api_method>
+        path: <api_path>
+        title: optional<api_title>
+        description: optional<apiDescription>
+        permission: optional<apiPermission>
+        headers:
+            <apiHeader_field>:
+                group: optional<apiHeader_group>
+                type: <apiHeader_type>
+                default: optional<apiHeader_defaultValue>
+                description: optional<apiHeader_description>
+        params:
+            <apiParam_field>:
+                group: optional<apiParam_group>
+                type: <apiParam_type>
+                restrictToValues:
+                    <apiParam_allowedValues>
+                default: optional<apiParam_defaultValue>
+                description: optional<apiParam_description>
+                fields: optional<collection<apiParam>>
+        returns:
+            <apiSuccess_field>:
+                group: optional<apiSuccess_group>
+                type: <apiSuccess_type>
+                description: optional<apiSuccess_description>
+                fields: optional<collection<apiSuccess>>
+        errors:
+            <apiError_field>:
+                group: optional<apiError_group>
+                type: <apiError_type>
+                description: optional<apiError_description>
+                fields: optional<collection<apiError>>
+#note apiVersion useGitTag

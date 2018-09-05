@@ -1,0 +1,145 @@
+ReservationAdmin:
+  ValidateOperation:
+    path: /reservations/admin/validate/
+    method: POST
+    title: Reservation Admin Validation
+    description: Validate a admin's identity.
+    params:
+      userID:
+        type: Number
+        description: Unique ID of a User.
+      password:
+        type: String
+        description: Mandatory password.
+  ListReservation:
+    path: /reservations/admin/list/:query
+    method: GET
+    title: Request list of Reservations
+    description: Request a list of reservation based on query.
+    params:
+      query:
+        type: String
+        description: Query to filter/sort the reservations.
+    returns:
+      page:
+        type: Number
+        description: Pagination.
+      reservations:
+        type: Object[]
+        description: List of filtered/sorted reservations.
+      total_page:
+        type: Number
+        description: Total pages.
+    errors: {}
+  ReservationDetail:
+    path: /reservation/admin/detail/:id
+    method: GET
+    title: Request info of a Reservation
+    description: Request the info of a Reservation.
+    params:
+      id:
+        type: Number
+        description: Unique ID of a Reservation.
+    returns:
+      reservation:
+        type: Object
+        description: Reservation Object.
+        fields:
+          deadline:
+            type: DateTime
+            description: Reservation deadline to upload to hospital.
+          id:
+            type: Number
+            description: Reservation unique id.
+          last_upload:
+            type: DateTime
+            description: Last upload DateTime of documents associated.
+          name:
+            type: String
+            description: Reservation_patient name.
+          re_assigned:
+            type: Boolean
+            description: Whether reservation has been reassigned.
+          status:
+            type: String
+            description: Reservation status.
+          trans_deadline:
+            type: DateTime
+            description: Reservation translating deadline.
+          trans_status:
+            type: String
+            description: Reservation translating status.
+          translator_C2E_name:
+            type: String
+            description: C2E_Translator name.
+          translator_E2C_name:
+            type: String
+            description: E2C_Translaotr name.
+    errors:
+      ReservationNotFound:
+        description: The required <code>id</code> of reservation is not found.
+  ReservationUpdate:
+    path: /reservation/admin/update/:id
+    method: POST
+    title: Update a Reservation
+    description: Admin Update on Reservation.
+    params:
+      id:
+        type: Number
+        description: Unique ID of a Reservation.
+      deadline:
+        type: DateTime
+        description: Reservation deadline to upload to hospital.
+      id:
+        type: Number
+        description: Reservation unique id.
+      last_upload:
+        type: DateTime
+        description: Last upload DateTime of documents associated.
+      name:
+        type: String
+        description: Reservation_patient name.
+      re_assigned:
+        type: Boolean
+        description: Whether reservation has been reassigned.
+      status:
+        type: String
+        description: Reservation status.
+      trans_deadline:
+        type: DateTime
+        description: Reservation translating deadline.
+      trans_status:
+        type: String
+        description: Reservation translating status.
+      translator_C2E_name:
+        type: String
+        description: C2E_Translator name.
+      translator_E2C_name:
+        type: String
+        description: E2C_Translaotr name.
+    returns:
+      id:
+        type: Number
+        description: Unique ID of a Reservation.    
+    errors:
+      InvalidUpdate:
+        description: The operation can not be performed at this time.
+  ReservationDocuments:
+    path: /reservation/admin/documents/:id/:type
+    method: GET
+    title: Request Documents associated with a Reservation
+    description: Request the documents associated with a reservation.
+    params:
+      type:
+        type: String
+        description: Document type
+      id:
+        type: Number
+        description: Reservation unique ID.
+    returns:
+      documents:
+        type: Object[]
+        description: List of Document Objects
+    errors:
+      ReservationNotFound:
+        description: The required <code>id</code> of reservation is not found.

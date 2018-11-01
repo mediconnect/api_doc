@@ -14,7 +14,7 @@ Staff:
     returns: 
       id:
         type: UUID
-        description: UUID of authorized user.
+        description: UUID of authorized staff user.
     errors: {}
   StaffSummary:
     path: staff/:id/summary
@@ -24,7 +24,7 @@ Staff:
     params: 
       id:
         type: UUID
-        description: Staff UUID
+        description: Staff user UUID
     returns:
       summary:
         type: String
@@ -38,7 +38,7 @@ Staff:
     params: 
       id:
         type: UUID
-        description: Staff UUID
+        description: Staff user UUID
       query:
         type: String
         description: A qeury to filter/sort assignments.
@@ -204,7 +204,7 @@ Staff:
     returns: 
       user_id:
         type: UUID
-        description: Deleted user UUID
+        description: Updated user UUID
     errors:
       AuthorizationFailed:
         description: The operation is not authorized.
@@ -219,6 +219,9 @@ Staff:
       id:
         type: Number
         description: Mandatory unique User ID.
+      token:
+        type: String
+        description: Mandatory token for authorizing operation.
     returns: 
       user_id:
         type: UUID

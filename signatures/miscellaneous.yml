@@ -39,18 +39,29 @@ Miscellaneous:
       description: Validate user's password input to authorize operations.
       params:
         id:
-          type: Number
-          description: Unique Supervisor ID
+          type: UUID
+          description: Unique staff user ID
         password:
           type: String
           description: Mandatory password
-        status_code:
-          type: optional<Number>
-          description: Optional status code for stage control
       returns:
         token:
-          type: Number
+          type: String
           description: A token that can be verified at backend to grant operation
       errors:
         ValidationError:
           description: Operation not authorized.
+  StaffSendEmail:
+      path: /auth/send
+      method: POST
+      title: Staff Send Email.
+      description: Staff send an email to user.
+      params:
+        content:
+          type: String
+          description: Mandatory email content..
+        user_id:
+          type: UUID
+          description: Mandatory user UUID.
+      returns: {}
+      errors: {}

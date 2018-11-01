@@ -108,13 +108,16 @@ Patient:
         description: On success, return visit history id.
     errors: {}
   PatientInfo:
-    path: /patient/:id/info
+    path: customer/:customer_id/patient/:patient_id
     method: GET
     title: Request patient info
     params:
+      customer_id:
+        type: UUID
+        description: Mandatory unique Customer user ID.
       id:
-        type: Number
-        description: Mandatory unique Patient ID.
+        type: UUID
+        description: Mandatory unique Patient user ID.
     returns:
       birthdate:
         type: DateTime

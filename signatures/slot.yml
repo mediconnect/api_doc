@@ -95,7 +95,7 @@ Slot:
     path: /slot/batch/reset/:hospital_id
     method: PUT
     title: Reset Slot Information
-    description: Reset a slot. Might be deprecated if overlap with UpdateSlot.
+    description: Reset a slot. Might be deprecated if duplicate with UpdateSlot.
     params:
       hospital_id:
         type: UUID

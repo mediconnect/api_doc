@@ -1,11 +1,11 @@
 Questionnaire:
-  RequestQuestionnaire:
-    path: /questionnaire/:questionnaire_id
+  QuestionnaireInfo:
+    path: /questionnaire/:id/info
     method: GET
     title: Request Questionnaire
     description: Request questionnaire information.
     params:
-      questionnaire_id:
+      id:
         type: UUID
         description: Questionnaire UUID
     returns:
@@ -43,8 +43,22 @@ Questionnaire:
     errors:
       QuestionnaireNotFound:
         description: The requested <code>id</code> of questionnaire is not found.
+  RequestQuetionnaire:
+    path: /questionnaire/:token
+    method: GET
+    title: Request a questionnaire based on token
+    description: Request questionnaire based on signature token.
+    params:
+      token:
+        type: String
+        description: Token to be unsigned and get questionnaire_id
+    retuen:
+      id:
+        type: UUID
+        description: Questionnaire UUID.
+Questionnaire/admin:
   CreateQuestionnaire:
-    path: /questionnaire/
+    path: /questionnaire/admin
     method: POST
     title: Create Questionnaire
     description: Create a Questionnaire.
@@ -74,8 +88,8 @@ Questionnaire:
         type: File
         description: Untranslated pdf file of questionnaire
     returns:
-      questionnaire_id:
-        type: Number
+      id:
+        type: UUID
         description: Questionnaire ID.
     errors:
       QuestionnaireNotFound:
@@ -83,7 +97,7 @@ Questionnaire:
       TranslatorNotFound:
         description: The requested <code>id</code> of translator is not found.
   UpdateQuestionnaire:
-    path: /questionnaire/manage/
+    path: /questionnaire/admin/
     method: PUT
     title: Update Questionnaire
     description: Update a Questionnaire.
@@ -106,17 +120,22 @@ Questionnaire:
       translated:
         type: Boolean
         description: Whther the questionnaire has been translated.
+      token:
+        type: String
+        description: Token to authorize operation.
     returns:
-      questionnaire_id:
-        type: Number
+      id:
+        type: UUID
         description: Updated questionnaire ID.
     errors:
+      InvalidAuthorization:
+        description: This operation is invalid at this stage.
       QuestionnaireNotFound:
         description: The requested <code>id</code> of questionnaire is not found.
       TranslatorNotFound:
         description: The requested <code>id</code> of translator is not found.
   ListQuestionnarie:
-    path: /questionnaire/list/:query
+    path: /questionnaire/admin/list/:query
     method: GET
     title: Request list of Questionnaires
     description: Request a list of questionnaires based on query.
@@ -125,7 +144,430 @@ Questionnaire:
         type: String
         description: Query to filter/sort the questionnaires.
     returns:
-      users:
+      questionnaires:
         type: Object[]
         description: List of filterd/sorted questionnaires.
     errors: {}
+  DeleteQuestionnarie:
+    path: /questionnaire/admin/:id
+    method: DELETE
+    title: Delete Questionnaires
+    description: Delete a questionnaire.
+    params:
+      id:
+        type: UUID
+        description: UUID of questionnaire to be deleted.
+      token:
+        type: String
+        description: Token to authorize the operation.
+    returns:
+      id:
+        type: UUID
+        description: UUID of deleted questionnaire.
+    errors:
+      InvalidAuthorization:
+        description: This operation is invalid at this stage.
+      QuestionnaireNotFound:
+        description: The required <code>id</code> of questionnaire is not found.
+Question:
+  QuestionInfo:
+    path: questionnaire/:questionnaire_id/question/:question_id/info
+    method: GET
+    title: Question Info
+    description: Request information about a quesiton
+    param:
+      questionnaire_id:
+        type: UUID
+        description: UUID of questionnaire
+      question_id:
+        type: UUID
+        description: UUID of question
+    returns:
+      question:
+        type: Object
+        description: A question object
+        fields:
+          choices:
+            type: UUID[]
+            description: List of uuids of possible choices
+          content:
+            type: String
+            description: Question content
+          format:
+            type: Number
+            description: Quesiton format code.
+    errors:
+      QuestionnaireNotFound:
+        description: The required <code>id</code> of questionnaire is not found.
+      QuestionNotFound:
+        description: The required <code>id</code> of question is not found.
+Question/admin:
+  CreateQuestion:
+    path: /question/admin/
+    method: POST
+    title: Create Question
+    description: Create a question
+    param:
+      choices:
+        type: UUID[]
+        description: List of uuids of possible choices
+      content:
+        type: String
+        description: Question content
+      formaat:
+        type: Number
+        description: Quesiton format code.
+      token:
+        type: String
+        description: Toekn to authorize operation.
+    returns:
+      id:
+        type: UUID
+        description: UUID of created question
+    errors:
+       InvalidAuthorization:
+        description: This operation is invalid at this stage.
+      QuestionNotFound:
+        description: The required <code>id</code> of question is not found.
+  UpdateQuestion:
+    path: /question/admin/
+    method: PUT
+    title: Update Question
+    description: Update a Question.
+    params:
+      choices:
+        type: UUID[]
+        description: Choices UUIDs of questionnaire
+      content:
+        type: String
+        description: Question content
+      formaat:
+        type: Number
+        description: Quesiton format code.
+      token:
+        type: String
+        description: Token to authorize operation.
+    returns:
+      id:
+        type: UUID
+        description: Updated question ID.
+    errors:
+      InvalidAuthorization:
+        description: This operation is invalid at this stage.
+      QuestioneNotFound:
+        description: The requested <code>id</code> of question is not found.
+      ChoiceNotFound:
+        description: The requested <code>id</code> of choice is not found.
+  ListQuestion:
+    path: /question/admin/list/:query
+    method: GET
+    title: Request list of Quesiton
+    description: Request a list of questions based on query.
+    params:
+      query:
+        type: String
+        description: Query to filter/sort the question.
+    returns:
+      questions:
+        type: Object[]
+        description: List of filterd/sorted question.
+    errors: {}
+  DeleteQuestion:
+    path: /question/admin/:id
+    method: DELETE
+    title: Delete Question
+    description: Delete a question.
+    params:
+      id:
+        type: UUID
+        description: UUID of question to be deleted.
+      token:
+        type: String
+        description: Token to authorize the operation.
+    returns:
+      id:
+        type: UUID
+        description: UUID of deleted question.
+    errors:
+      InvalidAuthorization:
+        description: This operation is invalid at this stage.
+      QuestionNotFound:
+        description: The required <code>id</code> of question is not found.
+Choice:
+  ChoiceInfo:
+    path: questionnaire/:questionnaire_id/question/:question_id/choice/:choice_id
+    method: GET
+    title: Choice Info
+    description: Request information about a choice
+    param:
+      questionnaire_id:
+        type: UUID
+        description: UUID of questionnaire
+      question_id:
+        type: UUID
+        description: UUID of question
+      choice_id:
+        type: UUID
+        description: UUID of choice
+    returns:
+      choice:
+        type: Object
+        description: A choice object
+        fields:
+          content:
+            type: String
+            description: Question content
+    errors:
+      QuestionnaireNotFound:
+        description: The required <code>id</code> of questionnaire is not found.
+      QuestionNotFound:
+        description: The required <code>id</code> of question is not found.
+Choice/admin:
+  CreateChoice:
+    path: /choice/admin/
+    method: POST
+    title: Create Choice
+    description: Create a choice
+    param:
+      question_id:
+        type: UUID[]
+        description: List of UUIDs of question this choice belongs to.
+      content:
+        type: String[]
+        description: List of choice contents.
+    returns:
+      id:
+        type: UUID[]
+        description: List of UUIDs of created choice
+    errors:
+      QuestionNotFound:
+        description: The required <code>id</code> of question is not found.
+  UpdateChoice:
+    path: /choice/admin/
+    method: PUT
+    title: Update Choice
+    description: Update a choice.
+    params:
+      content:
+        type: String
+        description: Choice content
+      token:
+        type: String
+        description: Token to authorize operation.
+    returns:
+      id:
+        type: UUID
+        description: Updated choice ID.
+    errors:
+      InvalidAuthorization:
+        description: This operation is invalid at this stage.
+      ChoiceNotFound:
+        description: The requested <code>id</code> of choice is not found.
+  ListChoice:
+    path: /choice/admin/list/:query
+    method: GET
+    title: Request list of Choices
+    description: Request a list of choices based on query.
+    params:
+      query:
+        type: String
+        description: Query to filter/sort the choice.
+    returns:
+      choices:
+        type: Object[]
+        description: List of filterd/sorted choices.
+    errors: {}
+  DeleteChoice:
+    path: /choice/admin/:id
+    method: DELETE
+    title: Delete Choice
+    description: Delete a choice.
+    params:
+      id:
+        type: UUID
+        description: UUID of choice to be deleted.
+      token:
+        type: String
+        description: Token to authorize the operation.
+    returns:
+      id:
+        type: UUID
+        description: UUID of deleted choice.
+    errors:
+      InvalidAuthorization:
+        description: This operation is invalid at this stage.
+      ChoiceNotFound:
+        description: The required <code>id</code> of choice is not found.
+Anser:
+  AnswerInfo:
+    path: answer/:id
+    method: GET
+    title: Answer Info
+    description: Request information about an Answer
+    param:
+      id:
+        type: UUID
+        description: UUID of answer
+    returns:
+      answer:
+        type: Object
+        description: An answer object
+        fields:
+          res_id:
+            type: UUID
+            description: Reservation UUID
+          questionnaire_id:
+            type: UUID
+            description: Questionnaire UUID
+          question_id:
+            type: UUID[]
+            description: List of Question UUIDs
+          content:
+            type: String[]
+            description: List of Answer contents
+          origin:
+            type: File
+            description: Un-translated answer pdf file.
+          translated:
+            type: <optional>File
+            description: Translated answer pdf file
+          is_translated:
+            type: boolean
+            description: Whther the answer pdf file is translated
+          translator_id:
+            type: UUID
+            description: C2E translator assigned to this answer.
+    errors:
+      QuestionnaireNotFound:
+        description: The required <code>id</code> of questionnaire is not found.
+      QuestionNotFound:
+        description: The required <code>id</code> of question is not found.
+  CreateAnswer:
+    path: answer/
+    method: POST
+    title: Create Answer
+    description: Create an Answer
+    param:
+      res_id:
+        type: UUID
+        description: Reservation UUID
+      questionnaire_id:
+        type: UUID
+        description: Questionnaire UUID
+      question_id:
+        type: UUID[]
+        description: List of Question UUIDs
+      content:
+        type: String[]
+        description: List of Answer contents
+      origin:
+        type: File
+        description: Un-translated answer pdf file.
+      translated:
+        type: <optional>File
+        description: Translated answer pdf file
+      is_translated:
+        type: boolean
+        description: Whther the answer pdf file is translated
+      translator_id:
+        type: UUID
+        description: C2E translator assigned to this answer.
+    returns:
+      id:
+        type: UUID
+        description: UUID of answeranswer:
+    errors:
+      QuestionnaireNotFound:
+        description: The required <code>id</code> of questionnaire is not found.
+      QuestionNotFound:
+        description: The required <code>id</code> of question is not found.
+      TranslatorNotFound:
+        description: The requested <code>id</code> of translator is not found.
+Answer/admin:
+  UpdateAnswer:
+    path: answer/
+    method: PUT
+    title: Create Answer
+    description: Create an Answer
+    param:
+      choice_id:
+        type: UUID
+        description: Choice UUID
+      res_id:
+        type: UUID
+        description: Reservation UUID
+      questionnaire_id:
+        type: UUID
+        description: Questionnaire UUID
+      question_id:
+        type: UUID[]
+        description: List of Question UUIDs
+      content:
+        type: String[]
+        description: List of Answer contents
+      origin:
+        type: File
+        description: Un-translated answer pdf file.
+      translated:
+        type: <optional>File
+        description: Translated answer pdf file
+      is_translated:
+        type: boolean
+        description: Whther the answer pdf file is translated
+      translator_id:
+        type: UUID
+        description: C2E translator assigned to this answer.
+      token:
+        type: String
+        description: Token to authorize operation.
+    returns:
+      id:
+        type: UUID
+        description: UUID of answeranswer:
+    errors:
+      QuestionnaireNotFound:
+        description: The required <code>id</code> of questionnaire is not found.
+      QuestionNotFound:
+        description: The required <code>id</code> of question is not found.
+      AnswerNotFound:
+        description: The required <code>id</code> of answer is not found.
+      TranslatorNotFound:
+        description: The requested <code>id</code> of translator is not found.
+      InvalidAuthorization:
+        description: This operation is invalid at this stage.
+  DeleteAnswer:
+    path: answer/:id
+    method: DELETE
+    title: Create Answer
+    description: Create an Answer
+    param:
+      id:
+        type: UUID
+        description: Choice UUID
+      token:
+        type: String
+        description: Token to authorize operation
+    returns:
+      id:
+        type: UUID
+        description: UUID of answeranswer:
+    errors:
+      AnswerNotFound:
+        description: The required <code>id</code> of answer is not found.
+      InvalidAuthorization:
+        description: This operation is invalid at this stage.
+  ListAnswer:
+    path: /answer/admin/list/:query
+    method: GET
+    title: Request list of Answers
+    description: Request a list of answers based on query.
+    params:
+      query:
+        type: String
+        description: Query to filter/sort the answer.
+    returns:
+      choices:
+        type: Object[]
+        description: List of filterd/sorted answers.
+    errors: {}
+

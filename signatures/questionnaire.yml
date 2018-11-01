@@ -1,0 +1,131 @@
+Questionnaire:
+  RequestQuestionnaire:
+    path: /questionnaire/:questionnaire_id
+    method: GET
+    title: Request Questionnaire
+    description: Request questionnaire information.
+    params:
+      questionnaire_id:
+        type: UUID
+        description: Questionnaire UUID
+    returns:
+      questionnaire:
+        type: Object
+        description: Questionnaire Object
+        fields:
+          questions:
+            type: UUID[]
+            description: Questions UUIDs of questionnaire
+          id:
+            type: UUID
+            description: Questionnaire UUID.
+          translator_id:
+            type: UUID
+            description: Translator assigned to this questionnaire UUID.
+          category:
+            type: String
+            description: Category of this questionnaire
+          hospital_id:
+            type: UUID
+            description: Hospital of this questionnaire UUID
+          disease_id:
+            type: UUID
+            description: Disease of this questionnaire UUID
+          is_translated:
+            type: Boolean
+            description: Whther the questionnaire has been translated.
+          translated:
+            type: Optional<File>
+            description: Translated pdf file of questionnaire
+          origin:
+            type: File
+            description: Untranslated pdf file of questionnaire
+    errors:
+      QuestionnaireNotFound:
+        description: The requested <code>id</code> of questionnaire is not found.
+  CreateQuestionnaire:
+    path: /questionnaire/
+    method: POST
+    title: Create Questionnaire
+    description: Create a Questionnaire.
+    params:
+      questions:
+        type: UUID[]
+        description: Questions UUIDs of questionnaire
+      translator_id:
+        type: UUID
+        description: Translator assigned to this questionnaire UUID.
+      category:
+          type: String
+          description: Category of this questionnaire
+      hospital_id:
+        type: UUID
+        description: Hospital of this questionnaire UUID
+      disease_id:
+        type: UUID
+        description: Disease of this questionnaire UUID
+      is_translated:
+        type: Boolean
+        description: Whther the questionnaire has been translated.
+      translated:
+        type: Optional<File>
+        description: Translated pdf file of questionnaire
+      origin:
+        type: File
+        description: Untranslated pdf file of questionnaire
+    returns:
+      questionnaire_id:
+        type: Number
+        description: Questionnaire ID.
+    errors:
+      QuestionnaireNotFound:
+        description: The requested <code>id</code> of questionnaire is not found.
+      TranslatorNotFound:
+        description: The requested <code>id</code> of translator is not found.
+  UpdateQuestionnaire:
+    path: /questionnaire/manage/
+    method: PUT
+    title: Update Questionnaire
+    description: Update a Questionnaire.
+    params:
+      questions:
+        type: UUID[]
+        description: Questions UUIDs of questionnaire
+      translator_id:
+        type: UUID
+        description: Translator assigned to this questionnaire UUID.
+      category:
+          type: String
+          description: Category of this questionnaire
+      hospital_id:
+        type: UUID
+        description: Hospital of this questionnaire UUID
+      disease_id:
+        type: UUID
+        description: Disease of this questionnaire UUID
+      translated:
+        type: Boolean
+        description: Whther the questionnaire has been translated.
+    returns:
+      questionnaire_id:
+        type: Number
+        description: Updated questionnaire ID.
+    errors:
+      QuestionnaireNotFound:
+        description: The requested <code>id</code> of questionnaire is not found.
+      TranslatorNotFound:
+        description: The requested <code>id</code> of translator is not found.
+  ListQuestionnarie:
+    path: /questionnaire/list/:query
+    method: GET
+    title: Request list of Questionnaires
+    description: Request a list of questionnaires based on query.
+    params:
+      query:
+        type: String
+        description: Query to filter/sort the questionnaires.
+    returns:
+      users:
+        type: Object[]
+        description: List of filterd/sorted questionnaires.
+    errors: {}

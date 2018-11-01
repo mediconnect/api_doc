@@ -1,6 +1,6 @@
 Document:
   CreateDocument:
-    path: /document
+    path: /document/
     method: POST
     title: Create Document
     description: Create document.
@@ -27,11 +27,14 @@ Document:
       RequiredFieldBlank:
         description: Any mandatory form is blank.
   RequestDocument:
-    path: /document
+    path: /document/:id
     method: GET
     title: Request Document Info
     description: Request document information.
-    params: {}
+    params: 
+      id:
+        type: UUID
+        description: UUID of document
     returns:
       document:
         type: Object
@@ -52,6 +55,22 @@ Document:
           upload_at:
             type: DateTime
             description: Document upload time.
+    errors:
+      DocumentNotFound:
+        description: The <code>id</code> of the document doesn't exist.
+  DeleteDocument:
+    path: /document/:id
+    method: DELETE
+    title: Delete Document
+    description: Delete a document.
+    params: 
+      id:
+        type: UUID
+        description: UUID of document
+    returns: 
+      id:
+        type: UUID
+        description: UUID of deleted document
     errors:
       DocumentNotFound:
         description: The <code>id</code> of the document doesn't exist.

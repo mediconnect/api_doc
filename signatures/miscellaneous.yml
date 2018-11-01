@@ -32,31 +32,25 @@ Miscellaneous:
     errors:
       RequiredFieldBlank:
         description: Any mandatory form is blank.
-  RequestQuestionnaire:
-    path: /questionnaire/:id/:token
-    method: GET
-    title: Request Questionnaire
-    description: Request questionnaire information.
-    params:
-      id:
-        type: Number
-        description: Unique Questionnaire ID.
-      token:
-        type: String
-        description: Token for authorization.
-    returns:
-      choices:
-        type: String[]
-        description: Quesiton choices.
-      contents:
-        type: String[]
-        description: Quesiton contents.
-      document:
-        type: Object
-        description: Questionnaire Document.
-      formats:
-        type: String[]
-        description: Question formats.
-    errors:
-      QuestionnaireNotFound:
-        description: The requested <code>id</code> of questionnaire is not found.
+  ValidatePassword:
+      path: /auth/password
+      method: POST
+      title: Validate password
+      description: Validate user's password input to authorize operations.
+      params:
+        id:
+          type: Number
+          description: Unique Supervisor ID
+        password:
+          type: String
+          description: Mandatory password
+        status_code:
+          type: optional<Number>
+          description: Optional status code for stage control
+      returns:
+        token:
+          type: Number
+          description: A token that can be verified at backend to grant operation
+      errors:
+        ValidationError:
+          description: Operation not authorized.

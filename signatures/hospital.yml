@@ -1,5 +1,5 @@
 Hospital:
-  HospitalDisplay:
+  HospitalInfo:
     path: /hospital/:id
     method: GET
     title: Request Hospital Information
@@ -39,33 +39,3 @@ Hospital:
     method: GET
     title: Request List of Hospitals
     description: Dispaly all hospitals based on query
-    params:
-      query:
-        type: Srtring
-        description: Query to filter/sort Hospitals
-    returns:
-      hospitals:
-        type: Object[]
-        description: List of filtered/sorted Hospitals.
-      image:
-        type: String
-        description: Hospital Image.
-      intro:
-        type: String
-        description: Hospital Brief Introduction.
-      location:
-        type: String
-        description: Hospital Location.
-      name:
-        type: String
-        description: Hospital Name.
-      page:
-        type: Number
-        description: pagination
-      rank:
-        type: Number
-        description: Hospital General Rank.
-      url:
-        type: String
-        description: Hospital Website Link.
-    errors: {}

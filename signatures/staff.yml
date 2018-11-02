@@ -1,0 +1,231 @@
+Staff:
+  StaffLogin:
+    path: /staff/login/
+    method: POST
+    title: Staff Login
+    description: Handle staff login request.
+    params:
+      email:
+        type: String
+        description: Mandatory email address.
+      password:
+        type: String
+        description: Mandatory password.
+    returns: 
+      id:
+        type: UUID
+        description: UUID of authorized staff user.
+    errors: {}
+  StaffSummary:
+    path: staff/:id/summary
+    method: GET
+    title: Summarize Website Stats
+    description: Request a summary of the website's stats.
+    params: 
+      id:
+        type: UUID
+        description: Staff user UUID
+    returns:
+      summary:
+        type: String
+        description: Whatever summary we want to display for the supervisor.
+    errors: {}
+  StaffAssignment:
+    path: staff/assignemnt/:id/:query
+    method: GET
+    title: Staff Assignemnt
+    description: Request a list of staff's assignments (reservations).
+    params: 
+      id:
+        type: UUID
+        description: Staff user UUID
+      query:
+        type: String
+        description: A qeury to filter/sort assignments.
+    returns:
+      reservations:
+        type: Object[]
+        description: List of reservation objects
+        fields:
+          disease_id:
+            type: Number
+            description: Unique ID for disease.
+          res_id:
+            type: UUID
+            description: Reservation ID
+          timeslot_id:
+            type: UUID
+            description: ID for reservation slot.
+          user_id:
+            type: UUID
+            description: Unique ID for customer.
+          patient_id:
+            type: UUID
+            description: Unique ID for patient.
+          hospital_id:
+            type: UUID
+            description: Unique ID for hospital.
+    errors: {}
+  CreateUser:
+    path: /supervisor/user
+    method: POST
+    title: Create a User
+    description: Create a user.
+    params:
+      address:
+        type: optional<String>
+        description: Optional address.
+      email:
+        type: String
+        description: Mandatory email address.
+      first_name:
+        type: String
+        description: Mandatory first name.
+      last_name:
+        type: String
+        description: Mandatory last name.
+      password:
+        type: String
+        description: Mandatory password.
+      password_confirmation:
+        type: String
+        description: Mandatory confirmation password.
+      tel:
+        type: Optional<String>
+        description: Optional phone number.
+    returns:
+      user_id:
+        type: UUID
+        description: Created user id.
+    errors:
+      EmailAlreadyExists:
+        description: The email exists in the DB.
+      PasswordDoesNotMath:
+        description: The password does not match password_confirmation.
+      RequiredFieldBlank:
+        description: Any mandatory form is blank.
+  ListUser:
+    path: /supervisor/user/:query
+    method: GET
+    title: Request list of User
+    description: Request a list of users based on query.
+    params:
+      query:
+        type: String
+        description: Query to filter/sort the users.
+    returns:
+      users:
+        type: Object[]
+        description: List of filterd/sorted users.
+    errors: {}
+  UserInfo:
+    path: /supervisor/user/:id
+    method: GET
+    title: Request User Info
+    description: Request user info.
+    params:
+      id:
+        type: UUID
+        description: Mandatory unique User ID.
+    returns:
+      user:
+        type: Object
+        description: User Object.
+        fields:
+          address:
+            type: String
+            description: Mandatory User address.
+          age:
+            type: Optional<Number>
+            description: Optional User age.
+          email:
+            type: String
+            description: Mandatory User email.
+          first_name:
+            type: String
+            description: Mandatory User first name.
+          gender:
+            type: Optional<String>
+            description: Optional User gender.
+          last_name:
+            type: String
+            description: Mandatory User last name.
+          phone:
+            type: String
+            description: Mandatory User phone.
+          qq:
+            type: Optional<String>
+            description: Optional User qq.
+          wechat:
+            type: Optional<String>
+            description: Optional User wechat.
+    errors:
+      UserNotFound:
+        description: The <code>id</code> of the user was not found.
+  UpdateUser:
+    path: /supervisor/user/
+    method: POST
+    title: Update User Info
+    description: Update user info.
+    params:
+      address:
+        type: optional<String>
+        description: Optional User address.
+      age:
+        type: Number
+        description: Optional] Optional User age.
+      email:
+        type: optional<String>
+        description: Optional User email.
+      first_name:
+        type: optional<String>
+        description: Optional User first name.
+      gender:
+        type: optional<String>
+        description: Optional User gender.
+      id:
+        type: UUID
+        description: Mandatory unique User ID.
+      last_name:
+        type: optional<String>
+        description: Optional User last name.
+      phone:
+        type: optional<String>
+        description: Optional User phone.
+      qq:
+        type: optional<String>
+        description: Optional User qq.
+      token:
+        type: String
+        description: Mandatory token for authorizing operation.
+      wechat:
+        type: optional<String>
+        description: Optional User wechat.
+    returns: 
+      user_id:
+        type: UUID
+        description: Updated user UUID
+    errors:
+      AuthorizationFailed:
+        description: The operation is not authorized.
+      UserNotFound:
+        description: The <code>id</code> of the user was not found.
+  DeleteUser:
+    path: /supervisor/user/:id
+    method: DELETE
+    title: Delete User
+    description: Delete user.
+    params:
+      id:
+        type: Number
+        description: Mandatory unique User ID.
+      token:
+        type: String
+        description: Mandatory token for authorizing operation.
+    returns: 
+      user_id:
+        type: UUID
+        description: Deleted user UUID
+    errors:
+      UserNotFound:
+        description: The <code>id</code> of the user was not found.

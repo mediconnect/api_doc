@@ -30,7 +30,7 @@ Reservation:
     path: /reservation/:id/update
     method: POST
     title: Update Reservation Information
-    description: 'Update reservation info: fill in previous info'
+    description: Update reservation info fill in previous info
     params:
       first_diagnosed_doctor:
         type: optional<String>
@@ -141,22 +141,31 @@ Reservation/admin:
   Update Reservation:
     path: /reservation/admin/:id
     method: PUT
-    title: Supervisor's operation to update a Reservation
+    title: Staff's operation to update a Reservation
     description: Update the info of a Reservation.
     params:
       id:
-        type: Number
+        type: UUID
+        description: Reservation UUID
+      translator_e2c_id:
+        type: UUID
         description: New E2C_Translator id.
+      translator_c2e_id:
+        type: UUID
+        description: New C2E_Translator id.
       status:
         type: Number
         description: New reservation status.
-      token:
-        type: String
-        description: Token to verify authorization.
       trans_status:
         type: Number
         description: New translating status.
-    returns: {}
+      token:
+        type: String
+        description: Token to verify authorization.
+    returns:
+      res_id:
+        type: UUID
+        description: Updated reservation UUID.
     errors:
       InvalidAuthorization:
         description: The operation is invalid at this stage.
@@ -169,37 +178,17 @@ Reservation/admin:
     description: Remove a Reservation from Database.
     params:
       id:
-        type: Number
+        type: UUID
         description: Unique ID of a Reservation.
       token:
         type: String
         description: Token to verify authorization.
-    returns: {}
+    returns:
+      res_id:
+        type: UUID
+        description: Deleted reservation UUID.
     errors:
       InvalidAuthorization:
         description: This operation is invalid at this stage.
-Reservation/translate:
-  Update Reservation:
-    path: /translator/reservation/:id
-    method: PUT
-    title: Translator's operation to update a Reservation
-    description: Update the informaiton of a Reservation.
-    params:
-      id:
-        type: Number
-        description: Unique ID of a Reservation.
-      status:
-        type: Number
-        description: New reservation status.
-      token:
-        type: String
-        description: Token to verify authorization.
-      trans_status:
-        type: Number
-        description: New translating status.
-    returns: {}
-    errors:
-      InvalidAuthorization:
-        description: The operation is invalid at this stage.
       ReservationNotFound:
         description: The required <code>id</code> of reservation is not found.

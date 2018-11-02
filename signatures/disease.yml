@@ -1,5 +1,5 @@
 Disease:
-  DiseaseDisplay:
+  DiseaseInfo:
     path: /disease/:id
     method: GET
     title: Request Disease Information
@@ -9,15 +9,32 @@ Disease:
         type: Number
         description: Disease unique ID
     returns:
-      image:
-        type: String
-        description: Disease image
-      keyword:
-        type: String
-        description: Disease keyword
-      name:
-        type: String
-        description: Disease name
+      disease:
+        type: Object
+        description: Disease Object
+        fields:
+          image:
+            type: String
+            description: Disease image
+          keyword:
+            type: String
+            description: Disease keyword.
+          name:
+            type: String
+            description: Disease name.
     errors:
       DiseaseNotFound:
         description: The <code>id</code> of the Disease was not found.
+  DiseaseList:
+    path: /disease/:query
+    method: GET
+    title: Request List of Diseases
+    description: Display all diseases based on query
+    params:
+      query:
+        type: Srtring
+        description: Query to filter/sort disease
+    returns:
+      diseases:
+        type: Object[]
+        description: List of filtered/sorted Diseases.

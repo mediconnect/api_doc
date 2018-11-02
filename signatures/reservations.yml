@@ -30,7 +30,7 @@ Reservation:
     path: /reservation/:id/update
     method: POST
     title: Update Reservation Information
-    description: Update reservation info: fill in previous info
+    description: Update reservation info fill in previous info
     params:
       first_diagnosed_doctor:
         type: optional<String>

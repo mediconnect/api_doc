@@ -35,7 +35,7 @@ Questionnaire:
             type: Boolean
             description: Whther the questionnaire has been translated.
           translated:
-            type: Optional<File>
+            type: File
             description: Translated pdf file of questionnaire
           origin:
             type: File
@@ -82,7 +82,7 @@ Questionnaire/admin:
         type: Boolean
         description: Whther the questionnaire has been translated.
       translated:
-        type: Optional<File>
+        type: File
         description: Translated pdf file of questionnaire
       origin:
         type: File
@@ -225,7 +225,7 @@ Question/admin:
         type: UUID
         description: UUID of created question
     errors:
-       InvalidAuthorization:
+      InvalidAuthorization:
         description: This operation is invalid at this stage.
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
@@ -429,7 +429,7 @@ Anser:
             type: File
             description: Un-translated answer pdf file.
           translated:
-            type: <optional>File
+            type: File
             description: Translated answer pdf file
           is_translated:
             type: boolean
@@ -464,7 +464,7 @@ Anser:
         type: File
         description: Un-translated answer pdf file.
       translated:
-        type: <optional>File
+        type: File
         description: Translated answer pdf file
       is_translated:
         type: boolean
@@ -475,7 +475,7 @@ Anser:
     returns:
       id:
         type: UUID
-        description: UUID of answeranswer:
+        description: UUID of answeranswer
     errors:
       QuestionnaireNotFound:
         description: The required <code>id</code> of questionnaire is not found.
@@ -487,8 +487,8 @@ Answer/admin:
   UpdateAnswer:
     path: answer/
     method: PUT
-    title: Create Answer
-    description: Create an Answer
+    title: Update Answer
+    description: Update an Answer
     param:
       choice_id:
         type: UUID
@@ -509,7 +509,7 @@ Answer/admin:
         type: File
         description: Un-translated answer pdf file.
       translated:
-        type: <optional>File
+        type: File
         description: Translated answer pdf file
       is_translated:
         type: boolean
@@ -523,7 +523,7 @@ Answer/admin:
     returns:
       id:
         type: UUID
-        description: UUID of answeranswer:
+        description: UUID of answeranswer
     errors:
       QuestionnaireNotFound:
         description: The required <code>id</code> of questionnaire is not found.
@@ -538,8 +538,8 @@ Answer/admin:
   DeleteAnswer:
     path: answer/:id
     method: DELETE
-    title: Create Answer
-    description: Create an Answer
+    title: Delete Answer
+    description: Delete an Answer
     param:
       id:
         type: UUID
@@ -550,7 +550,7 @@ Answer/admin:
     returns:
       id:
         type: UUID
-        description: UUID of answeranswer:
+        description: UUID of answeranswer
     errors:
       AnswerNotFound:
         description: The required <code>id</code> of answer is not found.

@@ -3706,7 +3706,170 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "POST",
+    "url": "/supervisor/user",
+    "title": "Create a User",
+    "name": "CreateUser",
+    "description": "<p>Create a user.</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "address",
+            "description": "<p>Optional address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "first_name",
+            "description": "<p>Mandatory first name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "last_name",
+            "description": "<p>Mandatory last name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "confirmed_password",
+            "description": "<p>Mandatory confirmation password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "tel",
+            "description": "<p>Optional phone number.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "rolw",
+            "description": "<p>0 for customer, 1 for c2e trans, 2 for e2c trans, 3 for sup, default 0</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>Created user id.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "EmailAlreadyExists",
+            "description": "<p>The email exists in the DB.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "PasswordDoesNotMath",
+            "description": "<p>The password does not match password_confirmation.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "RequiredFieldBlank",
+            "description": "<p>Any mandatory form is blank.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
     "filename": "build/staff.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "DELETE",
+    "url": "/supervisor/user/:id",
+    "title": "Delete User",
+    "name": "DeleteUser",
+    "description": "<p>Delete user.</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory unique User ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>Deleted user UUID</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The <code>id</code> of the user was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
     "groupTitle": "Staff"
   },
   {
@@ -3801,6 +3964,129 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/staff.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "GET",
+    "url": "/supervisor/user/:query",
+    "title": "Request list of User",
+    "name": "ListUser",
+    "description": "<p>Request a list of users based on query.</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter/sort the users.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "users",
+            "description": "<p>List of filterd/sorted users.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "GET",
+    "url": "staff/assignemnt/:id/:query",
+    "title": "Staff Assignemnt",
+    "name": "StaffAssignment",
+    "description": "<p>Request a list of staff's assignments (reservations).</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Staff UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>A qeury to filter/sort assignments.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "reservations",
+            "description": "<p>List of reservation objects</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reservations.disease_id",
+            "description": "<p>Unique ID for disease.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.res_id",
+            "description": "<p>Reservation ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.timeslot_id",
+            "description": "<p>ID for reservation slot.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.user_id",
+            "description": "<p>Unique ID for customer.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.patient_id",
+            "description": "<p>Unique ID for patient.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.hospital_id",
+            "description": "<p>Unique ID for hospital.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
     "groupTitle": "Staff"
   },
   {
@@ -3924,6 +4210,50 @@ define({ "api": [
             "type": "UUID",
             "optional": false,
             "field": "id",
+            "description": "<p>UUID of authorized user.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "POST",
+    "url": "/staff/login/",
+    "title": "Staff Login",
+    "name": "StaffLogin",
+    "description": "<p>Handle staff login request.</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
             "description": "<p>UUID of authorized staff user.</p>"
           }
         ]
@@ -3968,6 +4298,43 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/staff.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "GET",
+    "url": "staff/:id/summary",
+    "title": "Summarize Website Stats",
+    "name": "StaffSummary",
+    "description": "<p>Request a summary of the website's stats.</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Staff UUID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "summary",
+            "description": "<p>Whatever summary we want to display for the supervisor.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
     "groupTitle": "Staff"
   },
   {
@@ -4098,6 +4465,133 @@ define({ "api": [
     "groupTitle": "Staff"
   },
   {
+    "type": "POST",
+    "url": "/supervisor/user/",
+    "title": "Update User Info",
+    "name": "UpdateUser",
+    "description": "<p>Update user info.</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "address",
+            "description": "<p>Optional User address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "age",
+            "description": "<p>Optional] Optional User age.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "email",
+            "description": "<p>Optional User email.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "first_name",
+            "description": "<p>Optional User first name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "gender",
+            "description": "<p>Optional User gender.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory unique User ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "last_name",
+            "description": "<p>Optional User last name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "phone",
+            "description": "<p>Optional User phone.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "qq",
+            "description": "<p>Optional User qq.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Mandatory token for authorizing operation.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "wechat",
+            "description": "<p>Optional User wechat.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>Deleted user UUID</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "AuthorizationFailed",
+            "description": "<p>The operation is not authorized.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The <code>id</code> of the user was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Staff"
+  },
+  {
     "type": "GET",
     "url": "/supervisor/user/:id",
     "title": "Request User Info",
@@ -4208,6 +4702,119 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/staff.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "GET",
+    "url": "/supervisor/user/:id",
+    "title": "Request User Info",
+    "name": "UserInfo",
+    "description": "<p>Request user info.</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory unique User ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>User Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.address",
+            "description": "<p>Mandatory User address.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": true,
+            "field": "user.age",
+            "description": "<p>Optional User age.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.email",
+            "description": "<p>Mandatory User email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.first_name",
+            "description": "<p>Mandatory User first name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "user.gender",
+            "description": "<p>Optional User gender.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.last_name",
+            "description": "<p>Mandatory User last name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.phone",
+            "description": "<p>Mandatory User phone.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "user.qq",
+            "description": "<p>Optional User qq.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "user.wechat",
+            "description": "<p>Optional User wechat.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The <code>id</code> of the user was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
     "groupTitle": "Staff"
   }
 ] });

@@ -87,12 +87,15 @@ Staff:
       password:
         type: String
         description: Mandatory password.
-      password_confirmation:
+      confirmed_password:
         type: String
         description: Mandatory confirmation password.
       tel:
         type: Optional<String>
         description: Optional phone number.
+      rolw:
+        type: Optional<Number>
+        description: 0 for customer, 1 for c2e trans, 2 for e2c trans, 3 for sup, default 0
     returns:
       user_id:
         type: UUID

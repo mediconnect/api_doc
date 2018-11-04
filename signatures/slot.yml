@@ -91,35 +91,27 @@ Slot:
       SlotNotFound:
         description: The combination of <code>hospital_id</code> and <code>disease_id</code>
           of the Slot was not found.
-  ResetSlot:
-    path: /slot/batch/reset/:hospital_id
+  AdminUpdateSlot:
+    path: /slot/admin/:slot_id
     method: PUT
-    title: Reset Slot Information
-    description: Reset a slot. Might be deprecated if duplicate with UpdateSlot.
+    title: Admin Update Slot availablity
+    description: Update a slot. Might be deprecated if duplicate with UpdateSlot.
     params:
-      hospital_id:
+      slot_id:
         type: UUID
-        description: hospital ID
+        description: slot_id
     returns:
-      id:
-        type: UUID[]
-        description: Successfully reset slots
-      error:
+      slot:
+        type: Object
+        description: Successfully reset slot
+    errors: {}
+  ListSlot:
+    path: /slot/admin/
+    method: GET
+    title: List slot availablity
+    description: List slots.
+    returns:
+      slots:
         type: Object[]
-        description: Slots runs into errors
-        fields:
-          detail:
-            type: UUID
-            description: detail reason
-          error:
-            type: UUID
-            description: Type of error
-          time_slot:
-            type: UUID
-            description: Slot ID runs into errors
-    errors:
-      InvalidAuthorization:
-        description: This operation is invalid at this stage.
-      SlotNotFound:
-        description: The combination of <code>hospital_id</code> and <code>disease_id</code>
-          of the Slot was not found.
+        description: Successfully reset slot
+    errors: {}

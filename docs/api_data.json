@@ -3838,10 +3838,10 @@
   },
   {
     "type": "PUT",
-    "url": "/slot/batch/reset/:hospital_id",
-    "title": "Reset Slot Information",
-    "name": "ResetSlot",
-    "description": "<p>Reset a slot. Might be deprecated if duplicate with UpdateSlot.</p>",
+    "url": "/slot/admin/:slot_id",
+    "title": "Admin Update Slot availablity",
+    "name": "AdminUpdateSlot",
+    "description": "<p>Update a slot. Might be deprecated if duplicate with UpdateSlot.</p>",
     "group": "Slot",
     "parameter": {
       "fields": {
@@ -3850,8 +3850,8 @@
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "hospital_id",
-            "description": "<p>hospital ID</p>"
+            "field": "slot_id",
+            "description": "<p>slot_id</p>"
           }
         ]
       }
@@ -3861,58 +3861,34 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "UUID[]",
+            "type": "Object",
             "optional": false,
-            "field": "id",
-            "description": "<p>Successfully reset slots</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "error",
-            "description": "<p>Slots runs into errors</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "error.detail",
-            "description": "<p>detail reason</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "error.error",
-            "description": "<p>Type of error</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "error.time_slot",
-            "description": "<p>Slot ID runs into errors</p>"
+            "field": "slot",
+            "description": "<p>Successfully reset slot</p>"
           }
         ]
       }
     },
-    "error": {
+    "version": "0.0.0",
+    "filename": "build/slot.py",
+    "groupTitle": "Slot"
+  },
+  {
+    "type": "GET",
+    "url": "/slot/admin/",
+    "title": "List slot availablity",
+    "name": "ListSlot",
+    "description": "<p>List slots.</p>",
+    "group": "Slot",
+    "success": {
       "fields": {
-        "Error 4xx": [
+        "Success 200": [
           {
-            "group": "Error 4xx",
-            "type": "ErrorType",
+            "group": "Success 200",
+            "type": "Object[]",
             "optional": false,
-            "field": "InvalidAuthorization",
-            "description": "<p>This operation is invalid at this stage.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "type": "ErrorType",
-            "optional": false,
-            "field": "SlotNotFound",
-            "description": "<p>The combination of <code>hospital_id</code> and <code>disease_id</code> of the Slot was not found.</p>"
+            "field": "slots",
+            "description": "<p>Successfully reset slot</p>"
           }
         ]
       }
@@ -4562,92 +4538,6 @@
             "type": "UUID",
             "optional": false,
             "field": "id",
-            "description": "<p>Staff UUID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "query",
-            "description": "<p>A qeury to filter/sort assignments.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "reservations",
-            "description": "<p>List of reservation objects</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reservations.disease_id",
-            "description": "<p>Unique ID for disease.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.res_id",
-            "description": "<p>Reservation ID</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.timeslot_id",
-            "description": "<p>ID for reservation slot.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.user_id",
-            "description": "<p>Unique ID for customer.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.patient_id",
-            "description": "<p>Unique ID for patient.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.hospital_id",
-            "description": "<p>Unique ID for hospital.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/supervisor.py",
-    "groupTitle": "Staff"
-  },
-  {
-    "type": "GET",
-    "url": "staff/assignemnt/:id/:query",
-    "title": "Staff Assignemnt",
-    "name": "StaffAssignment",
-    "description": "<p>Request a list of staff's assignments (reservations).</p>",
-    "group": "Staff",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
             "description": "<p>Staff user UUID</p>"
           },
           {
@@ -4717,6 +4607,92 @@
     },
     "version": "0.0.0",
     "filename": "build/staff.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "GET",
+    "url": "staff/assignemnt/:id/:query",
+    "title": "Staff Assignemnt",
+    "name": "StaffAssignment",
+    "description": "<p>Request a list of staff's assignments (reservations).</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Staff UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>A qeury to filter/sort assignments.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "reservations",
+            "description": "<p>List of reservation objects</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reservations.disease_id",
+            "description": "<p>Unique ID for disease.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.res_id",
+            "description": "<p>Reservation ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.timeslot_id",
+            "description": "<p>ID for reservation slot.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.user_id",
+            "description": "<p>Unique ID for customer.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.patient_id",
+            "description": "<p>Unique ID for patient.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.hospital_id",
+            "description": "<p>Unique ID for hospital.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
     "groupTitle": "Staff"
   },
   {

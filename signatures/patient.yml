@@ -1,9 +1,12 @@
 Patient:
   CreatePatient:
-    path: /patient/create
+    path: /customer/:customer_id/patient
     method: POST
     title: Create patient
     params:
+      customer_id:
+        type: UUID
+        description: UUID of customer
       birthdate:
         type: DateTime
         description: Mandatory birthdate.
@@ -25,7 +28,7 @@ Patient:
       note:
         type: optional<String>
         description: Optional note.
-      passport_number:
+      passport:
         type: String
         description: Mandatory passport number.
       relationship:
@@ -40,112 +43,148 @@ Patient:
         description: On Successful creation, return patient_id.
     errors: {}
   UpdatePatient:
-    path: /patient/:patient_id/update
-    method: POST
+    path: /customer/:customer_id/patient/:patient_id
+    method: PUT
     title: Update patient
-    params:
-      birthdate:
-        type: optional<DateTime>
-        description: Mandatory birthdate.
-      first_name:
-        type: optional<String>
-        description: Mandatory first name.
-      first_name_pinyin:
-        type: optional<String>
-        description: Mandatory first name pinyin.
-      gender:
-        type: optional<String>
-        description: Mandatory gender with default "M".
-      last_name:
-        type: optional<String>
-        description: Mandatory last name.
-      last_name_pinyin:
-        type: optional<String>
-        description: Mandatory last name pinyin.
-      note:
-        type: optional<String>
-        description: Optional note.
-      passport_number:
-        type: optional<String>
-        description: Mandatory passport number.
-      patient_id:
-        type: Number
-        description: Mandatory unique Patient ID.
-      relationship:
-        type: optional<String>
-        description: Mandatory replationship with user.
-    returns:
-      msg:
-        type: String
-        description: Successfully update patient.
-    errors: {}
-  UpdatePatientHistory:
-    path: /patient/:patient_id/visit_history/add
-    method: POST
-    title: Create patient previous hospital visit history
-    params:
-      contact_info:
-        type: String
-        description: Mandatory doctor contact info.
-      disease_category:
-        type: String
-        description: Mandatory main disease category for the visit.
-      doctor_name:
-        type: String
-        description: Mandatory doctor consulted.
-      hospital_name:
-        type: String
-        description: Mandatory hospital visited.
-      patient_id:
-        type: Number
-        description: Mandatory unique Patient ID.
-      visit_date:
-        type: optional<DateTime>
-        description: Optional visit date.
-    returns:
-      visit_id:
-        type: String
-        description: On success, return visit history id.
-    errors: {}
-  PatientInfo:
-    path: customer/:customer_id/patient/:patient_id
-    method: GET
-    title: Request patient info
     params:
       customer_id:
         type: UUID
-        description: Mandatory unique Customer user ID.
-      id:
+        description: UUID of customer
+      patient_id:
         type: UUID
-        description: Mandatory unique Patient user ID.
-    returns:
+        description: UUID of patient
       birthdate:
-        type: DateTime
+        type: optional<DateTime>
         description: Mandatory birthdate.
       first_name:
-        type: String
+        type: optional<String>
         description: Mandatory first name.
       first_name_pinyin:
-        type: String
+        type: optional<String>
         description: Mandatory first name pinyin.
       gender:
-        type: String
+        type: optional<String>
         description: Mandatory gender with default "M".
       last_name:
-        type: String
+        type: optional<String>
         description: Mandatory last name.
       last_name_pinyin:
-        type: String
+        type: optional<String>
         description: Mandatory last name pinyin.
       note:
-        type: String
+        type: optional<String>
         description: Optional note.
       passport_number:
-        type: String
+        type: optional<String>
         description: Mandatory passport number.
+      patient_id:
+        type: Number
+        description: Mandatory unique Patient ID.
       relationship:
-        type: String
+        type: optional<String>
         description: Mandatory replationship with user.
-    errors:
-      PatientNotFound:
-        description: The <code>id</code> of patient is not found.
+    returns:
+      patient:
+        type: Object
+        description: Updated patient object
+    errors: {}
+  ListPatient:
+    path: /customer/:cutomer_id/patient/:query
+    method: GET
+    title: Get all patients of a customer
+    params:
+      query:
+        type: String
+        description: String to sort/filter patients
+      customer_id:
+        type: UUID
+        description: UUID of a customer
+    returns:
+      patients:
+        type: Object[]
+        description: list of patients
+    errors: {}
+  ListAllPatients:
+    path: /patients/:query
+    method: GET
+    title: Get all patients
+    params:
+      query:
+        type: String
+        description: query to filter/sort patients
+    returns:
+      patients:
+        type: Object[]
+        description: List of patient objects
+    errors: {}
+
+  # UpdatePatientHistory:
+  #   path: /patient/:patient_id/visit_history/add
+  #   method: POST
+  #   title: Create patient previous hospital visit history
+  #   params:
+  #     contact_info:
+  #       type: String
+  #       description: Mandatory doctor contact info.
+  #     disease_category:
+  #       type: String
+  #       description: Mandatory main disease category for the visit.
+  #     doctor_name:
+  #       type: String
+  #       description: Mandatory doctor consulted.
+  #     hospital_name:
+  #       type: String
+  #       description: Mandatory hospital visited.
+  #     patient_id:
+  #       type: Number
+  #       description: Mandatory unique Patient ID.
+  #     visit_date:
+  #       type: optional<DateTime>
+  #       description: Optional visit date.
+  #   returns:
+  #     visit_id:
+  #       type: String
+  #       description: On success, return visit history id.
+  #   errors: {}
+  # PatientInfo:
+  #   path: customer/:customer_id/patient/:patient_id
+  #   method: GET
+  #   title: Request patient info
+  #   params:
+  #     customer_id:
+  #       type: UUID
+  #       description: Mandatory unique Customer user ID.
+  #     id:
+  #       type: UUID
+  #       description: Mandatory unique Patient user ID.
+  #   returns:
+  #     birthdate:
+  #       type: DateTime
+  #       description: Mandatory birthdate.
+  #     first_name:
+  #       type: String
+  #       description: Mandatory first name.
+  #     first_name_pinyin:
+  #       type: String
+  #       description: Mandatory first name pinyin.
+  #     gender:
+  #       type: String
+  #       description: Mandatory gender with default "M".
+  #     last_name:
+  #       type: String
+  #       description: Mandatory last name.
+  #     last_name_pinyin:
+  #       type: String
+  #       description: Mandatory last name pinyin.
+  #     note:
+  #       type: String
+  #       description: Optional note.
+  #     passport_number:
+  #       type: String
+  #       description: Mandatory passport number.
+  #     relationship:
+  #       type: String
+  #       description: Mandatory replationship with user.
+  #   errors:
+  #     PatientNotFound:
+  #       description: The <code>id</code> of patient is not found.

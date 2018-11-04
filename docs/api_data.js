@@ -1,11 +1,31 @@
 define({ "api": [
   {
     "type": "GET",
-    "url": "answer/:id",
+    "url": "questionnaire/reservation/:res_id/answer/:answer_id",
     "title": "Answer Info",
     "name": "AnswerInfo",
-    "description": "<p>Request information about an Answer</p>",
+    "description": "<p>Request information about an Answer of an reservation</p>",
     "group": "Anser",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "answer_id",
+            "description": "<p>UUID of an answer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>UUID of reservation</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -29,13 +49,6 @@ define({ "api": [
             "optional": false,
             "field": "answer.questionnaire_id",
             "description": "<p>Questionnaire UUID</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID[]",
-            "optional": false,
-            "field": "answer.question_id",
-            "description": "<p>List of Question UUIDs</p>"
           },
           {
             "group": "Success 200",
@@ -101,11 +114,45 @@ define({ "api": [
   },
   {
     "type": "POST",
-    "url": "answer/",
+    "url": "questionnaire/reservation/:res_id/answer/:answer_id",
     "title": "Create Answer",
     "name": "CreateAnswer",
     "description": "<p>Create an Answer</p>",
     "group": "Anser",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>Reservation UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "questionnaire_id",
+            "description": "<p>Questionnaire UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String[]",
+            "optional": false,
+            "field": "content",
+            "description": "<p>List of Answer contents</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "origin",
+            "description": "<p>Un-translated answer pdf file.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -152,11 +199,31 @@ define({ "api": [
   },
   {
     "type": "DELETE",
-    "url": "answer/:id",
+    "url": "questionnaire/reservation/:res_id/answer/:answer_id",
     "title": "Delete Answer",
     "name": "DeleteAnswer",
     "description": "<p>Delete an Answer</p>",
-    "group": "Answer_admin",
+    "group": "Anser",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>UUID of a reservation</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>UUID of an answer</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -165,7 +232,7 @@ define({ "api": [
             "type": "UUID",
             "optional": false,
             "field": "id",
-            "description": "<p>UUID of answeranswer</p>"
+            "description": "<p>UUID of deleted answer</p>"
           }
         ]
       }
@@ -192,18 +259,48 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Answer_admin"
+    "groupTitle": "Anser"
   },
   {
     "type": "GET",
-    "url": "/answer/admin/list/:query",
-    "title": "Request list of Answers",
-    "name": "ListAnswer",
-    "description": "<p>Request a list of answers based on query.</p>",
-    "group": "Answer_admin",
+    "url": "questionnaire/answer/:query",
+    "title": "",
+    "name": "ListAllAnswers",
+    "group": "Anser",
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter/sort answers</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/questionnaire.py",
+    "groupTitle": "Anser"
+  },
+  {
+    "type": "GET",
+    "url": "questionnaire/reservation/:res_id/answer/:query",
+    "title": "Request list of Answers",
+    "name": "ListAnswer",
+    "description": "<p>Request a list of answers based on query.</p>",
+    "group": "Anser",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>UUID of a reservation</p>"
+          },
           {
             "group": "Parameter",
             "type": "String",
@@ -229,15 +326,84 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Answer_admin"
+    "groupTitle": "Anser"
   },
   {
     "type": "PUT",
-    "url": "answer/",
+    "url": "questionnaire/reservation/:res_id/answer/:answer_id",
     "title": "Update Answer",
     "name": "UpdateAnswer",
     "description": "<p>Update an Answer</p>",
-    "group": "Answer_admin",
+    "group": "Anser",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "choice_id",
+            "description": "<p>Choice UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>Reservation UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "questionnaire_id",
+            "description": "<p>Questionnaire UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String[]",
+            "optional": false,
+            "field": "content",
+            "description": "<p>List of Answer contents</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "origin",
+            "description": "<p>Un-translated answer pdf file.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "translated",
+            "description": "<p>Translated answer pdf file</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "boolean",
+            "optional": false,
+            "field": "is_translated",
+            "description": "<p>Whther the answer pdf file is translated</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "translator_id",
+            "description": "<p>C2E translator assigned to this answer.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token to authorize operation.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -294,15 +460,42 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Answer_admin"
+    "groupTitle": "Anser"
   },
   {
     "type": "GET",
-    "url": "questionnaire/:questionnaire_id/question/:question_id/choice/:choice_id",
+    "url": "questionnaire/admin/:questionnaire_id/question/:question_id/choice/:choice_id",
     "title": "Choice Info",
     "name": "ChoiceInfo",
     "description": "<p>Request information about a choice</p>",
     "group": "Choice",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "questionnaire_id",
+            "description": "<p>UUID of questionnaire</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "question_id",
+            "description": "<p>UUID of question</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "choice_id",
+            "description": "<p>UUID of choice</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -349,11 +542,31 @@ define({ "api": [
   },
   {
     "type": "POST",
-    "url": "/choice/admin/",
+    "url": "questionnaire/admin/:questionnaire_id/question/:question_id/choice",
     "title": "Create Choice",
     "name": "CreateChoice",
     "description": "<p>Create a choice</p>",
-    "group": "Choice_admin",
+    "group": "Choice",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID[]",
+            "optional": false,
+            "field": "question_id",
+            "description": "<p>List of UUIDs of question this choice belongs to.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String[]",
+            "optional": false,
+            "field": "content",
+            "description": "<p>List of choice contents.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -382,15 +595,15 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Choice_admin"
+    "groupTitle": "Choice"
   },
   {
     "type": "DELETE",
-    "url": "/choice/admin/:id",
+    "url": "questionnaire/admin/:questionnaire_id/question/:question_id/choice/:choice_id",
     "title": "Delete Choice",
     "name": "DeleteChoice",
     "description": "<p>Delete a choice.</p>",
-    "group": "Choice_admin",
+    "group": "Choice",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -446,18 +659,55 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Choice_admin"
+    "groupTitle": "Choice"
   },
   {
     "type": "GET",
-    "url": "/choice/admin/list/:query",
-    "title": "Request list of Choices",
-    "name": "ListChoice",
-    "description": "<p>Request a list of choices based on query.</p>",
-    "group": "Choice_admin",
+    "url": "questionnaire/choices/:query",
+    "title": "",
+    "name": "ListAllChoices",
+    "group": "Choice",
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter/sort choices</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/questionnaire.py",
+    "groupTitle": "Choice"
+  },
+  {
+    "type": "GET",
+    "url": "questionnaire/admin/:questionnaire_id/question/:question_id/choice",
+    "title": "Request list of Choices",
+    "name": "ListChoice",
+    "description": "<p>Request a list of choices of a question of a questionnaire</p>",
+    "group": "Choice",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "questionnaire_id",
+            "description": "<p>UUID of a questionnaire</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "question_id",
+            "description": "<p>UUID  of a question</p>"
+          },
           {
             "group": "Parameter",
             "type": "String",
@@ -483,15 +733,15 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Choice_admin"
+    "groupTitle": "Choice"
   },
   {
     "type": "PUT",
-    "url": "/choice/admin/",
+    "url": "questionnaire/admin/:questionnaire_id/question/:question_id/choice/:choice_id",
     "title": "Update Choice",
     "name": "UpdateChoice",
     "description": "<p>Update a choice.</p>",
-    "group": "Choice_admin",
+    "group": "Choice",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -547,7 +797,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Choice_admin"
+    "groupTitle": "Choice"
   },
   {
     "type": "POST",
@@ -1602,13 +1852,20 @@ define({ "api": [
   },
   {
     "type": "POST",
-    "url": "/patient/create",
+    "url": "/customer/:customer_id/patient",
     "title": "Create patient",
     "name": "CreatePatient",
     "group": "Patient",
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>UUID of customer</p>"
+          },
           {
             "group": "Parameter",
             "type": "DateTime",
@@ -1662,7 +1919,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "passport_number",
+            "field": "passport",
             "description": "<p>Mandatory passport number.</p>"
           },
           {
@@ -1701,26 +1958,19 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "customer/:customer_id/patient/:patient_id",
-    "title": "Request patient info",
-    "name": "PatientInfo",
+    "url": "/patients/:query",
+    "title": "Get all patients",
+    "name": "ListAllPatients",
     "group": "Patient",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "UUID",
+            "type": "String",
             "optional": false,
-            "field": "customer_id",
-            "description": "<p>Mandatory unique Customer user ID.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Mandatory unique Patient user ID.</p>"
+            "field": "query",
+            "description": "<p>query to filter/sort patients</p>"
           }
         ]
       }
@@ -1730,249 +1980,10 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "DateTime",
+            "type": "Object[]",
             "optional": false,
-            "field": "birthdate",
-            "description": "<p>Mandatory birthdate.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "first_name",
-            "description": "<p>Mandatory first name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "first_name_pinyin",
-            "description": "<p>Mandatory first name pinyin.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "gender",
-            "description": "<p>Mandatory gender with default &quot;M&quot;.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "last_name",
-            "description": "<p>Mandatory last name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "last_name_pinyin",
-            "description": "<p>Mandatory last name pinyin.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "note",
-            "description": "<p>Optional note.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "passport_number",
-            "description": "<p>Mandatory passport number.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "relationship",
-            "description": "<p>Mandatory replationship with user.</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "ErrorType",
-            "optional": false,
-            "field": "PatientNotFound",
-            "description": "<p>The <code>id</code> of patient is not found.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/patient.py",
-    "groupTitle": "Patient"
-  },
-  {
-    "type": "POST",
-    "url": "/patient/:patient_id/update",
-    "title": "Update patient",
-    "name": "UpdatePatient",
-    "group": "Patient",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "DateTime",
-            "optional": true,
-            "field": "birthdate",
-            "description": "<p>Mandatory birthdate.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "first_name",
-            "description": "<p>Mandatory first name.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "first_name_pinyin",
-            "description": "<p>Mandatory first name pinyin.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "gender",
-            "description": "<p>Mandatory gender with default &quot;M&quot;.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "last_name",
-            "description": "<p>Mandatory last name.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "last_name_pinyin",
-            "description": "<p>Mandatory last name pinyin.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "note",
-            "description": "<p>Optional note.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "passport_number",
-            "description": "<p>Mandatory passport number.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "patient_id",
-            "description": "<p>Mandatory unique Patient ID.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "relationship",
-            "description": "<p>Mandatory replationship with user.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "msg",
-            "description": "<p>Successfully update patient.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/patient.py",
-    "groupTitle": "Patient"
-  },
-  {
-    "type": "POST",
-    "url": "/patient/:patient_id/visit_history/add",
-    "title": "Create patient previous hospital visit history",
-    "name": "UpdatePatientHistory",
-    "group": "Patient",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "contact_info",
-            "description": "<p>Mandatory doctor contact info.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "disease_category",
-            "description": "<p>Mandatory main disease category for the visit.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "doctor_name",
-            "description": "<p>Mandatory doctor consulted.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "hospital_name",
-            "description": "<p>Mandatory hospital visited.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "patient_id",
-            "description": "<p>Mandatory unique Patient ID.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "DateTime",
-            "optional": true,
-            "field": "visit_date",
-            "description": "<p>Optional visit date.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "visit_id",
-            "description": "<p>On success, return visit history id.</p>"
+            "field": "patients",
+            "description": "<p>List of patient objects</p>"
           }
         ]
       }
@@ -1983,11 +1994,136 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "questionnaire/:questionnaire_id/question/:question_id/info",
-    "title": "Question Info",
-    "name": "QuestionInfo",
-    "description": "<p>Request information about a quesiton</p>",
-    "group": "Question",
+    "url": "/customer/:cutomer_id/patient/:query",
+    "title": "Get all patients of a customer",
+    "name": "ListPatient",
+    "group": "Patient",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>String to sort/filter patients</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>UUID of a customer</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "patients",
+            "description": "<p>list of patients</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/patient.py",
+    "groupTitle": "Patient"
+  },
+  {
+    "type": "PUT",
+    "url": "/customer/:customer_id/patient/:patient_id",
+    "title": "Update patient",
+    "name": "UpdatePatient",
+    "group": "Patient",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>UUID of customer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "patient_id",
+            "description": "<p>Mandatory unique Patient ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "DateTime",
+            "optional": true,
+            "field": "birthdate",
+            "description": "<p>Mandatory birthdate.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "first_name",
+            "description": "<p>Mandatory first name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "first_name_pinyin",
+            "description": "<p>Mandatory first name pinyin.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "gender",
+            "description": "<p>Mandatory gender with default &quot;M&quot;.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "last_name",
+            "description": "<p>Mandatory last name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "last_name_pinyin",
+            "description": "<p>Mandatory last name pinyin.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "note",
+            "description": "<p>Optional note.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "passport_number",
+            "description": "<p>Mandatory passport number.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "relationship",
+            "description": "<p>Mandatory replationship with user.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -1995,64 +2131,43 @@ define({ "api": [
             "group": "Success 200",
             "type": "Object",
             "optional": false,
-            "field": "question",
-            "description": "<p>A question object</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID[]",
-            "optional": false,
-            "field": "question.choices",
-            "description": "<p>List of uuids of possible choices</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "question.content",
-            "description": "<p>Question content</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "question.format",
-            "description": "<p>Quesiton format code.</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "ErrorType",
-            "optional": false,
-            "field": "QuestionnaireNotFound",
-            "description": "<p>The required <code>id</code> of questionnaire is not found.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "type": "ErrorType",
-            "optional": false,
-            "field": "QuestionNotFound",
-            "description": "<p>The required <code>id</code> of question is not found.</p>"
+            "field": "patient",
+            "description": "<p>Updated patient object</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "build/questionnaire.py",
-    "groupTitle": "Question"
+    "filename": "build/patient.py",
+    "groupTitle": "Patient"
   },
   {
     "type": "POST",
-    "url": "/question/admin/",
+    "url": "questionnaire/admin/:questionnaire_id/question",
     "title": "Create Question",
     "name": "CreateQuestion",
     "description": "<p>Create a question</p>",
-    "group": "Question_admin",
+    "group": "Question",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>Question content</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "formaat",
+            "description": "<p>Quesiton format code.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -2088,15 +2203,15 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Question_admin"
+    "groupTitle": "Question"
   },
   {
     "type": "DELETE",
-    "url": "/question/admin/:id",
+    "url": "questionnaire/admin/:questionnaire_id/question/:question_id",
     "title": "Delete Question",
     "name": "DeleteQuestion",
     "description": "<p>Delete a question.</p>",
-    "group": "Question_admin",
+    "group": "Question",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -2152,18 +2267,48 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Question_admin"
+    "groupTitle": "Question"
   },
   {
     "type": "GET",
-    "url": "/question/admin/list/:query",
-    "title": "Request list of Quesiton",
-    "name": "ListQuestion",
-    "description": "<p>Request a list of questions based on query.</p>",
-    "group": "Question_admin",
+    "url": "questionnaire/questions/:query",
+    "title": "",
+    "name": "ListAllQuestions",
+    "group": "Question",
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter/sort questions</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/questionnaire.py",
+    "groupTitle": "Question"
+  },
+  {
+    "type": "GET",
+    "url": "questionnaire/admin/:questionnaire_id/question/:query",
+    "title": "Request list of Quesiton of questionnaire",
+    "name": "ListQuestion",
+    "description": "<p>Request a list of questions of a questionnaire.</p>",
+    "group": "Question",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "questionnaire_id",
+            "description": "<p>Questionnaire UUID</p>"
+          },
           {
             "group": "Parameter",
             "type": "String",
@@ -2189,24 +2334,109 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Question_admin"
+    "groupTitle": "Question"
   },
   {
-    "type": "PUT",
-    "url": "/question/admin/",
-    "title": "Update Question",
-    "name": "UpdateQuestion",
-    "description": "<p>Update a Question.</p>",
-    "group": "Question_admin",
+    "type": "GET",
+    "url": "questionnaire/admin/:questionnaire_id/question/:question_id",
+    "title": "Question Info",
+    "name": "QuestionInfo",
+    "description": "<p>Request information about a quesiton</p>",
+    "group": "Question",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "UUID[]",
+            "type": "UUID",
             "optional": false,
-            "field": "choices",
-            "description": "<p>Choices UUIDs of questionnaire</p>"
+            "field": "questionnaire_id",
+            "description": "<p>UUID of questionnaire</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "question_id",
+            "description": "<p>UUID of question</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "question",
+            "description": "<p>A question object</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "question.content",
+            "description": "<p>Question content</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "question.format",
+            "description": "<p>Quesiton format code.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "QuestionnaireNotFound",
+            "description": "<p>The required <code>id</code> of questionnaire is not found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "QuestionNotFound",
+            "description": "<p>The required <code>id</code> of question is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/questionnaire.py",
+    "groupTitle": "Question"
+  },
+  {
+    "type": "PUT",
+    "url": "questionnaire/admin/:questionnaire_id/question/:question_id",
+    "title": "Update Question",
+    "name": "UpdateQuestion",
+    "description": "<p>Update a Question.</p>",
+    "group": "Question",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "questinnaire_id",
+            "description": "<p>Questionnaire UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "question_id",
+            "description": "<p>Question UUID</p>"
           },
           {
             "group": "Parameter",
@@ -2221,13 +2451,6 @@ define({ "api": [
             "optional": false,
             "field": "formaat",
             "description": "<p>Quesiton format code.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "token",
-            "description": "<p>Token to authorize operation.</p>"
           }
         ]
       }
@@ -2274,11 +2497,204 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Question_admin"
+    "groupTitle": "Question"
+  },
+  {
+    "type": "POST",
+    "url": "/questionnaire/admin",
+    "title": "Create Questionnaire",
+    "name": "CreateQuestionnaire",
+    "description": "<p>Create a Questionnaire.</p>",
+    "group": "Questionnaire",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "translator_id",
+            "description": "<p>Translator assigned to this questionnaire UUID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "category",
+            "description": "<p>Category of this questionnaire</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "hospital_id",
+            "description": "<p>Hospital of this questionnaire UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "disease_id",
+            "description": "<p>Disease of this questionnaire UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "is_translated",
+            "description": "<p>Whther the questionnaire has been translated.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "translated",
+            "description": "<p>Translated pdf file of questionnaire</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "origin",
+            "description": "<p>Untranslated pdf file of questionnaire</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Questionnaire ID.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "QuestionnaireNotFound",
+            "description": "<p>The requested <code>id</code> of questionnaire is not found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "TranslatorNotFound",
+            "description": "<p>The requested <code>id</code> of translator is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/questionnaire.py",
+    "groupTitle": "Questionnaire"
+  },
+  {
+    "type": "DELETE",
+    "url": "/questionnaire/admin/:id",
+    "title": "Delete Questionnaires",
+    "name": "DeleteQuestionnarie",
+    "description": "<p>Delete a questionnaire.</p>",
+    "group": "Questionnaire",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>UUID of questionnaire to be deleted.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>UUID of deleted questionnaire.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "InvalidAuthorization",
+            "description": "<p>This operation is invalid at this stage.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "QuestionnaireNotFound",
+            "description": "<p>The required <code>id</code> of questionnaire is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/questionnaire.py",
+    "groupTitle": "Questionnaire"
   },
   {
     "type": "GET",
-    "url": "/questionnaire/:id/info",
+    "url": "/questionnaire/admin/:query",
+    "title": "Request list of Questionnaires",
+    "name": "ListQuestionnarie",
+    "description": "<p>Request a list of questionnaires based on query.</p>",
+    "group": "Questionnaire",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter/sort the questionnaires.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "questionnaires",
+            "description": "<p>List of filterd/sorted questionnaires.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/questionnaire.py",
+    "groupTitle": "Questionnaire"
+  },
+  {
+    "type": "GET",
+    "url": "/questionnaire/admin/:id",
     "title": "Request Questionnaire",
     "name": "QuestionnaireInfo",
     "description": "<p>Request questionnaire information.</p>",
@@ -2305,13 +2721,6 @@ define({ "api": [
             "optional": false,
             "field": "questionnaire",
             "description": "<p>Questionnaire Object</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID[]",
-            "optional": false,
-            "field": "questionnaire.questions",
-            "description": "<p>Questions UUIDs of questionnaire</p>"
           },
           {
             "group": "Success 200",
@@ -2414,229 +2823,15 @@ define({ "api": [
     "groupTitle": "Questionnaire"
   },
   {
-    "type": "POST",
-    "url": "/questionnaire/admin",
-    "title": "Create Questionnaire",
-    "name": "CreateQuestionnaire",
-    "description": "<p>Create a Questionnaire.</p>",
-    "group": "Questionnaire_admin",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID[]",
-            "optional": false,
-            "field": "questions",
-            "description": "<p>Questions UUIDs of questionnaire</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "translator_id",
-            "description": "<p>Translator assigned to this questionnaire UUID.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "category",
-            "description": "<p>Category of this questionnaire</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "hospital_id",
-            "description": "<p>Hospital of this questionnaire UUID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "disease_id",
-            "description": "<p>Disease of this questionnaire UUID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "is_translated",
-            "description": "<p>Whther the questionnaire has been translated.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "File",
-            "optional": false,
-            "field": "translated",
-            "description": "<p>Translated pdf file of questionnaire</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "File",
-            "optional": false,
-            "field": "origin",
-            "description": "<p>Untranslated pdf file of questionnaire</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Questionnaire ID.</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "ErrorType",
-            "optional": false,
-            "field": "QuestionnaireNotFound",
-            "description": "<p>The requested <code>id</code> of questionnaire is not found.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "type": "ErrorType",
-            "optional": false,
-            "field": "TranslatorNotFound",
-            "description": "<p>The requested <code>id</code> of translator is not found.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/questionnaire.py",
-    "groupTitle": "Questionnaire_admin"
-  },
-  {
-    "type": "DELETE",
-    "url": "/questionnaire/admin/:id",
-    "title": "Delete Questionnaires",
-    "name": "DeleteQuestionnarie",
-    "description": "<p>Delete a questionnaire.</p>",
-    "group": "Questionnaire_admin",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
-            "description": "<p>UUID of questionnaire to be deleted.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "token",
-            "description": "<p>Token to authorize the operation.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
-            "description": "<p>UUID of deleted questionnaire.</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "ErrorType",
-            "optional": false,
-            "field": "InvalidAuthorization",
-            "description": "<p>This operation is invalid at this stage.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "type": "ErrorType",
-            "optional": false,
-            "field": "QuestionnaireNotFound",
-            "description": "<p>The required <code>id</code> of questionnaire is not found.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/questionnaire.py",
-    "groupTitle": "Questionnaire_admin"
-  },
-  {
-    "type": "GET",
-    "url": "/questionnaire/admin/list/:query",
-    "title": "Request list of Questionnaires",
-    "name": "ListQuestionnarie",
-    "description": "<p>Request a list of questionnaires based on query.</p>",
-    "group": "Questionnaire_admin",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "query",
-            "description": "<p>Query to filter/sort the questionnaires.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "questionnaires",
-            "description": "<p>List of filterd/sorted questionnaires.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/questionnaire.py",
-    "groupTitle": "Questionnaire_admin"
-  },
-  {
     "type": "PUT",
-    "url": "/questionnaire/admin/",
+    "url": "/questionnaire/admin/:id",
     "title": "Update Questionnaire",
     "name": "UpdateQuestionnaire",
     "description": "<p>Update a Questionnaire.</p>",
-    "group": "Questionnaire_admin",
+    "group": "Questionnaire",
     "parameter": {
       "fields": {
         "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID[]",
-            "optional": false,
-            "field": "questions",
-            "description": "<p>Questions UUIDs of questionnaire</p>"
-          },
           {
             "group": "Parameter",
             "type": "UUID",
@@ -2671,13 +2866,6 @@ define({ "api": [
             "optional": false,
             "field": "translated",
             "description": "<p>Whther the questionnaire has been translated.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "token",
-            "description": "<p>Token to authorize operation.</p>"
           }
         ]
       }
@@ -2724,7 +2912,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Questionnaire_admin"
+    "groupTitle": "Questionnaire"
   },
   {
     "type": "GET",
@@ -4018,92 +4206,6 @@ define({ "api": [
             "type": "UUID",
             "optional": false,
             "field": "id",
-            "description": "<p>Staff UUID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "query",
-            "description": "<p>A qeury to filter/sort assignments.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "reservations",
-            "description": "<p>List of reservation objects</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reservations.disease_id",
-            "description": "<p>Unique ID for disease.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.res_id",
-            "description": "<p>Reservation ID</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.timeslot_id",
-            "description": "<p>ID for reservation slot.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.user_id",
-            "description": "<p>Unique ID for customer.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.patient_id",
-            "description": "<p>Unique ID for patient.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.hospital_id",
-            "description": "<p>Unique ID for hospital.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/supervisor.py",
-    "groupTitle": "Staff"
-  },
-  {
-    "type": "GET",
-    "url": "staff/assignemnt/:id/:query",
-    "title": "Staff Assignemnt",
-    "name": "StaffAssignment",
-    "description": "<p>Request a list of staff's assignments (reservations).</p>",
-    "group": "Staff",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
             "description": "<p>Staff user UUID</p>"
           },
           {
@@ -4173,6 +4275,92 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/staff.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "GET",
+    "url": "staff/assignemnt/:id/:query",
+    "title": "Staff Assignemnt",
+    "name": "StaffAssignment",
+    "description": "<p>Request a list of staff's assignments (reservations).</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Staff UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>A qeury to filter/sort assignments.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "reservations",
+            "description": "<p>List of reservation objects</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reservations.disease_id",
+            "description": "<p>Unique ID for disease.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.res_id",
+            "description": "<p>Reservation ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.timeslot_id",
+            "description": "<p>ID for reservation slot.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.user_id",
+            "description": "<p>Unique ID for customer.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.patient_id",
+            "description": "<p>Unique ID for patient.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.hospital_id",
+            "description": "<p>Unique ID for hospital.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
     "groupTitle": "Staff"
   },
   {

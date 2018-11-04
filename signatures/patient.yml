@@ -117,7 +117,14 @@ Patient:
         type: Object[]
         description: List of patient objects
     errors: {}
-
+  DeletePatients:
+    path : /patient/:id
+    method: DELETE
+    title: Delete a patient
+    params:
+      id:
+        type: UUID
+        description: UUID of a patient
   # UpdatePatientHistory:
   #   path: /patient/:patient_id/visit_history/add
   #   method: POST

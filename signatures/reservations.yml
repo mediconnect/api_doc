@@ -139,12 +139,12 @@ Reservation:
         description: The payment is not able to be processed.
 Reservation/admin:
   Update Reservation:
-    path: /reservation/admin/:id
+    path: /reservation/admin/:res_id
     method: PUT
     title: Staff's operation to update a Reservation
     description: Update the info of a Reservation.
     params:
-      id:
+      res_id:
         type: UUID
         description: Reservation UUID
       translator_e2c_id:
@@ -172,17 +172,14 @@ Reservation/admin:
       ReservationNotFound:
         description: The required <code>id</code> of reservation is not found.
   Delete Reservation:
-    path: /reservation/admin/:id
+    path: /reservation/admin/:res_id
     method: DELETE
     title: Supervisor's operation to delete a Reservation
     description: Remove a Reservation from Database.
     params:
-      id:
+      res_id:
         type: UUID
         description: Unique ID of a Reservation.
-      token:
-        type: String
-        description: Token to verify authorization.
     returns:
       res_id:
         type: UUID
@@ -192,3 +189,39 @@ Reservation/admin:
         description: This operation is invalid at this stage.
       ReservationNotFound:
         description: The required <code>id</code> of reservation is not found.
+  ListReservations:
+    path: /reservation/admin/:query
+    method: GET
+    title: Staff's operation to list reservations
+    description: List all reservations.
+    params:
+      query:
+        type: String
+        description: Query to filter/sort reservation
+    returns:
+      reservations:
+        type: Object[]
+        description: list of reservation objects
+        fields:
+          res_id:
+            type: UUID
+            description: Reservation UUID
+          translator_e2c_id:
+            type: UUID
+            description: New E2C_Translator id.
+          translator_c2e_id:
+            type: UUID
+            description: New C2E_Translator id.
+          status:
+            type: Number
+            description: New reservation status.
+          trans_status:
+            type: Number
+            description: New translating status.
+          token:
+            type: String
+            description: Token to verify authorization.
+    returns:
+      res_id:
+        type: UUID
+        description: Updated reservation UUID.

@@ -13,29 +13,86 @@ Hospital:
         type: Object
         description: Hospital Object.
         fields:
+          name:
+            type: String
+            description: Hospital name
+          email:
+            type: String
+            description: Hospital email
           image:
             type: String
             description: Hospital Image.
-          intro:
+          introduction:
             type: String
             description: Hospital Brief Introduction.
-          location:
+          area:
             type: String
-            description: Hospital Location.
-          rank:
+            description: Hospital area.
+          overall_rank:
             type: Number
             description: Hospital General Rank.
-          url:
+          website:
             type: String
             description: Hospital Website Link.
-      name:
-        type: String
-        description: Hospital Name.
+          feedback_time:
+            type: String
+            description: Feedback_time in weeks
+          average_score:
+            type: Number
+            description:  Average customer score
+          specialty:
+            type: String
+            description: Hospital specialty.
+          review_number:
+            type: Number
+            description: Numbe of reviews.
     errors:
       ObjectNotFound:
         description: The <code>id</code> of the Hospital was not found.
   HospitalList:
-    path: /hospitals/:query
+    path: /hospital/:query
     method: GET
     title: Request List of Hospitals
     description: Dispaly all hospitals based on query
+    params:
+      query:
+        type: String
+        description: Query to filter hospitals
+    returns:
+      hospitals:
+        type: Object[]
+        fields:
+          name:
+            type: String
+            description: Hospital name
+          email:
+            type: String
+            description: Hospital email
+          image:
+            type: String
+            description: Hospital Image.
+          introduction:
+            type: String
+            description: Hospital Brief Introduction.
+          area:
+            type: String
+            description: Hospital area.
+          overall_rank:
+            type: Number
+            description: Hospital General Rank.
+          website:
+            type: String
+            description: Hospital Website Link.
+          feedback_time:
+            type: String
+            description: Feedback_time in weeks
+          average_score:
+            type: Number
+            description:  Average customer score
+          specialty:
+            type: String
+            description: Hospital specialty.
+          review_number:
+            type: Number
+            description: Numbe of reviews.
+    errors: {}

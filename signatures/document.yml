@@ -5,21 +5,27 @@ Document:
     title: Create Document
     description: Create document.
     params:
+      res_id:
+        type: UUID
+        description: UUID of reservation this document belongs to
       description:
         type: String
         description: Mandatory document description
-      file_path:
-        type: String
-        description: Mandatory file_path
+      file:
+        type: File
+        description: File Object
       name:
         type: String
         description: Mandatory document name
-      note:
+      description:
         type: optional<String>
-        description: Optional note for document.
+        description: Optional description for document.
       upload_at:
         type: DateTime
         description: Mandatory document upload time.
+      owner:
+        type: UUID
+        description: UUID of user uploaded the document
     returns:
       id:
         type: Number
@@ -40,21 +46,27 @@ Document:
         type: Object
         description: Document Object
         fields:
+          res_id:
+            type: UUID
+            description: Reservation UUID
           description:
             type: Stinrg
             description: Document description
-          file_path:
-            type: String
-            description: File_path
+          file:
+            type: File
+            description: file object
           name:
             type: String
             description: Document name
-          note:
+          description:
             type: optional<String>
-            description: Note for document
+            description: description for document
           upload_at:
             type: DateTime
             description: Document upload time.
+          owner:
+            type: UUID
+            description: UUID of owner uploaded this document
     errors:
       DocumentNotFound:
         description: The <code>id</code> of the document doesn't exist.
@@ -74,3 +86,69 @@ Document:
     errors:
       DocumentNotFound:
         description: The <code>id</code> of the document doesn't exist.
+  ListDocument:
+    path: /document/:query
+    method: GET
+    title: List All Documents
+    params:
+      query:
+        type: String
+        description: query to filter Documents
+    returns:
+      documents:
+        type: Object
+        description: List of documents Object
+        fields:
+          res:
+            type: UUID
+            description: Reservation UUID
+          description:
+            type: Stinrg
+            description: Document description
+          file:
+            type: File
+            description: file object
+          name:
+            type: String
+            description: Document name
+          description:
+            type: optional<String>
+            description: description for document
+          upload_at:
+            type: DateTime
+            description: Document upload time.
+          owner:
+            type: UUID
+            description: UUID of owner uploaded this document
+  UpdateDocument:
+    path: /document/:id
+    method: PUT
+    title: Update Document
+    description: Update a dicument
+    params:
+      id:
+        type: UUID
+        description: UUID of document
+      res:
+        type: UUID
+        description: Reservation UUID
+      description:
+        type: Stinrg
+        description: Document description
+      file:
+        type: File
+        description: file object
+      name:
+        type: String
+        description: Document name
+      description:
+        type: optional<String>
+        description: description for document
+      upload_at:
+        type: DateTime
+        description: Document upload time.
+      owner:
+        type: UUID
+        description: UUID of owner uploaded this document
+      
+

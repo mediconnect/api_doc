@@ -1284,13 +1284,6 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "disease.image",
-            "description": "<p>Disease image</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
             "field": "disease.keyword",
             "description": "<p>Disease keyword.</p>"
           },
@@ -1350,6 +1343,20 @@
             "optional": false,
             "field": "diseases",
             "description": "<p>List of filtered/sorted Diseases.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diseases.keyword",
+            "description": "<p>Disease keyword.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diseases.name",
+            "description": "<p>Disease name.</p>"
           }
         ]
       }
@@ -1370,17 +1377,24 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "UUID",
             "optional": false,
-            "field": "description",
-            "description": "<p>Mandatory document description</p>"
+            "field": "res_id",
+            "description": "<p>UUID of reservation this document belongs to</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Optional description for document.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
             "optional": false,
-            "field": "file_path",
-            "description": "<p>Mandatory file_path</p>"
+            "field": "file",
+            "description": "<p>File Object</p>"
           },
           {
             "group": "Parameter",
@@ -1391,17 +1405,17 @@
           },
           {
             "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "note",
-            "description": "<p>Optional note for document.</p>"
-          },
-          {
-            "group": "Parameter",
             "type": "DateTime",
             "optional": false,
             "field": "upload_at",
             "description": "<p>Mandatory document upload time.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "owner",
+            "description": "<p>UUID of user uploaded the document</p>"
           }
         ]
       }
@@ -1488,6 +1502,84 @@
   },
   {
     "type": "GET",
+    "url": "/document/:query",
+    "title": "List All Documents",
+    "name": "ListDocument",
+    "group": "Document",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>query to filter Documents</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "documents",
+            "description": "<p>List of documents Object</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "documents.res",
+            "description": "<p>Reservation UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "documents.description",
+            "description": "<p>description for document</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "File",
+            "optional": false,
+            "field": "documents.file",
+            "description": "<p>file object</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "documents.name",
+            "description": "<p>Document name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "documents.upload_at",
+            "description": "<p>Document upload time.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "documents.owner",
+            "description": "<p>UUID of owner uploaded this document</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/document.py",
+    "groupTitle": "Document"
+  },
+  {
+    "type": "GET",
     "url": "/document/:id",
     "title": "Request Document Info",
     "name": "RequestDocument",
@@ -1518,17 +1610,24 @@
           },
           {
             "group": "Success 200",
-            "type": "Stinrg",
+            "type": "UUID",
             "optional": false,
-            "field": "document.description",
-            "description": "<p>Document description</p>"
+            "field": "document.res_id",
+            "description": "<p>Reservation UUID</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
+            "optional": true,
+            "field": "document.description",
+            "description": "<p>description for document</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "File",
             "optional": false,
-            "field": "document.file_path",
-            "description": "<p>File_path</p>"
+            "field": "document.file",
+            "description": "<p>file object</p>"
           },
           {
             "group": "Success 200",
@@ -1539,17 +1638,17 @@
           },
           {
             "group": "Success 200",
-            "type": "String",
-            "optional": true,
-            "field": "document.note",
-            "description": "<p>Note for document</p>"
-          },
-          {
-            "group": "Success 200",
             "type": "DateTime",
             "optional": false,
             "field": "document.upload_at",
             "description": "<p>Document upload time.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "document.owner",
+            "description": "<p>UUID of owner uploaded this document</p>"
           }
         ]
       }
@@ -1563,6 +1662,72 @@
             "optional": false,
             "field": "DocumentNotFound",
             "description": "<p>The <code>id</code> of the document doesn't exist.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/document.py",
+    "groupTitle": "Document"
+  },
+  {
+    "type": "PUT",
+    "url": "/document/:id",
+    "title": "Update Document",
+    "name": "UpdateDocument",
+    "description": "<p>Update a dicument</p>",
+    "group": "Document",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>UUID of document</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res",
+            "description": "<p>Reservation UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "description",
+            "description": "<p>description for document</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "file",
+            "description": "<p>file object</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Document name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "DateTime",
+            "optional": false,
+            "field": "upload_at",
+            "description": "<p>Document upload time.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "owner",
+            "description": "<p>UUID of owner uploaded this document</p>"
           }
         ]
       }
@@ -1605,6 +1770,20 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
+            "field": "hospital.name",
+            "description": "<p>Hospital name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospital.email",
+            "description": "<p>Hospital email</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
             "field": "hospital.image",
             "description": "<p>Hospital Image.</p>"
           },
@@ -1612,36 +1791,57 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "hospital.intro",
+            "field": "hospital.introduction",
             "description": "<p>Hospital Brief Introduction.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "hospital.location",
-            "description": "<p>Hospital Location.</p>"
+            "field": "hospital.area",
+            "description": "<p>Hospital area.</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "hospital.rank",
+            "field": "hospital.overall_rank",
             "description": "<p>Hospital General Rank.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "hospital.url",
+            "field": "hospital.website",
             "description": "<p>Hospital Website Link.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "name",
-            "description": "<p>Hospital Name.</p>"
+            "field": "hospital.feedback_time",
+            "description": "<p>Feedback_time in weeks</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "hospital.average_score",
+            "description": "<p>Average customer score</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospital.specialty",
+            "description": "<p>Hospital specialty.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "hospital.review_number",
+            "description": "<p>Numbe of reviews.</p>"
           }
         ]
       }
@@ -1665,11 +1865,114 @@
   },
   {
     "type": "GET",
-    "url": "/hospitals/:query",
+    "url": "/hospital/:query",
     "title": "Request List of Hospitals",
     "name": "HospitalList",
     "description": "<p>Dispaly all hospitals based on query</p>",
     "group": "Hospital",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter hospitals</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "hospitals",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospitals.name",
+            "description": "<p>Hospital name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospitals.email",
+            "description": "<p>Hospital email</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospitals.image",
+            "description": "<p>Hospital Image.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospitals.introduction",
+            "description": "<p>Hospital Brief Introduction.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospitals.area",
+            "description": "<p>Hospital area.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "hospitals.overall_rank",
+            "description": "<p>Hospital General Rank.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospitals.website",
+            "description": "<p>Hospital Website Link.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospitals.feedback_time",
+            "description": "<p>Feedback_time in weeks</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "hospitals.average_score",
+            "description": "<p>Average customer score</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospitals.specialty",
+            "description": "<p>Hospital specialty.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "hospitals.review_number",
+            "description": "<p>Numbe of reviews.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "build/hospital.py",
     "groupTitle": "Hospital"
@@ -1948,6 +2251,29 @@
             "optional": false,
             "field": "patient_id",
             "description": "<p>On Successful creation, return patient_id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/patient.py",
+    "groupTitle": "Patient"
+  },
+  {
+    "type": "DELETE",
+    "url": "/patient/:id",
+    "title": "Delete a patient",
+    "name": "DeletePatients",
+    "group": "Patient",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>UUID of a patient</p>"
           }
         ]
       }
@@ -3326,7 +3652,7 @@
   },
   {
     "type": "DELETE",
-    "url": "/reservation/admin/:id",
+    "url": "/reservation/admin/:res_id",
     "title": "Supervisor's operation to delete a Reservation",
     "name": "Delete_Reservation",
     "description": "<p>Remove a Reservation from Database.</p>",
@@ -3338,15 +3664,8 @@
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "id",
+            "field": "res_id",
             "description": "<p>Unique ID of a Reservation.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "token",
-            "description": "<p>Token to verify authorization.</p>"
           }
         ]
       }
@@ -3389,8 +3708,45 @@
     "groupTitle": "Reservation_admin"
   },
   {
+    "type": "GET",
+    "url": "/reservation/admin/:query",
+    "title": "Staff's operation to list reservations",
+    "name": "ListReservations",
+    "description": "<p>List all reservations.</p>",
+    "group": "Reservation_admin",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter/sort reservation</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>Updated reservation UUID.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/reservations.py",
+    "groupTitle": "Reservation_admin"
+  },
+  {
     "type": "PUT",
-    "url": "/reservation/admin/:id",
+    "url": "/reservation/admin/:res_id",
     "title": "Staff's operation to update a Reservation",
     "name": "Update_Reservation",
     "description": "<p>Update the info of a Reservation.</p>",
@@ -3402,7 +3758,7 @@
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "id",
+            "field": "res_id",
             "description": "<p>Reservation UUID</p>"
           },
           {
@@ -4206,92 +4562,6 @@
             "type": "UUID",
             "optional": false,
             "field": "id",
-            "description": "<p>Staff user UUID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "query",
-            "description": "<p>A qeury to filter/sort assignments.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "reservations",
-            "description": "<p>List of reservation objects</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reservations.disease_id",
-            "description": "<p>Unique ID for disease.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.res_id",
-            "description": "<p>Reservation ID</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.timeslot_id",
-            "description": "<p>ID for reservation slot.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.user_id",
-            "description": "<p>Unique ID for customer.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.patient_id",
-            "description": "<p>Unique ID for patient.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.hospital_id",
-            "description": "<p>Unique ID for hospital.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/staff.py",
-    "groupTitle": "Staff"
-  },
-  {
-    "type": "GET",
-    "url": "staff/assignemnt/:id/:query",
-    "title": "Staff Assignemnt",
-    "name": "StaffAssignment",
-    "description": "<p>Request a list of staff's assignments (reservations).</p>",
-    "group": "Staff",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
             "description": "<p>Staff UUID</p>"
           },
           {
@@ -4361,6 +4631,92 @@
     },
     "version": "0.0.0",
     "filename": "build/supervisor.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "GET",
+    "url": "staff/assignemnt/:id/:query",
+    "title": "Staff Assignemnt",
+    "name": "StaffAssignment",
+    "description": "<p>Request a list of staff's assignments (reservations).</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Staff user UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>A qeury to filter/sort assignments.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "reservations",
+            "description": "<p>List of reservation objects</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reservations.disease_id",
+            "description": "<p>Unique ID for disease.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.res_id",
+            "description": "<p>Reservation ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.timeslot_id",
+            "description": "<p>ID for reservation slot.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.user_id",
+            "description": "<p>Unique ID for customer.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.patient_id",
+            "description": "<p>Unique ID for patient.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.hospital_id",
+            "description": "<p>Unique ID for hospital.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/staff.py",
     "groupTitle": "Staff"
   },
   {
@@ -4476,10 +4832,31 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Number",
             "optional": false,
-            "field": "summary",
-            "description": "<p>Whatever summary we want to display for the supervisor.</p>"
+            "field": "num_reservation_done",
+            "description": "<p>Number of done reservations.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "num_reservation_translating",
+            "description": "<p>Number of trasnlating reservations.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "num_reservation_approving",
+            "description": "<p>Number of approving reservations.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "num_reservation",
+            "description": "<p>Total number of reservations.</p>"
           }
         ]
       }

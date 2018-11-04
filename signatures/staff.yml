@@ -26,9 +26,18 @@ Staff:
         type: UUID
         description: Staff user UUID
     returns:
-      summary:
-        type: String
-        description: Whatever summary we want to display for the supervisor.
+      num_reservation_done:
+        type: Number
+        description: Number of done reservations.
+      num_reservation_translating:
+        type: Number
+        description: Number of trasnlating reservations.
+      num_reservation_approving:
+        type: Number
+        description: Number of approving reservations.
+      num_reservation:
+        type: Number
+        description: Total number of reservations.
     errors: {}
   StaffAssignment:
     path: staff/assignemnt/:id/:query

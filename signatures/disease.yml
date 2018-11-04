@@ -13,9 +13,6 @@ Disease:
         type: Object
         description: Disease Object
         fields:
-          image:
-            type: String
-            description: Disease image
           keyword:
             type: String
             description: Disease keyword.
@@ -38,3 +35,10 @@ Disease:
       diseases:
         type: Object[]
         description: List of filtered/sorted Diseases.
+        fields:
+          keyword:
+            type: String
+            description: Disease keyword.
+          name:
+            type: String
+            description: Disease name.

@@ -89,7 +89,7 @@ Patient:
         description: Updated patient object
     errors: {}
   ListPatient:
-    path: /customer/:cutomer_id/patient/:query
+    path: /customer/:customer_id/patient/:query
     method: GET
     title: Get all patients of a customer
     params:

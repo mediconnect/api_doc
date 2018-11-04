@@ -163,6 +163,7 @@ Question:
   ListAllQuestions:
     path: questionnaire/questions/:query
     method: GET
+    title: List All Questions
     params:
       query:
         type: String
@@ -293,6 +294,7 @@ Choice:
   ListAllChoices:
     path: questionnaire/choices/:query
     method: GET
+    title: List All Choices
     params:
       query:
         type: String
@@ -406,10 +408,11 @@ Choice:
         description: This operation is invalid at this stage.
       ChoiceNotFound:
         description: The required <code>id</code> of choice is not found.
-Anser:
+Answer:
   ListAllAnswers:
     path: questionnaire/answer/:query
     method: GET
+    title: List All Answers
     params:
       query:
         type: String

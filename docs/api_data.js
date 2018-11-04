@@ -5,7 +5,7 @@ define({ "api": [
     "title": "Answer Info",
     "name": "AnswerInfo",
     "description": "<p>Request information about an Answer of an reservation</p>",
-    "group": "Anser",
+    "group": "Answer",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -110,7 +110,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Anser"
+    "groupTitle": "Answer"
   },
   {
     "type": "POST",
@@ -118,7 +118,7 @@ define({ "api": [
     "title": "Create Answer",
     "name": "CreateAnswer",
     "description": "<p>Create an Answer</p>",
-    "group": "Anser",
+    "group": "Answer",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -195,7 +195,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Anser"
+    "groupTitle": "Answer"
   },
   {
     "type": "DELETE",
@@ -203,7 +203,7 @@ define({ "api": [
     "title": "Delete Answer",
     "name": "DeleteAnswer",
     "description": "<p>Delete an Answer</p>",
-    "group": "Anser",
+    "group": "Answer",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -259,14 +259,14 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Anser"
+    "groupTitle": "Answer"
   },
   {
     "type": "GET",
     "url": "questionnaire/answer/:query",
-    "title": "",
+    "title": "List All Answers",
     "name": "ListAllAnswers",
-    "group": "Anser",
+    "group": "Answer",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -282,7 +282,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Anser"
+    "groupTitle": "Answer"
   },
   {
     "type": "GET",
@@ -290,7 +290,7 @@ define({ "api": [
     "title": "Request list of Answers",
     "name": "ListAnswer",
     "description": "<p>Request a list of answers based on query.</p>",
-    "group": "Anser",
+    "group": "Answer",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -326,7 +326,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Anser"
+    "groupTitle": "Answer"
   },
   {
     "type": "PUT",
@@ -334,7 +334,7 @@ define({ "api": [
     "title": "Update Answer",
     "name": "UpdateAnswer",
     "description": "<p>Update an Answer</p>",
-    "group": "Anser",
+    "group": "Answer",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -460,7 +460,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
-    "groupTitle": "Anser"
+    "groupTitle": "Answer"
   },
   {
     "type": "GET",
@@ -664,7 +664,7 @@ define({ "api": [
   {
     "type": "GET",
     "url": "questionnaire/choices/:query",
-    "title": "",
+    "title": "List All Choices",
     "name": "ListAllChoices",
     "group": "Choice",
     "parameter": {
@@ -1994,7 +1994,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "/customer/:cutomer_id/patient/:query",
+    "url": "/customer/:customer_id/patient/:query",
     "title": "Get all patients of a customer",
     "name": "ListPatient",
     "group": "Patient",
@@ -2272,7 +2272,7 @@ define({ "api": [
   {
     "type": "GET",
     "url": "questionnaire/questions/:query",
-    "title": "",
+    "title": "List All Questions",
     "name": "ListAllQuestions",
     "group": "Question",
     "parameter": {

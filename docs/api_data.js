@@ -1,7 +1,7 @@
 define({ "api": [
   {
     "type": "GET",
-    "url": "questionnaire/reservation/:res_id/answer/:answer_id",
+    "url": "questionnaire/reservation/:res/answer/:answer",
     "title": "Answer Info",
     "name": "AnswerInfo",
     "description": "<p>Request information about an Answer of an reservation</p>",
@@ -13,14 +13,14 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "answer_id",
+            "field": "answer",
             "description": "<p>UUID of an answer</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res_id",
+            "field": "res",
             "description": "<p>UUID of reservation</p>"
           }
         ]
@@ -40,14 +40,14 @@ define({ "api": [
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "answer.res_id",
+            "field": "answer.res",
             "description": "<p>Reservation UUID</p>"
           },
           {
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "answer.questionnaire_id",
+            "field": "answer.questionnaire",
             "description": "<p>Questionnaire UUID</p>"
           },
           {
@@ -82,7 +82,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "answer.translator_id",
+            "field": "answer.translator",
             "description": "<p>C2E translator assigned to this answer.</p>"
           }
         ]
@@ -114,7 +114,7 @@ define({ "api": [
   },
   {
     "type": "POST",
-    "url": "questionnaire/reservation/:res_id/answer/:answer_id",
+    "url": "questionnaire/reservation/:res/answer/:answer",
     "title": "Create Answer",
     "name": "CreateAnswer",
     "description": "<p>Create an Answer</p>",
@@ -126,14 +126,14 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res_id",
+            "field": "res",
             "description": "<p>Reservation UUID</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "questionnaire_id",
+            "field": "questionnaire",
             "description": "<p>Questionnaire UUID</p>"
           },
           {
@@ -199,7 +199,7 @@ define({ "api": [
   },
   {
     "type": "DELETE",
-    "url": "questionnaire/reservation/:res_id/answer/:answer_id",
+    "url": "questionnaire/reservation/:res/answer/:answer",
     "title": "Delete Answer",
     "name": "DeleteAnswer",
     "description": "<p>Delete an Answer</p>",
@@ -211,7 +211,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res_id",
+            "field": "res",
             "description": "<p>UUID of a reservation</p>"
           },
           {
@@ -286,7 +286,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "questionnaire/reservation/:res_id/answer/:query",
+    "url": "questionnaire/reservation/:res/answer/:query",
     "title": "Request list of Answers",
     "name": "ListAnswer",
     "description": "<p>Request a list of answers based on query.</p>",
@@ -298,7 +298,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res_id",
+            "field": "res",
             "description": "<p>UUID of a reservation</p>"
           },
           {
@@ -330,7 +330,7 @@ define({ "api": [
   },
   {
     "type": "PUT",
-    "url": "questionnaire/reservation/:res_id/answer/:answer_id",
+    "url": "questionnaire/reservation/:res/answer/:answer",
     "title": "Update Answer",
     "name": "UpdateAnswer",
     "description": "<p>Update an Answer</p>",
@@ -342,21 +342,21 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "choice_id",
+            "field": "choice",
             "description": "<p>Choice UUID</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res_id",
+            "field": "res",
             "description": "<p>Reservation UUID</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "questionnaire_id",
+            "field": "questionnaire",
             "description": "<p>Questionnaire UUID</p>"
           },
           {
@@ -391,7 +391,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "translator_id",
+            "field": "translator",
             "description": "<p>C2E translator assigned to this answer.</p>"
           },
           {
@@ -464,7 +464,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "questionnaire/admin/:questionnaire_id/question/:question_id/choice/:choice_id",
+    "url": "questionnaire/admin/:questionnaire/question/:question/choice/:choice",
     "title": "Choice Info",
     "name": "ChoiceInfo",
     "description": "<p>Request information about a choice</p>",
@@ -476,21 +476,21 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "questionnaire_id",
+            "field": "questionnaire",
             "description": "<p>UUID of questionnaire</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "question_id",
+            "field": "question",
             "description": "<p>UUID of question</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "choice_id",
+            "field": "choice",
             "description": "<p>UUID of choice</p>"
           }
         ]
@@ -542,7 +542,7 @@ define({ "api": [
   },
   {
     "type": "POST",
-    "url": "questionnaire/admin/:questionnaire_id/question/:question_id/choice",
+    "url": "questionnaire/admin/:questionnaire/question/:question/choice",
     "title": "Create Choice",
     "name": "CreateChoice",
     "description": "<p>Create a choice</p>",
@@ -554,7 +554,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID[]",
             "optional": false,
-            "field": "question_id",
+            "field": "question",
             "description": "<p>List of UUIDs of question this choice belongs to.</p>"
           },
           {
@@ -599,7 +599,7 @@ define({ "api": [
   },
   {
     "type": "DELETE",
-    "url": "questionnaire/admin/:questionnaire_id/question/:question_id/choice/:choice_id",
+    "url": "questionnaire/admin/:questionnaire/question/:question/choice/:choice",
     "title": "Delete Choice",
     "name": "DeleteChoice",
     "description": "<p>Delete a choice.</p>",
@@ -686,7 +686,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "questionnaire/admin/:questionnaire_id/question/:question_id/choice",
+    "url": "questionnaire/admin/:questionnaire/question/:question/choice",
     "title": "Request list of Choices",
     "name": "ListChoice",
     "description": "<p>Request a list of choices of a question of a questionnaire</p>",
@@ -698,14 +698,14 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "questionnaire_id",
+            "field": "questionnaire",
             "description": "<p>UUID of a questionnaire</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "question_id",
+            "field": "question",
             "description": "<p>UUID  of a question</p>"
           },
           {
@@ -737,7 +737,7 @@ define({ "api": [
   },
   {
     "type": "PUT",
-    "url": "questionnaire/admin/:questionnaire_id/question/:question_id/choice/:choice_id",
+    "url": "questionnaire/admin/:questionnaire/question/:question/choice/:choice",
     "title": "Update Choice",
     "name": "UpdateChoice",
     "description": "<p>Update a choice.</p>",
@@ -1379,7 +1379,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res_id",
+            "field": "res",
             "description": "<p>UUID of reservation this document belongs to</p>"
           },
           {
@@ -2469,7 +2469,7 @@ define({ "api": [
   },
   {
     "type": "POST",
-    "url": "questionnaire/admin/:questionnaire_id/question",
+    "url": "questionnaire/admin/:questionnaire/question",
     "title": "Create Question",
     "name": "CreateQuestion",
     "description": "<p>Create a question</p>",
@@ -2533,7 +2533,7 @@ define({ "api": [
   },
   {
     "type": "DELETE",
-    "url": "questionnaire/admin/:questionnaire_id/question/:question_id",
+    "url": "questionnaire/admin/:questionnaire/question/:question",
     "title": "Delete Question",
     "name": "DeleteQuestion",
     "description": "<p>Delete a question.</p>",
@@ -2620,7 +2620,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "questionnaire/admin/:questionnaire_id/question/:query",
+    "url": "questionnaire/admin/:questionnaire/question/:query",
     "title": "Request list of Quesiton of questionnaire",
     "name": "ListQuestion",
     "description": "<p>Request a list of questions of a questionnaire.</p>",
@@ -2632,7 +2632,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "questionnaire_id",
+            "field": "questionnaire",
             "description": "<p>Questionnaire UUID</p>"
           },
           {
@@ -2664,7 +2664,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "questionnaire/admin/:questionnaire_id/question/:question_id",
+    "url": "questionnaire/admin/:questionnaire/question/:question",
     "title": "Question Info",
     "name": "QuestionInfo",
     "description": "<p>Request information about a quesiton</p>",
@@ -2676,14 +2676,14 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "questionnaire_id",
+            "field": "questionnaire",
             "description": "<p>UUID of questionnaire</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "question_id",
+            "field": "question",
             "description": "<p>UUID of question</p>"
           }
         ]
@@ -2742,7 +2742,7 @@ define({ "api": [
   },
   {
     "type": "PUT",
-    "url": "questionnaire/admin/:questionnaire_id/question/:question_id",
+    "url": "questionnaire/admin/:questionnaire/question/:question",
     "title": "Update Question",
     "name": "UpdateQuestion",
     "description": "<p>Update a Question.</p>",
@@ -2754,14 +2754,14 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "questinnaire_id",
+            "field": "questinnaire",
             "description": "<p>Questionnaire UUID</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "question_id",
+            "field": "question",
             "description": "<p>Question UUID</p>"
           },
           {
@@ -2839,7 +2839,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "translator_id",
+            "field": "translator",
             "description": "<p>Translator assigned to this questionnaire UUID.</p>"
           },
           {
@@ -2853,14 +2853,14 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "hospital_id",
+            "field": "hospital",
             "description": "<p>Hospital of this questionnaire UUID</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "disease_id",
+            "field": "disease",
             "description": "<p>Disease of this questionnaire UUID</p>"
           },
           {
@@ -3059,7 +3059,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "questionnaire.translator_id",
+            "field": "questionnaire.translator",
             "description": "<p>Translator assigned to this questionnaire UUID.</p>"
           },
           {
@@ -3073,14 +3073,14 @@ define({ "api": [
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "questionnaire.hospital_id",
+            "field": "questionnaire.hospital",
             "description": "<p>Hospital of this questionnaire UUID</p>"
           },
           {
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "questionnaire.disease_id",
+            "field": "questionnaire.disease",
             "description": "<p>Disease of this questionnaire UUID</p>"
           },
           {
@@ -3139,7 +3139,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<p>Token to be unsigned and get questionnaire_id</p>"
+            "description": "<p>Token to be unsigned and get questionnaire</p>"
           }
         ]
       }
@@ -3162,7 +3162,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "translator_id",
+            "field": "translator",
             "description": "<p>Translator assigned to this questionnaire UUID.</p>"
           },
           {
@@ -3176,14 +3176,14 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "hospital_id",
+            "field": "hospital",
             "description": "<p>Hospital of this questionnaire UUID</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "disease_id",
+            "field": "disease",
             "description": "<p>Disease of this questionnaire UUID</p>"
           },
           {
@@ -3722,7 +3722,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "query",
-            "description": "<p>Query to filter/sort reservation</p>"
+            "description": "<p>Query to filter/sort reservation, e.g. /reservation/admin/?first_doctor_name=asd&amp;ordering=-translator_id</p>"
           }
         ]
       }

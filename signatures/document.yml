@@ -5,7 +5,7 @@ Document:
     title: Create Document
     description: Create document.
     params:
-      res_id:
+      res:
         type: UUID
         description: UUID of reservation this document belongs to
       description:

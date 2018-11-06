@@ -16,16 +16,16 @@ Questionnaire:
           id:
             type: UUID
             description: Questionnaire UUID.
-          translator_id:
+          translator:
             type: UUID
             description: Translator assigned to this questionnaire UUID.
           category:
             type: String
             description: Category of this questionnaire
-          hospital_id:
+          hospital:
             type: UUID
             description: Hospital of this questionnaire UUID
-          disease_id:
+          disease:
             type: UUID
             description: Disease of this questionnaire UUID
           is_translated:
@@ -48,7 +48,7 @@ Questionnaire:
     params:
       token:
         type: String
-        description: Token to be unsigned and get questionnaire_id
+        description: Token to be unsigned and get questionnaire
     retuen:
       id:
         type: UUID
@@ -59,16 +59,16 @@ Questionnaire:
     title: Create Questionnaire
     description: Create a Questionnaire.
     params:
-      translator_id:
+      translator:
         type: UUID
         description: Translator assigned to this questionnaire UUID.
       category:
           type: String
           description: Category of this questionnaire
-      hospital_id:
+      hospital:
         type: UUID
         description: Hospital of this questionnaire UUID
-      disease_id:
+      disease:
         type: UUID
         description: Disease of this questionnaire UUID
       is_translated:
@@ -95,16 +95,16 @@ Questionnaire:
     title: Update Questionnaire
     description: Update a Questionnaire.
     params:
-      translator_id:
+      translator:
         type: UUID
         description: Translator assigned to this questionnaire UUID.
       category:
           type: String
           description: Category of this questionnaire
-      hospital_id:
+      hospital:
         type: UUID
         description: Hospital of this questionnaire UUID
-      disease_id:
+      disease:
         type: UUID
         description: Disease of this questionnaire UUID
       translated:
@@ -169,15 +169,15 @@ Question:
         type: String
         description: Query to filter/sort questions
   QuestionInfo:
-    path: questionnaire/admin/:questionnaire_id/question/:question_id
+    path: questionnaire/admin/:questionnaire/question/:question
     method: GET
     title: Question Info
     description: Request information about a quesiton
     params:
-      questionnaire_id:
+      questionnaire:
         type: UUID
         description: UUID of questionnaire
-      question_id:
+      question:
         type: UUID
         description: UUID of question
     returns:
@@ -197,7 +197,7 @@ Question:
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
   CreateQuestion:
-    path: questionnaire/admin/:questionnaire_id/question
+    path: questionnaire/admin/:questionnaire/question
     method: POST
     title: Create Question
     description: Create a question
@@ -221,15 +221,15 @@ Question:
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
   UpdateQuestion:
-    path: questionnaire/admin/:questionnaire_id/question/:question_id
+    path: questionnaire/admin/:questionnaire/question/:question
     method: PUT
     title: Update Question
     description: Update a Question.
     params:
-      questinnaire_id:
+      questinnaire:
         type: UUID
         description: Questionnaire UUID
-      question_id:
+      question:
         type: UUID
         description: Question UUID
       content:
@@ -253,12 +253,12 @@ Question:
       ChoiceNotFound:
         description: The requested <code>id</code> of choice is not found.
   ListQuestion:
-    path: questionnaire/admin/:questionnaire_id/question/:query
+    path: questionnaire/admin/:questionnaire/question/:query
     method: GET
     title: Request list of Quesiton of questionnaire
     description: Request a list of questions of a questionnaire.
     params:
-      questionnaire_id:
+      questionnaire:
         type: String
         description: Questionnaire UUID
       query:
@@ -270,7 +270,7 @@ Question:
         description: List of filterd/sorted question.
     errors: {}
   DeleteQuestion:
-    path: questionnaire/admin/:questionnaire_id/question/:question_id
+    path: questionnaire/admin/:questionnaire/question/:question
     method: DELETE
     title: Delete Question
     description: Delete a question.
@@ -300,18 +300,18 @@ Choice:
         type: String
         description: Query to filter/sort choices
   ChoiceInfo:
-    path: questionnaire/admin/:questionnaire_id/question/:question_id/choice/:choice_id
+    path: questionnaire/admin/:questionnaire/question/:question/choice/:choice
     method: GET
     title: Choice Info
     description: Request information about a choice
     params:
-      questionnaire_id:
+      questionnaire:
         type: UUID
         description: UUID of questionnaire
-      question_id:
+      question:
         type: UUID
         description: UUID of question
-      choice_id:
+      choice:
         type: UUID
         description: UUID of choice
     returns:
@@ -328,12 +328,12 @@ Choice:
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
   CreateChoice:
-    path: questionnaire/admin/:questionnaire_id/question/:question_id/choice
+    path: questionnaire/admin/:questionnaire/question/:question/choice
     method: POST
     title: Create Choice
     description: Create a choice
     params:
-      question_id:
+      question:
         type: UUID[]
         description: List of UUIDs of question this choice belongs to.
       content:
@@ -347,7 +347,7 @@ Choice:
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
   UpdateChoice:
-    path: questionnaire/admin/:questionnaire_id/question/:question_id/choice/:choice_id
+    path: questionnaire/admin/:questionnaire/question/:question/choice/:choice
     method: PUT
     title: Update Choice
     description: Update a choice.
@@ -368,15 +368,15 @@ Choice:
       ChoiceNotFound:
         description: The requested <code>id</code> of choice is not found.
   ListChoice:
-    path: questionnaire/admin/:questionnaire_id/question/:question_id/choice
+    path: questionnaire/admin/:questionnaire/question/:question/choice
     method: GET
     title: Request list of Choices
     description: Request a list of choices of a question of a questionnaire
     params:
-      questionnaire_id:
+      questionnaire:
         type: UUID
         description: UUID of a questionnaire
-      question_id:
+      question:
         type: UUID
         description: UUID  of a question
       query:
@@ -388,7 +388,7 @@ Choice:
         description: List of filterd/sorted choices.
     errors: {}
   DeleteChoice:
-    path: questionnaire/admin/:questionnaire_id/question/:question_id/choice/:choice_id
+    path: questionnaire/admin/:questionnaire/question/:question/choice/:choice
     method: DELETE
     title: Delete Choice
     description: Delete a choice.
@@ -418,15 +418,15 @@ Answer:
         type: String
         description: Query to filter/sort answers
   AnswerInfo:
-    path: questionnaire/reservation/:res_id/answer/:answer_id
+    path: questionnaire/reservation/:res/answer/:answer
     method: GET
     title: Answer Info
     description: Request information about an Answer of an reservation
     params:
-      answer_id:
+      answer:
         type: UUID
         description: UUID of an answer
-      res_id:
+      res:
         type: UUID
         description: UUID of reservation
     returns:
@@ -434,10 +434,10 @@ Answer:
         type: Object
         description: An answer object
         fields:
-          res_id:
+          res:
             type: UUID
             description: Reservation UUID
-          questionnaire_id:
+          questionnaire:
             type: UUID
             description: Questionnaire UUID
           content:
@@ -452,7 +452,7 @@ Answer:
           is_translated:
             type: boolean
             description: Whther the answer pdf file is translated
-          translator_id:
+          translator:
             type: UUID
             description: C2E translator assigned to this answer.
     errors:
@@ -461,15 +461,15 @@ Answer:
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
   CreateAnswer:
-    path: questionnaire/reservation/:res_id/answer/:answer_id
+    path: questionnaire/reservation/:res/answer/:answer
     method: POST
     title: Create Answer
     description: Create an Answer
     params:
-      res_id:
+      res:
         type: UUID
         description: Reservation UUID
-      questionnaire_id:
+      questionnaire:
         type: UUID
         description: Questionnaire UUID
       content:
@@ -490,18 +490,18 @@ Answer:
       TranslatorNotFound:
         description: The requested <code>id</code> of translator is not found.
   UpdateAnswer:
-    path: questionnaire/reservation/:res_id/answer/:answer_id
+    path: questionnaire/reservation/:res/answer/:answer
     method: PUT
     title: Update Answer
     description: Update an Answer
     params:
-      choice_id:
+      choice:
         type: UUID
         description: Choice UUID
-      res_id:
+      res:
         type: UUID
         description: Reservation UUID
-      questionnaire_id:
+      questionnaire:
         type: UUID
         description: Questionnaire UUID
       content:
@@ -516,7 +516,7 @@ Answer:
       is_translated:
         type: boolean
         description: Whther the answer pdf file is translated
-      translator_id:
+      translator:
         type: UUID
         description: C2E translator assigned to this answer.
       token:
@@ -538,12 +538,12 @@ Answer:
       InvalidAuthorization:
         description: This operation is invalid at this stage.
   DeleteAnswer:
-    path: questionnaire/reservation/:res_id/answer/:answer_id
+    path: questionnaire/reservation/:res/answer/:answer
     method: DELETE
     title: Delete Answer
     description: Delete an Answer
     params:
-      res_id:
+      res:
         type: UUID
         description: UUID of a reservation
       id:
@@ -562,12 +562,12 @@ Answer:
       InvalidAuthorization:
         description: This operation is invalid at this stage.
   ListAnswer:
-    path: questionnaire/reservation/:res_id/answer/:query
+    path: questionnaire/reservation/:res/answer/:query
     method: GET
     title: Request list of Answers
     description: Request a list of answers based on query.
     params:
-      res_id:
+      res:
         type: UUID
         description: UUID of a reservation
       query:

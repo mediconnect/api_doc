@@ -197,7 +197,7 @@ Reservation/admin:
     params:
       query:
         type: String
-        description: Query to filter/sort reservation
+        description: Query to filter/sort reservation, e.g. /reservation/admin/?first_doctor_name=asd&ordering=-translator_id
     returns:
       reservations:
         type: Object[]

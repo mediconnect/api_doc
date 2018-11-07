@@ -410,7 +410,7 @@ Choice:
         description: The required <code>id</code> of choice is not found.
 Answer:
   ListAllAnswers:
-    path: questionnaire/answer/:query
+    path: questionnaire/answers/:query
     method: GET
     title: List All Answers
     params:
@@ -418,7 +418,7 @@ Answer:
         type: String
         description: Query to filter/sort answers
   AnswerInfo:
-    path: questionnaire/reservation/:res/answer/:answer
+    path: questionnaire/reservation/:reservation/answer/:answer
     method: GET
     title: Answer Info
     description: Request information about an Answer of an reservation
@@ -426,7 +426,7 @@ Answer:
       answer:
         type: UUID
         description: UUID of an answer
-      res:
+      reservation:
         type: UUID
         description: UUID of reservation
     returns:
@@ -434,7 +434,7 @@ Answer:
         type: Object
         description: An answer object
         fields:
-          res:
+          reservation:
             type: UUID
             description: Reservation UUID
           questionnaire:
@@ -461,12 +461,12 @@ Answer:
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
   CreateAnswer:
-    path: questionnaire/reservation/:res/answer/:answer
+    path: questionnaire/reservation/:reservation/answer/:answer
     method: POST
     title: Create Answer
     description: Create an Answer
     params:
-      res:
+      reservation:
         type: UUID
         description: Reservation UUID
       questionnaire:
@@ -490,7 +490,7 @@ Answer:
       TranslatorNotFound:
         description: The requested <code>id</code> of translator is not found.
   UpdateAnswer:
-    path: questionnaire/reservation/:res/answer/:answer
+    path: questionnaire/reservation/:reservation/answer/:answer
     method: PUT
     title: Update Answer
     description: Update an Answer
@@ -498,7 +498,7 @@ Answer:
       choice:
         type: UUID
         description: Choice UUID
-      res:
+      reservation:
         type: UUID
         description: Reservation UUID
       questionnaire:
@@ -538,12 +538,12 @@ Answer:
       InvalidAuthorization:
         description: This operation is invalid at this stage.
   DeleteAnswer:
-    path: questionnaire/reservation/:res/answer/:answer
+    path: questionnaire/reservation/:reservation/answer/:answer
     method: DELETE
     title: Delete Answer
     description: Delete an Answer
     params:
-      res:
+      reservation:
         type: UUID
         description: UUID of a reservation
       id:
@@ -562,12 +562,12 @@ Answer:
       InvalidAuthorization:
         description: This operation is invalid at this stage.
   ListAnswer:
-    path: questionnaire/reservation/:res/answer/:query
+    path: questionnaire/reservation/:reservation/answer/:query
     method: GET
-    title: Request list of Answers
+    title: Request list of Answers of Reservation
     description: Request a list of answers based on query.
     params:
-      res:
+      reservation:
         type: UUID
         description: UUID of a reservation
       query:

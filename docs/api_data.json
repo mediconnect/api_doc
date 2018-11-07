@@ -1,7 +1,7 @@
 [
   {
     "type": "GET",
-    "url": "questionnaire/reservation/:res/answer/:answer",
+    "url": "questionnaire/reservation/:reservation/answer/:answer",
     "title": "Answer Info",
     "name": "AnswerInfo",
     "description": "<p>Request information about an Answer of an reservation</p>",
@@ -20,7 +20,7 @@
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res",
+            "field": "reservation",
             "description": "<p>UUID of reservation</p>"
           }
         ]
@@ -40,7 +40,7 @@
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "answer.res",
+            "field": "answer.reservation",
             "description": "<p>Reservation UUID</p>"
           },
           {
@@ -114,7 +114,7 @@
   },
   {
     "type": "POST",
-    "url": "questionnaire/reservation/:res/answer/:answer",
+    "url": "questionnaire/reservation/:reservation/answer/:answer",
     "title": "Create Answer",
     "name": "CreateAnswer",
     "description": "<p>Create an Answer</p>",
@@ -126,7 +126,7 @@
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res",
+            "field": "reservation",
             "description": "<p>Reservation UUID</p>"
           },
           {
@@ -199,7 +199,7 @@
   },
   {
     "type": "DELETE",
-    "url": "questionnaire/reservation/:res/answer/:answer",
+    "url": "questionnaire/reservation/:reservation/answer/:answer",
     "title": "Delete Answer",
     "name": "DeleteAnswer",
     "description": "<p>Delete an Answer</p>",
@@ -211,7 +211,7 @@
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res",
+            "field": "reservation",
             "description": "<p>UUID of a reservation</p>"
           },
           {
@@ -263,7 +263,7 @@
   },
   {
     "type": "GET",
-    "url": "questionnaire/answer/:query",
+    "url": "questionnaire/answers/:query",
     "title": "List All Answers",
     "name": "ListAllAnswers",
     "group": "Answer",
@@ -286,8 +286,8 @@
   },
   {
     "type": "GET",
-    "url": "questionnaire/reservation/:res/answer/:query",
-    "title": "Request list of Answers",
+    "url": "questionnaire/reservation/:reservation/answer/:query",
+    "title": "Request list of Answers of Reservation",
     "name": "ListAnswer",
     "description": "<p>Request a list of answers based on query.</p>",
     "group": "Answer",
@@ -298,7 +298,7 @@
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res",
+            "field": "reservation",
             "description": "<p>UUID of a reservation</p>"
           },
           {
@@ -330,7 +330,7 @@
   },
   {
     "type": "PUT",
-    "url": "questionnaire/reservation/:res/answer/:answer",
+    "url": "questionnaire/reservation/:reservation/answer/:answer",
     "title": "Update Answer",
     "name": "UpdateAnswer",
     "description": "<p>Update an Answer</p>",
@@ -349,7 +349,7 @@
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res",
+            "field": "reservation",
             "description": "<p>Reservation UUID</p>"
           },
           {
@@ -1317,7 +1317,7 @@
   {
     "type": "GET",
     "url": "/disease/:query",
-    "title": "Request List of Diseases",
+    "title": "List of Diseases",
     "name": "DiseaseList",
     "description": "<p>Display all diseases based on query</p>",
     "group": "Disease",
@@ -1379,7 +1379,7 @@
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res",
+            "field": "reservation",
             "description": "<p>UUID of reservation this document belongs to</p>"
           },
           {
@@ -1533,7 +1533,7 @@
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "documents.res",
+            "field": "documents.reservation",
             "description": "<p>Reservation UUID</p>"
           },
           {
@@ -1691,7 +1691,7 @@
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res",
+            "field": "reservation",
             "description": "<p>Reservation UUID</p>"
           },
           {
@@ -2285,7 +2285,7 @@
   {
     "type": "GET",
     "url": "/patients/:query",
-    "title": "Get all patients",
+    "title": "List All Patients",
     "name": "ListAllPatients",
     "group": "Patient",
     "parameter": {
@@ -2321,7 +2321,7 @@
   {
     "type": "GET",
     "url": "/customer/:customer_id/patient/:query",
-    "title": "Get all patients of a customer",
+    "title": "List Patient of Customer",
     "name": "ListPatient",
     "group": "Patient",
     "parameter": {

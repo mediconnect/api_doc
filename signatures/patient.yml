@@ -91,7 +91,7 @@ Patient:
   ListPatient:
     path: /customer/:customer_id/patient/:query
     method: GET
-    title: Get all patients of a customer
+    title: List Patient of Customer
     params:
       query:
         type: String
@@ -107,7 +107,7 @@ Patient:
   ListAllPatients:
     path: /patients/:query
     method: GET
-    title: Get all patients
+    title: List All Patients
     params:
       query:
         type: String

@@ -25,7 +25,7 @@ Disease:
   DiseaseList:
     path: /disease/:query
     method: GET
-    title: Request List of Diseases
+    title: List of Diseases
     description: Display all diseases based on query
     params:
       query:

@@ -1,0 +1,74 @@
+Info:
+  Info-info:
+    path: /info/:id
+    method: GET
+    title: Request Info Information
+    description: Display information about a Info.
+    params:
+      id:
+        type: Number
+        description: Info unique ID
+    returns:
+      Info:
+        type: Object
+        description: Info Object.
+        fields:
+          hospital:
+            type: UUID
+            description: hospital UUID
+          disease:
+            type: UUID
+            description: disease UUID
+          deposit:
+            type: Number
+            description: Deposit number
+          full_price:
+            type: Number
+            description: Full price number
+          rank:
+            type: Number
+            description: specialty rank
+          description:
+            type: String
+            description: Description of this Disease of this hospital Info
+          feedback_time:
+            type: Number
+            description: Feedback_time in weeks
+    errors:
+      ObjectNotFound:
+        description: The <code>id</code> of the Info was not found.
+  InfoList:
+    path: /info/:query
+    method: GET
+    title: Request List of Infos
+    description: Dispaly all Infos based on query
+    params:
+      query:
+        type: String
+        description: Query to filter Infos
+    returns:
+      Infos:
+        type: Object[]
+        fields:
+          hospital:
+            type: UUID
+            description: hospital UUID
+          disease:
+            type: UUID
+            description: disease UUID
+          deposit:
+            type: Number
+            description: Deposit number
+          full_price:
+            type: Number
+            description: Full price number
+          rank:
+            type: Number
+            description: specialty rank
+          description:
+            type: String
+            description: Description of this Disease of this hospital Info
+          feedback_time:
+            type: String
+            description: Feedback_time in weeks
+    errors: {}

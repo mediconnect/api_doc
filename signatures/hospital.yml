@@ -34,9 +34,6 @@ Hospital:
           website:
             type: String
             description: Hospital Website Link.
-          feedback_time:
-            type: String
-            description: Feedback_time in weeks
           average_score:
             type: Number
             description:  Average customer score
@@ -83,9 +80,6 @@ Hospital:
           website:
             type: String
             description: Hospital Website Link.
-          feedback_time:
-            type: String
-            description: Feedback_time in weeks
           average_score:
             type: Number
             description:  Average customer score

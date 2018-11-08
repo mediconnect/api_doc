@@ -43,7 +43,7 @@ Questionnaire:
   RequestQuetionnaire:
     path: /questionnaire/:token
     method: GET
-    title: Request a questionnaire based on token
+    title: Questionnaire based on token
     description: Request questionnaire based on signature token.
     params:
       token:
@@ -127,7 +127,7 @@ Questionnaire:
   ListQuestionnarie:
     path: /questionnaire/admin/:query
     method: GET
-    title: Request list of Questionnaires
+    title: List of Questionnaires
     description: Request a list of questionnaires based on query.
     params:
       query:
@@ -255,7 +255,7 @@ Question:
   ListQuestion:
     path: questionnaire/admin/:questionnaire/question/:query
     method: GET
-    title: Request list of Quesiton of questionnaire
+    title: List of Quesiton of Questionnaire
     description: Request a list of questions of a questionnaire.
     params:
       questionnaire:
@@ -370,7 +370,7 @@ Choice:
   ListChoice:
     path: questionnaire/admin/:questionnaire/question/:question/choice
     method: GET
-    title: Request list of Choices
+    title: List of Choices of Questionnaire of  Question
     description: Request a list of choices of a question of a questionnaire
     params:
       questionnaire:
@@ -564,7 +564,7 @@ Answer:
   ListAnswer:
     path: questionnaire/reservation/:reservation/answer/:query
     method: GET
-    title: Request list of Answers of Reservation
+    title:  List of Answers of Reservation
     description: Request a list of answers based on query.
     params:
       reservation:

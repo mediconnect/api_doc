@@ -287,7 +287,7 @@ define({ "api": [
   {
     "type": "GET",
     "url": "questionnaire/reservation/:reservation/answer/:query",
-    "title": "Request list of Answers of Reservation",
+    "title": "List of Answers of Reservation",
     "name": "ListAnswer",
     "description": "<p>Request a list of answers based on query.</p>",
     "group": "Answer",
@@ -687,7 +687,7 @@ define({ "api": [
   {
     "type": "GET",
     "url": "questionnaire/admin/:questionnaire/question/:question/choice",
-    "title": "Request list of Choices",
+    "title": "List of Choices of Questionnaire of  Question",
     "name": "ListChoice",
     "description": "<p>Request a list of choices of a question of a questionnaire</p>",
     "group": "Choice",
@@ -1379,7 +1379,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "reservation",
+            "field": "res",
             "description": "<p>UUID of reservation this document belongs to</p>"
           },
           {
@@ -1533,7 +1533,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "documents.reservation",
+            "field": "documents.res",
             "description": "<p>Reservation UUID</p>"
           },
           {
@@ -1691,7 +1691,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "reservation",
+            "field": "res",
             "description": "<p>Reservation UUID</p>"
           },
           {
@@ -1817,13 +1817,6 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "hospital.feedback_time",
-            "description": "<p>Feedback_time in weeks</p>"
-          },
-          {
-            "group": "Success 200",
             "type": "Number",
             "optional": false,
             "field": "hospital.average_score",
@@ -1944,13 +1937,6 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "hospitals.feedback_time",
-            "description": "<p>Feedback_time in weeks</p>"
-          },
-          {
-            "group": "Success 200",
             "type": "Number",
             "optional": false,
             "field": "hospitals.average_score",
@@ -1976,6 +1962,191 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "build/hospital.py",
     "groupTitle": "Hospital"
+  },
+  {
+    "type": "GET",
+    "url": "/info/:query",
+    "title": "Request List of Infos",
+    "name": "InfoList",
+    "description": "<p>Dispaly all Infos based on query</p>",
+    "group": "Info",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter Infos</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "Infos",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "Infos.hospital",
+            "description": "<p>hospital UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "Infos.disease",
+            "description": "<p>disease UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Infos.deposit",
+            "description": "<p>Deposit number</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Infos.full_price",
+            "description": "<p>Full price number</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Infos.rank",
+            "description": "<p>specialty rank</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Infos.description",
+            "description": "<p>Description of this Disease of this hospital Info</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Infos.feedback_time",
+            "description": "<p>Feedback_time in weeks</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/info.py",
+    "groupTitle": "Info"
+  },
+  {
+    "type": "GET",
+    "url": "/info/:id",
+    "title": "Request Info Information",
+    "name": "Info_info",
+    "description": "<p>Display information about a Info.</p>",
+    "group": "Info",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Info unique ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "Info",
+            "description": "<p>Info Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "Info.hospital",
+            "description": "<p>hospital UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "Info.disease",
+            "description": "<p>disease UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Info.deposit",
+            "description": "<p>Deposit number</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Info.full_price",
+            "description": "<p>Full price number</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Info.rank",
+            "description": "<p>specialty rank</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Info.description",
+            "description": "<p>Description of this Disease of this hospital Info</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Info.feedback_time",
+            "description": "<p>Feedback_time in weeks</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "ObjectNotFound",
+            "description": "<p>The <code>id</code> of the Info was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/info.py",
+    "groupTitle": "Info"
   },
   {
     "type": "GET",
@@ -2621,7 +2792,7 @@ define({ "api": [
   {
     "type": "GET",
     "url": "questionnaire/admin/:questionnaire/question/:query",
-    "title": "Request list of Quesiton of questionnaire",
+    "title": "List of Quesiton of Questionnaire",
     "name": "ListQuestion",
     "description": "<p>Request a list of questions of a questionnaire.</p>",
     "group": "Question",
@@ -2984,7 +3155,7 @@ define({ "api": [
   {
     "type": "GET",
     "url": "/questionnaire/admin/:query",
-    "title": "Request list of Questionnaires",
+    "title": "List of Questionnaires",
     "name": "ListQuestionnarie",
     "description": "<p>Request a list of questionnaires based on query.</p>",
     "group": "Questionnaire",
@@ -3127,7 +3298,7 @@ define({ "api": [
   {
     "type": "GET",
     "url": "/questionnaire/:token",
-    "title": "Request a questionnaire based on token",
+    "title": "Questionnaire based on token",
     "name": "RequestQuetionnaire",
     "description": "<p>Request questionnaire based on signature token.</p>",
     "group": "Questionnaire",

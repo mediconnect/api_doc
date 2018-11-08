@@ -5,7 +5,7 @@ Document:
     title: Create Document
     description: Create document.
     params:
-      reservation:
+      res:
         type: UUID
         description: UUID of reservation this document belongs to
       description:
@@ -99,7 +99,7 @@ Document:
         type: Object
         description: List of documents Object
         fields:
-          reservation:
+          res:
             type: UUID
             description: Reservation UUID
           description:
@@ -129,7 +129,7 @@ Document:
       id:
         type: UUID
         description: UUID of document
-      reservation:
+      res:
         type: UUID
         description: Reservation UUID
       description:

@@ -57,25 +57,6 @@ Customer:
     errors:
       CustomerNotFound:
         description: The <code>id</code> of the customer was not found.
-  GetStoredPatientIds:
-    path: /customer/get_stored_patient_ids
-    method: GET
-    title: Request Stored Patiente_IDs
-    description: Request a list of stored patient_ids.
-    params:
-      id:
-        type: Number
-        description: Mandatory unique Customer ID.
-    returns:
-      patient_ids:
-        type: Number[]
-        description: Mandatory Patient IDs.
-      patient_names:
-        type: String[]
-        description: Mandatory Patient Names.
-    errors:
-      CustomerNotFound:
-        description: The <code>id</code> of the customer was not found.
   CustomerRegister:
     path: /customer/register/
     method: POST
@@ -114,7 +95,7 @@ Customer:
   CustomerForgetPassword:
     path: /customer/forget_password
     method: POST
-    title: Forget Password
+    title: Forget Password (not ready yet)
     description: Handle request from customer that forgets password.
     params:
       captcha:

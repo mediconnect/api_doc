@@ -1,6 +1,6 @@
-Patient:
+Customer_Patient:
   PatientInfo:
-    path: /patient/:patient_id
+    path: customer/:customer_id/patient/:patient_id
     method: GET
     title: Request Patient info
     params:
@@ -151,6 +151,15 @@ Patient:
         type: Object[]
         description: list of patients
     errors: {}
+  DeletePatient:
+    path : customer/:customer_id/patient/:id
+    method: DELETE
+    title: Delete a patient
+    params:
+      id:
+        type: UUID
+        description: UUID of deleted patient
+Patient-admin:
   ListAllPatients:
     path: /patients/:query
     method: GET
@@ -195,14 +204,6 @@ Patient:
             type: Number
             description: Mandatory replationship with user, 0 Self, 1 Relative, 2 Other
     errors: {}
-  DeletePatients:
-    path : /patient/:id
-    method: DELETE
-    title: Delete a patient
-    params:
-      id:
-        type: UUID
-        description: UUID of a patient
   # UpdatePatientHistory:
   #   path: /patient/:patient_id/visit_history/add
   #   method: POST

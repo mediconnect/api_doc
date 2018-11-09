@@ -802,7 +802,7 @@
   {
     "type": "POST",
     "url": "/customer/forget_password",
-    "title": "Forget Password",
+    "title": "Forget Password (not ready yet)",
     "name": "CustomerForgetPassword",
     "description": "<p>Handle request from customer that forgets password.</p>",
     "group": "Customer",
@@ -1194,21 +1194,90 @@
     "groupTitle": "Customer"
   },
   {
-    "type": "GET",
-    "url": "/customer/get_stored_patient_ids",
-    "title": "Request Stored Patiente_IDs",
-    "name": "GetStoredPatientIds",
-    "description": "<p>Request a list of stored patient_ids.</p>",
-    "group": "Customer",
+    "type": "POST",
+    "url": "/customer/:customer_id/patient",
+    "title": "Create patient",
+    "name": "CreatePatient",
+    "group": "Customer_Patient",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>UUID of customer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "DateTime",
+            "optional": false,
+            "field": "birthdate",
+            "description": "<p>Mandatory birthdate.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "first_name",
+            "description": "<p>Mandatory first name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "first_name_pinyin",
+            "description": "<p>Mandatory first name pinyin.</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "id",
-            "description": "<p>Mandatory unique Customer ID.</p>"
+            "field": "gender",
+            "description": "<p>Mandatory gender, 0 Male, 1 Female, 2 Other</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "last_name",
+            "description": "<p>Mandatory last name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "last_name_pinyin",
+            "description": "<p>Mandatory last name pinyin.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "note",
+            "description": "<p>Optional note.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "passport",
+            "description": "<p>Mandatory passport number.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "relationship",
+            "description": "<p>Mandatory replationship with user, 0 Self, 1 Relative, 2 Other</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>Mandatory unique User ID.</p>"
           }
         ]
       }
@@ -1218,37 +1287,302 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Number[]",
+            "type": "String",
             "optional": false,
-            "field": "patient_ids",
-            "description": "<p>Mandatory Patient IDs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "patient_names",
-            "description": "<p>Mandatory Patient Names.</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "ErrorType",
-            "optional": false,
-            "field": "CustomerNotFound",
-            "description": "<p>The <code>id</code> of the customer was not found.</p>"
+            "field": "patient_id",
+            "description": "<p>On Successful creation, return patient_id.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "build/customer.py",
-    "groupTitle": "Customer"
+    "filename": "build/patient.py",
+    "groupTitle": "Customer_Patient"
+  },
+  {
+    "type": "DELETE",
+    "url": "customer/:customer_id/patient/:id",
+    "title": "Delete a patient",
+    "name": "DeletePatient",
+    "group": "Customer_Patient",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>UUID of deleted patient</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/patient.py",
+    "groupTitle": "Customer_Patient"
+  },
+  {
+    "type": "GET",
+    "url": "/customer/:customer_id/patient/:query",
+    "title": "List Patient of Customer",
+    "name": "ListPatient",
+    "group": "Customer_Patient",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>String to sort/filter patients</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>UUID of a customer</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "patients",
+            "description": "<p>list of patients</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/patient.py",
+    "groupTitle": "Customer_Patient"
+  },
+  {
+    "type": "GET",
+    "url": "customer/:customer_id/patient/:patient_id",
+    "title": "Request Patient info",
+    "name": "PatientInfo",
+    "group": "Customer_Patient",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "patient_id",
+            "description": "<p>UUID of a patient</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "patients",
+            "description": "<p>list of patients</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "patients.patient_id",
+            "description": "<p>UUID of patient</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "patients.customer_id",
+            "description": "<p>UUID of customer</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "patients.birthdate",
+            "description": "<p>Mandatory birthdate.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.first_name",
+            "description": "<p>Mandatory first name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.first_name_pinyin",
+            "description": "<p>Mandatory first name pinyin.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "patients.gender",
+            "description": "<p>Mandatory gender, 0 Male, 1 Female, 2 Other</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.last_name",
+            "description": "<p>Mandatory last name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.last_name_pinyin",
+            "description": "<p>Mandatory last name pinyin.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "patients.note",
+            "description": "<p>Optional note.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.passport",
+            "description": "<p>Mandatory passport number.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "patients.relationship",
+            "description": "<p>Mandatory replationship with user, 0 Self, 1 Relative, 2 Other</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/patient.py",
+    "groupTitle": "Customer_Patient"
+  },
+  {
+    "type": "PUT",
+    "url": "/customer/:customer_id/patient/:patient_id",
+    "title": "Update patient",
+    "name": "UpdatePatient",
+    "group": "Customer_Patient",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>UUID of customer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "patient_id",
+            "description": "<p>Mandatory unique Patient ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "DateTime",
+            "optional": true,
+            "field": "birthdate",
+            "description": "<p>Mandatory birthdate.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "first_name",
+            "description": "<p>Mandatory first name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "first_name_pinyin",
+            "description": "<p>Mandatory first name pinyin.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "gender",
+            "description": "<p>Mandatory gender with default &quot;M&quot;.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "last_name",
+            "description": "<p>Mandatory last name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "last_name_pinyin",
+            "description": "<p>Mandatory last name pinyin.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "note",
+            "description": "<p>Optional note.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "passport_number",
+            "description": "<p>Mandatory passport number.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "relationship",
+            "description": "<p>Mandatory replationship with user.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "patient",
+            "description": "<p>Updated patient object</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/patient.py",
+    "groupTitle": "Customer_Patient"
   },
   {
     "type": "GET",
@@ -2437,140 +2771,11 @@
     "groupTitle": "Miscellaneous"
   },
   {
-    "type": "POST",
-    "url": "/customer/:customer_id/patient",
-    "title": "Create patient",
-    "name": "CreatePatient",
-    "group": "Patient",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "customer_id",
-            "description": "<p>UUID of customer</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "DateTime",
-            "optional": false,
-            "field": "birthdate",
-            "description": "<p>Mandatory birthdate.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "first_name",
-            "description": "<p>Mandatory first name.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "first_name_pinyin",
-            "description": "<p>Mandatory first name pinyin.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "gender",
-            "description": "<p>Mandatory gender, 0 Male, 1 Female, 2 Other</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "last_name",
-            "description": "<p>Mandatory last name.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "last_name_pinyin",
-            "description": "<p>Mandatory last name pinyin.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "note",
-            "description": "<p>Optional note.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "passport",
-            "description": "<p>Mandatory passport number.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "relationship",
-            "description": "<p>Mandatory replationship with user, 0 Self, 1 Relative, 2 Other</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "user_id",
-            "description": "<p>Mandatory unique User ID.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "patient_id",
-            "description": "<p>On Successful creation, return patient_id.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/patient.py",
-    "groupTitle": "Patient"
-  },
-  {
-    "type": "DELETE",
-    "url": "/patient/:id",
-    "title": "Delete a patient",
-    "name": "DeletePatients",
-    "group": "Patient",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
-            "description": "<p>UUID of a patient</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/patient.py",
-    "groupTitle": "Patient"
-  },
-  {
     "type": "GET",
     "url": "/patients/:query",
     "title": "List All Patients",
     "name": "ListAllPatients",
-    "group": "Patient",
+    "group": "Patient_admin",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -2669,269 +2874,7 @@
     },
     "version": "0.0.0",
     "filename": "build/patient.py",
-    "groupTitle": "Patient"
-  },
-  {
-    "type": "GET",
-    "url": "/customer/:customer_id/patient/:query",
-    "title": "List Patient of Customer",
-    "name": "ListPatient",
-    "group": "Patient",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "query",
-            "description": "<p>String to sort/filter patients</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "customer_id",
-            "description": "<p>UUID of a customer</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "patients",
-            "description": "<p>list of patients</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/patient.py",
-    "groupTitle": "Patient"
-  },
-  {
-    "type": "GET",
-    "url": "/patient/:patient_id",
-    "title": "Request Patient info",
-    "name": "PatientInfo",
-    "group": "Patient",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "patient_id",
-            "description": "<p>UUID of a patient</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "patients",
-            "description": "<p>list of patients</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "patients.patient_id",
-            "description": "<p>UUID of patient</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "patients.customer_id",
-            "description": "<p>UUID of customer</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "DateTime",
-            "optional": false,
-            "field": "patients.birthdate",
-            "description": "<p>Mandatory birthdate.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "patients.first_name",
-            "description": "<p>Mandatory first name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "patients.first_name_pinyin",
-            "description": "<p>Mandatory first name pinyin.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "patients.gender",
-            "description": "<p>Mandatory gender, 0 Male, 1 Female, 2 Other</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "patients.last_name",
-            "description": "<p>Mandatory last name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "patients.last_name_pinyin",
-            "description": "<p>Mandatory last name pinyin.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": true,
-            "field": "patients.note",
-            "description": "<p>Optional note.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "patients.passport",
-            "description": "<p>Mandatory passport number.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "patients.relationship",
-            "description": "<p>Mandatory replationship with user, 0 Self, 1 Relative, 2 Other</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/patient.py",
-    "groupTitle": "Patient"
-  },
-  {
-    "type": "PUT",
-    "url": "/customer/:customer_id/patient/:patient_id",
-    "title": "Update patient",
-    "name": "UpdatePatient",
-    "group": "Patient",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "customer_id",
-            "description": "<p>UUID of customer</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "patient_id",
-            "description": "<p>Mandatory unique Patient ID.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "DateTime",
-            "optional": true,
-            "field": "birthdate",
-            "description": "<p>Mandatory birthdate.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "first_name",
-            "description": "<p>Mandatory first name.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "first_name_pinyin",
-            "description": "<p>Mandatory first name pinyin.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "gender",
-            "description": "<p>Mandatory gender with default &quot;M&quot;.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "last_name",
-            "description": "<p>Mandatory last name.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "last_name_pinyin",
-            "description": "<p>Mandatory last name pinyin.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "note",
-            "description": "<p>Optional note.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "passport_number",
-            "description": "<p>Mandatory passport number.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "relationship",
-            "description": "<p>Mandatory replationship with user.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "patient",
-            "description": "<p>Updated patient object</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/patient.py",
-    "groupTitle": "Patient"
+    "groupTitle": "Patient_admin"
   },
   {
     "type": "POST",

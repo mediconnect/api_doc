@@ -19,6 +19,24 @@ Disease:
           name:
             type: String
             description: Disease name.
+          full_name:
+            type: String
+            description: Disease full name
+          name_end: 
+            type: String
+            description: Diseae english name
+          types:
+            type: String
+            description: Disease type 就诊科室
+          target_group:
+            type: String
+            description: Patients that are more likely to get this disease
+          introduciton:
+            type: String
+            description: Disease introduciton
+          categories:
+            type: String
+            description:  Disease categories
     errors:
       DiseaseNotFound:
         description: The <code>id</code> of the Disease was not found.
@@ -42,3 +60,21 @@ Disease:
           name:
             type: String
             description: Disease name.
+          full_name:
+            type: String
+            description: Disease full name
+          name_end: 
+            type: String
+            description: Diseae english name
+          types:
+            type: String
+            description: Disease type 就诊科室
+          target_group:
+            type: String
+            description: Patients that are more likely to get this disease
+          introduciton:
+            type: String
+            description: Disease introduciton
+          categories:
+            type: String
+            description:  Disease categories

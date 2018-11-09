@@ -26,6 +26,9 @@ Document:
       owner:
         type: UUID
         description: UUID of user uploaded the document
+      type:
+        type: Number
+        description: Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate
     returns:
       id:
         type: Number
@@ -67,6 +70,9 @@ Document:
           owner:
             type: UUID
             description: UUID of owner uploaded this document
+          type:
+            type: Number
+            description: Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate
     errors:
       DocumentNotFound:
         description: The <code>id</code> of the document doesn't exist.
@@ -120,6 +126,9 @@ Document:
           owner:
             type: UUID
             description: UUID of owner uploaded this document
+          type:
+            type: Number
+            description: Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate
   UpdateDocument:
     path: /document/:id
     method: PUT
@@ -150,5 +159,8 @@ Document:
       owner:
         type: UUID
         description: UUID of owner uploaded this document
+      type:
+        type: Number
+        description: Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate
       
 

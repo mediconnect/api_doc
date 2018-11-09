@@ -1,4 +1,51 @@
 Patient:
+  PatientInfo:
+    path: /patient/:patient_id
+    method: GET
+    title: Request Patient info
+    params:
+      patient_id:
+        type: UUID
+        description: UUID of a patient
+    returns:
+      patients:
+        type: Object[]
+        description: list of patients
+        fields:
+          patient_id:
+            type: UUID
+            description: UUID of patient
+          customer_id:
+            type: UUID
+            description: UUID of customer
+          birthdate:
+            type: DateTime
+            description: Mandatory birthdate.
+          first_name:
+            type: String
+            description: Mandatory first name.
+          first_name_pinyin:
+            type: String
+            description: Mandatory first name pinyin.
+          gender:
+            type: Number
+            description: Mandatory gender, 0 Male, 1 Female, 2 Other
+          last_name:
+            type: String
+            description: Mandatory last name.
+          last_name_pinyin:
+            type: String
+            description: Mandatory last name pinyin.
+          note:
+            type: optional<String>
+            description: Optional note.
+          passport:
+            type: String
+            description: Mandatory passport number.
+          relationship:
+            type: Number
+            description: Mandatory replationship with user, 0 Self, 1 Relative, 2 Other
+    errors: {}
   CreatePatient:
     path: /customer/:customer_id/patient
     method: POST
@@ -17,8 +64,8 @@ Patient:
         type: String
         description: Mandatory first name pinyin.
       gender:
-        type: String
-        description: Mandatory gender with default "M".
+        type: Number
+        description: Mandatory gender, 0 Male, 1 Female, 2 Other
       last_name:
         type: String
         description: Mandatory last name.
@@ -32,8 +79,8 @@ Patient:
         type: String
         description: Mandatory passport number.
       relationship:
-        type: String
-        description: Mandatory replationship with user.
+        type: Number
+        description: Mandatory replationship with user, 0 Self, 1 Relative, 2 Other
       user_id:
         type: Number
         description: Mandatory unique User ID.
@@ -116,6 +163,37 @@ Patient:
       patients:
         type: Object[]
         description: List of patient objects
+        fields:
+          customer_id:
+            type: UUID
+            description: UUID of customer
+          birthdate:
+            type: DateTime
+            description: Mandatory birthdate.
+          first_name:
+            type: String
+            description: Mandatory first name.
+          first_name_pinyin:
+            type: String
+            description: Mandatory first name pinyin.
+          gender:
+            type: Number
+            description: Mandatory gender, 0 Male, 1 Female, 2 Other
+          last_name:
+            type: String
+            description: Mandatory last name.
+          last_name_pinyin:
+            type: String
+            description: Mandatory last name pinyin.
+          note:
+            type: optional<String>
+            description: Optional note.
+          passport:
+            type: String
+            description: Mandatory passport number.
+          relationship:
+            type: Number
+            description: Mandatory replationship with user, 0 Self, 1 Relative, 2 Other
     errors: {}
   DeletePatients:
     path : /patient/:id

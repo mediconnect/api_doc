@@ -1293,6 +1293,48 @@ define({ "api": [
             "optional": false,
             "field": "disease.name",
             "description": "<p>Disease name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "disease.full_name",
+            "description": "<p>Disease full name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "disease.name_end",
+            "description": "<p>Diseae english name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "disease.types",
+            "description": "<p>Disease type 就诊科室</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "disease.target_group",
+            "description": "<p>Patients that are more likely to get this disease</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "disease.introduciton",
+            "description": "<p>Disease introduciton</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "disease.categories",
+            "description": "<p>Disease categories</p>"
           }
         ]
       }
@@ -1357,6 +1399,48 @@ define({ "api": [
             "optional": false,
             "field": "diseases.name",
             "description": "<p>Disease name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diseases.full_name",
+            "description": "<p>Disease full name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diseases.name_end",
+            "description": "<p>Diseae english name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diseases.types",
+            "description": "<p>Disease type 就诊科室</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diseases.target_group",
+            "description": "<p>Patients that are more likely to get this disease</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diseases.introduciton",
+            "description": "<p>Disease introduciton</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diseases.categories",
+            "description": "<p>Disease categories</p>"
           }
         ]
       }
@@ -1416,6 +1500,13 @@ define({ "api": [
             "optional": false,
             "field": "owner",
             "description": "<p>UUID of user uploaded the document</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate</p>"
           }
         ]
       }
@@ -1570,6 +1661,13 @@ define({ "api": [
             "optional": false,
             "field": "documents.owner",
             "description": "<p>UUID of owner uploaded this document</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "documents.type",
+            "description": "<p>Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate</p>"
           }
         ]
       }
@@ -1649,6 +1747,13 @@ define({ "api": [
             "optional": false,
             "field": "document.owner",
             "description": "<p>UUID of owner uploaded this document</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "document.type",
+            "description": "<p>Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate</p>"
           }
         ]
       }
@@ -1728,6 +1833,13 @@ define({ "api": [
             "optional": false,
             "field": "owner",
             "description": "<p>UUID of owner uploaded this document</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate</p>"
           }
         ]
       }
@@ -2363,10 +2475,10 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "Number",
             "optional": false,
             "field": "gender",
-            "description": "<p>Mandatory gender with default &quot;M&quot;.</p>"
+            "description": "<p>Mandatory gender, 0 Male, 1 Female, 2 Other</p>"
           },
           {
             "group": "Parameter",
@@ -2398,10 +2510,10 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "Number",
             "optional": false,
             "field": "relationship",
-            "description": "<p>Mandatory replationship with user.</p>"
+            "description": "<p>Mandatory replationship with user, 0 Self, 1 Relative, 2 Other</p>"
           },
           {
             "group": "Parameter",
@@ -2481,6 +2593,76 @@ define({ "api": [
             "optional": false,
             "field": "patients",
             "description": "<p>List of patient objects</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "patients.customer_id",
+            "description": "<p>UUID of customer</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "patients.birthdate",
+            "description": "<p>Mandatory birthdate.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.first_name",
+            "description": "<p>Mandatory first name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.first_name_pinyin",
+            "description": "<p>Mandatory first name pinyin.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "patients.gender",
+            "description": "<p>Mandatory gender, 0 Male, 1 Female, 2 Other</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.last_name",
+            "description": "<p>Mandatory last name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.last_name_pinyin",
+            "description": "<p>Mandatory last name pinyin.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "patients.note",
+            "description": "<p>Optional note.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.passport",
+            "description": "<p>Mandatory passport number.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "patients.relationship",
+            "description": "<p>Mandatory replationship with user, 0 Self, 1 Relative, 2 Other</p>"
           }
         ]
       }
@@ -2524,6 +2706,119 @@ define({ "api": [
             "optional": false,
             "field": "patients",
             "description": "<p>list of patients</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/patient.py",
+    "groupTitle": "Patient"
+  },
+  {
+    "type": "GET",
+    "url": "/patient/:patient_id",
+    "title": "Request Patient info",
+    "name": "PatientInfo",
+    "group": "Patient",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "patient_id",
+            "description": "<p>UUID of a patient</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "patients",
+            "description": "<p>list of patients</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "patients.patient_id",
+            "description": "<p>UUID of patient</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "patients.customer_id",
+            "description": "<p>UUID of customer</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "patients.birthdate",
+            "description": "<p>Mandatory birthdate.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.first_name",
+            "description": "<p>Mandatory first name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.first_name_pinyin",
+            "description": "<p>Mandatory first name pinyin.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "patients.gender",
+            "description": "<p>Mandatory gender, 0 Male, 1 Female, 2 Other</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.last_name",
+            "description": "<p>Mandatory last name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.last_name_pinyin",
+            "description": "<p>Mandatory last name pinyin.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "patients.note",
+            "description": "<p>Optional note.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patients.passport",
+            "description": "<p>Mandatory passport number.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "patients.relationship",
+            "description": "<p>Mandatory replationship with user, 0 Self, 1 Relative, 2 Other</p>"
           }
         ]
       }
@@ -4709,92 +5004,6 @@ define({ "api": [
             "type": "UUID",
             "optional": false,
             "field": "id",
-            "description": "<p>Staff user UUID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "query",
-            "description": "<p>A qeury to filter/sort assignments.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "reservations",
-            "description": "<p>List of reservation objects</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reservations.disease_id",
-            "description": "<p>Unique ID for disease.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.res_id",
-            "description": "<p>Reservation ID</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.timeslot_id",
-            "description": "<p>ID for reservation slot.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.user_id",
-            "description": "<p>Unique ID for customer.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.patient_id",
-            "description": "<p>Unique ID for patient.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.hospital_id",
-            "description": "<p>Unique ID for hospital.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/staff.py",
-    "groupTitle": "Staff"
-  },
-  {
-    "type": "GET",
-    "url": "staff/assignemnt/:id/:query",
-    "title": "Staff Assignemnt",
-    "name": "StaffAssignment",
-    "description": "<p>Request a list of staff's assignments (reservations).</p>",
-    "group": "Staff",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
             "description": "<p>Staff UUID</p>"
           },
           {
@@ -4864,6 +5073,92 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/supervisor.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "GET",
+    "url": "staff/assignemnt/:id/:query",
+    "title": "Staff Assignemnt",
+    "name": "StaffAssignment",
+    "description": "<p>Request a list of staff's assignments (reservations).</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Staff user UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>A qeury to filter/sort assignments.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "reservations",
+            "description": "<p>List of reservation objects</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reservations.disease_id",
+            "description": "<p>Unique ID for disease.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.res_id",
+            "description": "<p>Reservation ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.timeslot_id",
+            "description": "<p>ID for reservation slot.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.user_id",
+            "description": "<p>Unique ID for customer.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.patient_id",
+            "description": "<p>Unique ID for patient.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.hospital_id",
+            "description": "<p>Unique ID for hospital.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/staff.py",
     "groupTitle": "Staff"
   },
   {

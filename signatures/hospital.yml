@@ -13,6 +13,9 @@ Hospital:
         type: Object
         description: Hospital Object.
         fields:
+          id:
+            type: UUID
+            description: Hospital UUID
           name:
             type: String
             description: Hospital name
@@ -59,6 +62,9 @@ Hospital:
       hospitals:
         type: Object[]
         fields:
+          id: 
+            type: UUID
+            description: Hospital UUID
           name:
             type: String
             description: Hospital name

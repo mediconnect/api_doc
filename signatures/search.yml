@@ -1,0 +1,79 @@
+Search:
+  SeachHospital:
+    path: /search/:query
+    method: GET
+    title: Seach Info by hospital
+    description: Search Info by hospital
+    params:
+      query:
+        type: String
+        description: search criteria
+    returns:
+      infos:
+        type: UUID[]
+        description: List of Info ids
+      hospitals:
+        type: Object[]
+        description: List of Hospital Objects
+        fields:
+          id:
+            type: UUID
+            description: hospital UUID
+          name:
+            type: String
+          image:
+            type: Image
+            description: hospital Image, not ready yet, don't include for now
+      diseases:
+        type: Object[]
+        description: List of Disease Objects
+        fields:
+          id:
+            type: UUID
+            description: diseases UUID
+          name:
+            type: String
+            description: disease name
+          keyword:
+            type: String
+            description: disease keyword
+    errors: {}
+  SeachHospitalByDisease:
+    path: /search/:query
+    method: GET
+    title: Seach Info By Hospital By Disease
+    description: Search Info by hospital by disease
+    params:
+      query:
+        type: String
+        description: search criteria
+    returns:
+      infos:
+        type: UUID[]
+        description: List of Info ids
+      hospitals:
+        type: Object[]
+        description: List of Hospital Objects
+        fields:
+          id:
+            type: UUID
+            description: hospital UUID
+          name:
+            type: String
+          image:
+            type: Image
+            description: hospital Image, not ready yet, don't include for now
+      disease:
+        type: Object
+        description: Disease Objects
+        fields:
+          id:
+            type: UUID
+            description: diseases UUID
+          name:
+            type: String
+            description: disease name
+          keyword:
+            type: String
+            description: disease keyword
+    errors: {}

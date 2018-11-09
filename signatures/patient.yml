@@ -85,7 +85,7 @@ Customer_Patient:
         type: Number
         description: Mandatory unique User ID.
     returns:
-      patient_id:
+      id:
         type: String
         description: On Successful creation, return patient_id.
     errors: {}

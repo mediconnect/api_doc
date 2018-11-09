@@ -49,7 +49,10 @@ Document:
         type: Object
         description: Document Object
         fields:
-          res_id:
+          id:
+            type: UUID
+            description: Document UUID
+          res:
             type: UUID
             description: Reservation UUID
           description:

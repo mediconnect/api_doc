@@ -13,6 +13,9 @@ Disease:
         type: Object
         description: Disease Object
         fields:
+          id:
+            type: UUID
+            description: Disease UUID
           keyword:
             type: String
             description: Disease keyword.
@@ -54,6 +57,9 @@ Disease:
         type: Object[]
         description: List of filtered/sorted Diseases.
         fields:
+          id:
+            type: UUID
+            description: Disease UUID
           keyword:
             type: String
             description: Disease keyword.

@@ -12,17 +12,23 @@ Staff:
         type: String
         description: Mandatory password.
     returns: 
-      id:
+      user_id:
         type: UUID
         description: UUID of authorized staff user.
+      staff_id:
+        type: UUID
+        description: UUID of authorized staff
+      role:
+        type: String
+        description: Role of  authorized staff
     errors: {}
   StaffSummary:
-    path: staff/:id/summary
+    path: staff/:staff_id/summary
     method: GET
     title: Summarize Website Stats
     description: Request a summary of the website's stats.
     params: 
-      id:
+      staff_id:
         type: UUID
         description: Staff user UUID
     returns:
@@ -40,14 +46,14 @@ Staff:
         description: Total number of reservations.
     errors: {}
   StaffAssignment:
-    path: staff/assignemnt/:id/:query
+    path: staff/assignemnt/:staff_id/:query
     method: GET
     title: Staff Assignemnt
     description: Request a list of staff's assignments (reservations).
     params: 
-      id:
+      staff_id:
         type: UUID
-        description: Staff user UUID
+        description: Staff UUID
       query:
         type: String
         description: A qeury to filter/sort assignments.
@@ -102,7 +108,10 @@ Staff:
       tel:
         type: Optional<String>
         description: Optional phone number.
-      rolw:
+      address:
+        type: Optional<String>
+        description: Optional address
+      role:
         type: Optional<Number>
         description: 0 for customer, 1 for c2e trans, 2 for e2c trans, 3 for sup, default 0
     returns:

@@ -1289,7 +1289,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "patient_id",
+            "field": "id",
             "description": "<p>On Successful creation, return patient_id.</p>"
           }
         ]
@@ -1616,6 +1616,13 @@ define({ "api": [
           },
           {
             "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "disease.id",
+            "description": "<p>Disease UUID</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "disease.keyword",
@@ -1719,6 +1726,13 @@ define({ "api": [
             "optional": false,
             "field": "diseases",
             "description": "<p>List of filtered/sorted Diseases.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "diseases.id",
+            "description": "<p>Disease UUID</p>"
           },
           {
             "group": "Success 200",
@@ -2044,7 +2058,14 @@ define({ "api": [
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "document.res_id",
+            "field": "document.id",
+            "description": "<p>Document UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "document.res",
             "description": "<p>Reservation UUID</p>"
           },
           {
@@ -2214,6 +2235,13 @@ define({ "api": [
           },
           {
             "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "hospital.id",
+            "description": "<p>Hospital UUID</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "hospital.name",
@@ -2334,6 +2362,13 @@ define({ "api": [
           },
           {
             "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "hospitals.id",
+            "description": "<p>Hospital UUID</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "hospitals.name",
@@ -2443,6 +2478,13 @@ define({ "api": [
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
+            "field": "Infos.id",
+            "description": "<p>Info UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
             "field": "Infos.hospital",
             "description": "<p>hospital UUID</p>"
           },
@@ -2497,7 +2539,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "/info/:id",
+    "url": "/info/:info_id",
     "title": "Request Info Information",
     "name": "Info_info",
     "description": "<p>Display information about a Info.</p>",
@@ -2509,8 +2551,8 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "id",
-            "description": "<p>Info unique ID</p>"
+            "field": "info_id",
+            "description": "<p>Info Uniquer id</p>"
           }
         ]
       }
@@ -2524,6 +2566,13 @@ define({ "api": [
             "optional": false,
             "field": "Info",
             "description": "<p>Info Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "Info.id",
+            "description": "<p>Info UUID</p>"
           },
           {
             "group": "Success 200",
@@ -4246,6 +4295,192 @@ define({ "api": [
     "groupTitle": "Reservation_admin"
   },
   {
+    "type": "GET",
+    "url": "/search/:query",
+    "title": "Seach Info by hospital",
+    "name": "SeachHospital",
+    "description": "<p>Search Info by hospital</p>",
+    "group": "Search",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>search criteria</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID[]",
+            "optional": false,
+            "field": "infos",
+            "description": "<p>List of Info ids</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "hospitals",
+            "description": "<p>List of Hospital Objects</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "hospitals.id",
+            "description": "<p>hospital UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospitals.name",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "Image",
+            "optional": false,
+            "field": "hospitals.image",
+            "description": "<p>hospital Image, not ready yet, don't include for now</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "diseases",
+            "description": "<p>List of Disease Objects</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "diseases.id",
+            "description": "<p>diseases UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diseases.name",
+            "description": "<p>disease name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "diseases.keyword",
+            "description": "<p>disease keyword</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/search.py",
+    "groupTitle": "Search"
+  },
+  {
+    "type": "GET",
+    "url": "/search/:query",
+    "title": "Seach Info By Hospital By Disease",
+    "name": "SeachHospitalByDisease",
+    "description": "<p>Search Info by hospital by disease</p>",
+    "group": "Search",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>search criteria</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID[]",
+            "optional": false,
+            "field": "infos",
+            "description": "<p>List of Info ids</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "hospitals",
+            "description": "<p>List of Hospital Objects</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "hospitals.id",
+            "description": "<p>hospital UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospitals.name",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "Image",
+            "optional": false,
+            "field": "hospitals.image",
+            "description": "<p>hospital Image, not ready yet, don't include for now</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "disease",
+            "description": "<p>Disease Objects</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "disease.id",
+            "description": "<p>diseases UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "disease.name",
+            "description": "<p>disease name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "disease.keyword",
+            "description": "<p>disease keyword</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/search.py",
+    "groupTitle": "Search"
+  },
+  {
     "type": "PUT",
     "url": "/slot/admin/:slot_id",
     "title": "Admin Update Slot availablity",
@@ -4653,7 +4888,7 @@ define({ "api": [
             "type": "String",
             "optional": true,
             "field": "address",
-            "description": "<p>Optional address.</p>"
+            "description": "<p>Optional address</p>"
           },
           {
             "group": "Parameter",
@@ -4701,7 +4936,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": true,
-            "field": "rolw",
+            "field": "role",
             "description": "<p>0 for customer, 1 for c2e trans, 2 for e2c trans, 3 for sup, default 0</p>"
           }
         ]
@@ -5020,7 +5255,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "staff/assignemnt/:id/:query",
+    "url": "staff/assignemnt/:staff_id/:query",
     "title": "Staff Assignemnt",
     "name": "StaffAssignment",
     "description": "<p>Request a list of staff's assignments (reservations).</p>",
@@ -5032,8 +5267,8 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "id",
-            "description": "<p>Staff user UUID</p>"
+            "field": "staff_id",
+            "description": "<p>Staff UUID</p>"
           },
           {
             "group": "Parameter",
@@ -5182,66 +5417,22 @@ define({ "api": [
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "id",
+            "field": "user_id",
             "description": "<p>UUID of authorized staff user.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/staff.py",
-    "groupTitle": "Staff"
-  },
-  {
-    "type": "GET",
-    "url": "staff/:id/summary",
-    "title": "Summarize Website Stats",
-    "name": "StaffSummary",
-    "description": "<p>Request a summary of the website's stats.</p>",
-    "group": "Staff",
-    "parameter": {
-      "fields": {
-        "Parameter": [
+          },
           {
-            "group": "Parameter",
+            "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "id",
-            "description": "<p>Staff user UUID</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "num_reservation_done",
-            "description": "<p>Number of done reservations.</p>"
+            "field": "staff_id",
+            "description": "<p>UUID of authorized staff</p>"
           },
           {
             "group": "Success 200",
-            "type": "Number",
+            "type": "String",
             "optional": false,
-            "field": "num_reservation_translating",
-            "description": "<p>Number of trasnlating reservations.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "num_reservation_approving",
-            "description": "<p>Number of approving reservations.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "num_reservation",
-            "description": "<p>Total number of reservations.</p>"
+            "field": "role",
+            "description": "<p>Role of  authorized staff</p>"
           }
         ]
       }
@@ -5285,6 +5476,64 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/supervisor.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "GET",
+    "url": "staff/:staff_id/summary",
+    "title": "Summarize Website Stats",
+    "name": "StaffSummary",
+    "description": "<p>Request a summary of the website's stats.</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "staff_id",
+            "description": "<p>Staff user UUID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "num_reservation_done",
+            "description": "<p>Number of done reservations.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "num_reservation_translating",
+            "description": "<p>Number of trasnlating reservations.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "num_reservation_approving",
+            "description": "<p>Number of approving reservations.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "num_reservation",
+            "description": "<p>Total number of reservations.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/staff.py",
     "groupTitle": "Staff"
   },
   {
@@ -5651,7 +5900,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "build/staff.py",
+    "filename": "build/supervisor.py",
     "groupTitle": "Staff"
   },
   {
@@ -5764,7 +6013,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "build/supervisor.py",
+    "filename": "build/staff.py",
     "groupTitle": "Staff"
   }
 ] });

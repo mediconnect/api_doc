@@ -1,18 +1,21 @@
 Info:
   Info-info:
-    path: /info/:id
+    path: /info/:info_id
     method: GET
     title: Request Info Information
     description: Display information about a Info.
     params:
-      id:
+      info_id:
         type: Number
-        description: Info unique ID
+        description: Info Uniquer id
     returns:
       Info:
         type: Object
         description: Info Object.
         fields:
+          id:
+            type: UUID
+            description: Info UUID
           hospital:
             type: UUID
             description: hospital UUID
@@ -50,6 +53,9 @@ Info:
       Infos:
         type: Object[]
         fields:
+          id:
+            type: UUID
+            description: Info UUID
           hospital:
             type: UUID
             description: hospital UUID

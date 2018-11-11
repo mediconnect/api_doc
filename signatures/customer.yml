@@ -112,7 +112,7 @@ Customer:
         description: The queried email does not exist in the database.
   CustomerUpdateProfile:
     path: /customer/profile
-    method: POST
+    method: PUT
     title: Update Customer Profile Information
     description: Update customer profile information.
     params:

@@ -1094,7 +1094,7 @@ define({ "api": [
     "groupTitle": "Customer"
   },
   {
-    "type": "POST",
+    "type": "PUT",
     "url": "/customer/profile",
     "title": "Update Customer Profile Information",
     "name": "CustomerUpdateProfile",

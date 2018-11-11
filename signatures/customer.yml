@@ -116,6 +116,9 @@ Customer:
     title: Update Customer Profile Information
     description: Update customer profile information.
     params:
+      id:
+        type: Number
+        description: Mandatory customer id.
       address:
         type: String
         description: Mandatory address.

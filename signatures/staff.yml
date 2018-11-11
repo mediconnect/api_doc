@@ -22,6 +22,17 @@ Staff:
         type: String
         description: Role of  authorized staff
     errors: {}
+  StaffLogout:
+    path: /staff/logout
+    method: POST
+    title: Staff Logout
+    description: Handle staff logout request
+    params: {}
+    returns: 
+      msg:
+        type: String
+        description: message (in the future a redirect_to will be implemented)
+    errors: {}
   StaffSummary:
     path: staff/:staff_id/summary
     method: GET

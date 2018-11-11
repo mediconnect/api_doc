@@ -1105,6 +1105,13 @@
         "Parameter": [
           {
             "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory customer id.</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "address",
@@ -5127,7 +5134,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "build/staff.py",
+    "filename": "build/supervisor.py",
     "groupTitle": "Staff"
   },
   {
@@ -5164,7 +5171,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "build/supervisor.py",
+    "filename": "build/staff.py",
     "groupTitle": "Staff"
   },
   {
@@ -5373,14 +5380,28 @@
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "id",
-            "description": "<p>UUID of authorized user.</p>"
+            "field": "user_id",
+            "description": "<p>UUID of authorized staff user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "staff_id",
+            "description": "<p>UUID of authorized staff</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "role",
+            "description": "<p>Role of  authorized staff</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "build/supervisor.py",
+    "filename": "build/staff.py",
     "groupTitle": "Staff"
   },
   {
@@ -5417,22 +5438,32 @@
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "user_id",
-            "description": "<p>UUID of authorized staff user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "staff_id",
-            "description": "<p>UUID of authorized staff</p>"
-          },
+            "field": "id",
+            "description": "<p>UUID of authorized user.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "POST",
+    "url": "/staff/logout",
+    "title": "Staff Logout",
+    "name": "StaffLogout",
+    "description": "<p>Handle staff logout request</p>",
+    "group": "Staff",
+    "success": {
+      "fields": {
+        "Success 200": [
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "role",
-            "description": "<p>Role of  authorized staff</p>"
+            "field": "msg",
+            "description": "<p>message (in the future a redirect_to will be implemented)</p>"
           }
         ]
       }
@@ -5900,7 +5931,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "build/supervisor.py",
+    "filename": "build/staff.py",
     "groupTitle": "Staff"
   },
   {
@@ -6013,7 +6044,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "build/staff.py",
+    "filename": "build/supervisor.py",
     "groupTitle": "Staff"
   }
 ]

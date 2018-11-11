@@ -852,7 +852,7 @@
   },
   {
     "type": "GET",
-    "url": "/customer/info",
+    "url": "/customer/profile",
     "title": "Request Customer Info",
     "name": "CustomerInfo",
     "description": "<p>Request customer infomation.</p>",
@@ -965,7 +965,7 @@
   },
   {
     "type": "POST",
-    "url": "/customer/login/",
+    "url": "/customer/login",
     "title": "Customer Login",
     "name": "CustomerLogin",
     "description": "<p>Handle customer login request.</p>",
@@ -996,7 +996,7 @@
   },
   {
     "type": "POST",
-    "url": "/customer/register/",
+    "url": "/customer/register",
     "title": "Customer Register",
     "name": "CustomerRegister",
     "description": "<p>Handle customer registration request.</p>",
@@ -1095,7 +1095,7 @@
   },
   {
     "type": "POST",
-    "url": "/customer/update_profile",
+    "url": "/customer/profile",
     "title": "Update Customer Profile Information",
     "name": "CustomerUpdateProfile",
     "description": "<p>Update customer profile information.</p>",

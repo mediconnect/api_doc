@@ -996,6 +996,30 @@ define({ "api": [
   },
   {
     "type": "POST",
+    "url": "/customer/logout",
+    "title": "Customer Logout",
+    "name": "CustomerLogout",
+    "description": "<p>Handle customer logout request</p>",
+    "group": "Customer",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>message (in the future a redirect_to will be implemented)</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/customer.py",
+    "groupTitle": "Customer"
+  },
+  {
+    "type": "POST",
     "url": "/customer/register",
     "title": "Customer Register",
     "name": "CustomerRegister",

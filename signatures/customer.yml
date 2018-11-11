@@ -13,6 +13,17 @@ Customer:
         description: Mandatory password.
     returns: {}
     errors: {}
+  CustomerLogout:
+    path: /customer/logout
+    method: POST
+    title: Customer Logout
+    description: Handle customer logout request
+    params: {}
+    returns: 
+      msg:
+        type: String
+        description: message (in the future a redirect_to will be implemented)
+    errors: {}
   CustomerInfo:
     path: /customer/profile
     method: GET

@@ -1,6 +1,6 @@
 Staff:
   StaffLogin:
-    path: /staff/login/
+    path: /staff/login
     method: POST
     title: Staff Login
     description: Handle staff login request.
@@ -23,7 +23,7 @@ Staff:
         description: Role of  authorized staff
     errors: {}
   StaffSummary:
-    path: staff/:staff_id/summary
+    path: staff/summary/:staff_id
     method: GET
     title: Summarize Website Stats
     description: Request a summary of the website's stats.
@@ -46,7 +46,7 @@ Staff:
         description: Total number of reservations.
     errors: {}
   StaffAssignment:
-    path: staff/assignemnt/:staff_id/:query
+    path: staff/assignemnt/:staff_id
     method: GET
     title: Staff Assignemnt
     description: Request a list of staff's assignments (reservations).
@@ -54,9 +54,6 @@ Staff:
       staff_id:
         type: UUID
         description: Staff UUID
-      query:
-        type: String
-        description: A qeury to filter/sort assignments.
     returns:
       reservations:
         type: Object[]
@@ -82,7 +79,7 @@ Staff:
             description: Unique ID for hospital.
     errors: {}
   CreateUser:
-    path: /supervisor/user
+    path: /staff/user
     method: POST
     title: Create a User
     description: Create a user.
@@ -126,7 +123,7 @@ Staff:
       RequiredFieldBlank:
         description: Any mandatory form is blank.
   ListUser:
-    path: /supervisor/user/:query
+    path: /staff/user/:query
     method: GET
     title: Request list of User
     description: Request a list of users based on query.
@@ -140,7 +137,7 @@ Staff:
         description: List of filterd/sorted users.
     errors: {}
   UserInfo:
-    path: /supervisor/user/:id
+    path: /staff/user/:id
     method: GET
     title: Request User Info
     description: Request user info.
@@ -184,7 +181,7 @@ Staff:
       UserNotFound:
         description: The <code>id</code> of the user was not found.
   UpdateUser:
-    path: /supervisor/user/
+    path: /staff/user/
     method: POST
     title: Update User Info
     description: Update user info.
@@ -232,7 +229,7 @@ Staff:
       UserNotFound:
         description: The <code>id</code> of the user was not found.
   DeleteUser:
-    path: /supervisor/user/:id
+    path: /staff/user/:id
     method: DELETE
     title: Delete User
     description: Delete user.

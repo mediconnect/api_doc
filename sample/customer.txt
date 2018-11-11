@@ -1,0 +1,30 @@
+CustomerInfo:
+http://api.yiconfirmed.com/api/customer/profile
+Method: GET
+Data: {'id': '1'}
+Response: <Response [400]>
+
+CustomerLogin:
+http://api.yiconfirmed.com/api/customer/login
+Method: POST
+Data: {'email': 'joshuarodriguez@gmail.com', 'password': '/.,Buz1234'}
+Response: <Response [400]>
+
+CustomerRegister:
+http://api.yiconfirmed.com/api/customer/register
+Method: POST
+Data: {'address': '211 Mary Keys\nSmithmouth, GA 45725', 'email': 'tanyajones@hotmail.com', 'name': 'Pamela Gray', 'password': '/.,Buz1234', 'password_confirmation': '/.,Buz1234', 'tel': 3}
+Response: <Response [500]>
+
+CustomerForgetPassword:
+http://api.yiconfirmed.com/api/customer/forget_password
+Method: POST
+Data: {'captcha': 'finemoreparticular', 'email': 'whitneyrichard@francis.info'}
+Response: <Response [404]>
+
+CustomerUpdateProfile:
+http://api.yiconfirmed.com/api/customer/profile
+Method: POST
+Data: {'address': '88164 Walter Mill Suite 104\nMillstown, WY 91554', 'email': 'cparker@rogers.com', 'name': 'Morgan Jones', 'old_password': 'scenebankget', 'password': '/.,Buz1234', 'password_confirmation': '/.,Buz1234', 'tel': 3}
+Response: <Response [405]>
+

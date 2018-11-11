@@ -1,0 +1,12 @@
+DiseaseInfo:
+http://api.yiconfirmed.com/api/disease/598dd80c-fac5-4ec4-93b5-557a49e54dfe
+Method: GET
+Data: {}
+Response: <Response [200]>
+
+DiseaseList:
+http://api.yiconfirmed.com/api/disease/?name=demo&ordering=name
+Method: GET
+Data: {}
+Response: <Response [200]>
+

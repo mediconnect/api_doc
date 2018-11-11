@@ -169,7 +169,7 @@ Question:
         type: String
         description: Query to filter/sort questions
   QuestionInfo:
-    path: questionnaire/admin/:questionnaire/question/:question
+    path: questionnaire/admin/:questionnaire_id/question/:question
     method: GET
     title: Question Info
     description: Request information about a quesiton
@@ -197,7 +197,7 @@ Question:
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
   CreateQuestion:
-    path: questionnaire/admin/:questionnaire/question
+    path: questionnaire/admin/:questionnaire_id/question
     method: POST
     title: Create Question
     description: Create a question
@@ -221,7 +221,7 @@ Question:
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
   UpdateQuestion:
-    path: questionnaire/admin/:questionnaire/question/:question
+    path: questionnaire/admin/:questionnaire_id/question/:question
     method: PUT
     title: Update Question
     description: Update a Question.
@@ -253,7 +253,7 @@ Question:
       ChoiceNotFound:
         description: The requested <code>id</code> of choice is not found.
   ListQuestion:
-    path: questionnaire/admin/:questionnaire/question/:query
+    path: questionnaire/admin/:questionnaire_id/question/:query
     method: GET
     title: List of Quesiton of Questionnaire
     description: Request a list of questions of a questionnaire.
@@ -270,12 +270,15 @@ Question:
         description: List of filterd/sorted question.
     errors: {}
   DeleteQuestion:
-    path: questionnaire/admin/:questionnaire/question/:question
+    path: questionnaire/admin/:questionnaire_id/question/:question
     method: DELETE
     title: Delete Question
     description: Delete a question.
     params:
-      id:
+      questionnaire_id:
+        type:  UUID
+        description: UUID of questionnaire of question
+      question:
         type: UUID
         description: UUID of question to be deleted.
       token:
@@ -300,7 +303,7 @@ Choice:
         type: String
         description: Query to filter/sort choices
   ChoiceInfo:
-    path: questionnaire/admin/:questionnaire/question/:question/choice/:choice
+    path: questionnaire/admin/:questionnaire_id/question/:question/choice/:choice
     method: GET
     title: Choice Info
     description: Request information about a choice
@@ -328,7 +331,7 @@ Choice:
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
   CreateChoice:
-    path: questionnaire/admin/:questionnaire/question/:question/choice
+    path: questionnaire/admin/:questionnaire_id/question/:question/choice
     method: POST
     title: Create Choice
     description: Create a choice
@@ -347,7 +350,7 @@ Choice:
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
   UpdateChoice:
-    path: questionnaire/admin/:questionnaire/question/:question/choice/:choice
+    path: questionnaire/admin/:questionnaire_id/question/:question/choice/:choice
     method: PUT
     title: Update Choice
     description: Update a choice.
@@ -368,7 +371,7 @@ Choice:
       ChoiceNotFound:
         description: The requested <code>id</code> of choice is not found.
   ListChoice:
-    path: questionnaire/admin/:questionnaire/question/:question/choice
+    path: questionnaire/admin/:questionnaire_id/question/:question/choice
     method: GET
     title: List of Choices of Questionnaire of  Question
     description: Request a list of choices of a question of a questionnaire
@@ -388,7 +391,7 @@ Choice:
         description: List of filterd/sorted choices.
     errors: {}
   DeleteChoice:
-    path: questionnaire/admin/:questionnaire/question/:question/choice/:choice
+    path: questionnaire/admin/:questionnaire_id/question/:question/choice/:choice
     method: DELETE
     title: Delete Choice
     description: Delete a choice.

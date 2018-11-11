@@ -1,0 +1,12 @@
+Info-info:
+http://api.yiconfirmed.com/api/info/8efdfc31-b236-48cd-ac2e-16cde8dd62d1
+Method: GET
+Data: {}
+Response: <Response [200]>
+
+InfoList:
+http://api.yiconfirmed.com/api/info/?name=demo&ordering=name
+Method: GET
+Data: {}
+Response: <Response [200]>
+

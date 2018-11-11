@@ -1,0 +1,12 @@
+HospitalInfo:
+http://api.yiconfirmed.com/api/hospital/d2a28146-3362-4ed5-b360-1d22199b9f24
+Method: GET
+Data: {}
+Response: <Response [200]>
+
+HospitalList:
+http://api.yiconfirmed.com/api/hospital/?name=demo&ordering=name
+Method: GET
+Data: {}
+Response: <Response [200]>
+

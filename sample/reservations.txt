@@ -1,0 +1,48 @@
+Delete Reservation:
+http://api.yiconfirmed.com/api/reservation/admin/3766f59a-f73c-4f46-9f5e-e77a5f27923d
+Method: DELETE
+Data: {}
+Response: <Response [404]>
+
+GetReservationInfo:
+http://api.yiconfirmed.com/api/reservation/83ee5a3d-e538-43ba-9e3e-10ee760bce1f/info
+Method: GET
+Data: {}
+Response: <Response [404]>
+
+ListReservations:
+http://api.yiconfirmed.com/api/reservation/admin/?name=demo&ordering=name
+Method: GET
+Data: {}
+Response: <Response [200]>
+
+ReservationInitiate:
+http://api.yiconfirmed.com/api/reservation/create
+Method: PUT
+Data: {'disease_id': '598dd80c-fac5-4ec4-93b5-557a49e54dfe', 'hospital_id': '2fe2df4a-4a36-4737-b698-da4a5dbf8a60', 'patient_id': 'b64211d6-7f61-472e-9e3e-438dba33f1d0', 'timeslot_id': '614e91a8-94a5-4a4e-bea5-87c133213870', 'user_id': 'f8c6ca45-5250-4236-a520-60893e8cb05d'}
+Response: <Response [400]>
+
+Update Reservation:
+http://api.yiconfirmed.com/api/reservation/admin/11fbe94e-c1cc-48c3-9924-d27d450f7f54
+Method: PUT
+Data: {'translator_e2c_id': '07910025-fe07-4af4-9531-dcb3229f9d8b', 'translator_c2e_id': 'fa1ec578-e625-4ac3-af6b-c898f2c891af', 'status': 0, 'trans_status': 0, 'token': 'ed3f0f8cebe0459393101dac56f6d329'}
+Response: <Response [500]>
+
+ReservationUpdate:
+http://api.yiconfirmed.com/api/reservation/1172b2b3-5c0a-4b21-a8d5-59f010074071/update
+Method: POST
+Data: {'first_diagnosed_doctor': 'indicatebeautifultonight', 'first_diagnosed_doctor_contact': 'gunmovementaway', 'first_diagnosed_hospital': 'havesinglerepresent', 'note': 'goalhairmessage', 'reservation_id': '747e1c56-3ab4-4cdc-a79a-f135b9b63f89', 'timeslot_id': 'ebc76a05-5c38-4283-83a3-19ff63d7aa44'}
+Response: <Response [404]>
+
+CommitReservation:
+http://api.yiconfirmed.com/api/reservation/f1c22583-00a8-4d1b-b70f-184cc3d8f0e5/commit
+Method: POST
+Data: {}
+Response: <Response [404]>
+
+PayReservation:
+http://api.yiconfirmed.com/api/reserve/ef30e0e4-55e7-4436-b6cb-4f7c61749b19/pay
+Method: POST
+Data: {'token': 'e8becd8845f846f6b5d8640942a3ae05'}
+Response: <Response [404]>
+

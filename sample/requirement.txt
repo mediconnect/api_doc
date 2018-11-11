@@ -1,0 +1,6 @@
+DocumentRequirement:
+http://api.yiconfirmed.com/api/requirement/2fe2df4a-4a36-4737-b698-da4a5dbf8a60/:disease_id
+Method: GET
+Data: {'disease_id': '598dd80c-fac5-4ec4-93b5-557a49e54dfe'}
+Response: <Response [404]>
+

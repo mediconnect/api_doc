@@ -1,9 +1,95 @@
 Customer_Patient:
+  CreatePatient:
+    path: /customer/:customer_id/patient
+    method: POST
+    title: Create patient
+    params:
+      customer_id:
+        type: UUID
+        description: UUID of customer
+      birthdate:
+        type: DateTime
+        description: Mandatory birthdate.
+      first_name:
+        type: String
+        description: Mandatory first name.
+      first_name_pinyin:
+        type: String
+        description: Mandatory first name pinyin.
+      gender:
+        type: Number
+        description: Mandatory gender, 0 Male, 1 Female, 2 Other
+      last_name:
+        type: String
+        description: Mandatory last name.
+      last_name_pinyin:
+        type: String
+        description: Mandatory last name pinyin.
+      note:
+        type: optional<String>
+        description: Optional note.
+      passport:
+        type: String
+        description: Mandatory passport number.
+      relationship:
+        type: Number
+        description: Mandatory replationship with user, 0 Self, 1 Relative, 2 Other
+    returns:
+      id:
+        type: String
+        description: On Successful creation, return patient_id.
+    errors: {}
+  UpdatePatient:
+    path: /customer/:customer_id/patient/:patient_id
+    method: PUT
+    title: Update patient
+    params:
+      customer_id:
+        type: UUID
+        description: UUID of customer
+      patient_id:
+        type: UUID
+        description: UUID of patient
+      birthdate:
+        type: optional<DateTime>
+        description: Mandatory birthdate.
+      first_name:
+        type: optional<String>
+        description: Mandatory first name.
+      first_name_pinyin:
+        type: optional<String>
+        description: Mandatory first name pinyin.
+      gender:
+        type: optional<Number>
+        description: Mandatory gender with default "M".
+      last_name:
+        type: optional<String>
+        description: Mandatory last name.
+      last_name_pinyin:
+        type: optional<String>
+        description: Mandatory last name pinyin.
+      note:
+        type: optional<String>
+        description: Optional note.
+      passport_number:
+        type: optional<String>
+        description: Mandatory passport number.
+      relationship:
+        type: optional<Number>
+        description: Mandatory replationship with user.
+    returns:
+      patient:
+        type: Object
+        description: Updated patient object
+    errors: {}
   PatientInfo:
     path: customer/:customer_id/patient/:patient_id
     method: GET
     title: Request Patient info
     params:
+      customer_id:
+        type: UUID
+        description: UUID of a customer
       patient_id:
         type: UUID
         description: UUID of a patient
@@ -45,95 +131,6 @@ Customer_Patient:
           relationship:
             type: Number
             description: Mandatory replationship with user, 0 Self, 1 Relative, 2 Other
-    errors: {}
-  CreatePatient:
-    path: /customer/:customer_id/patient
-    method: POST
-    title: Create patient
-    params:
-      customer_id:
-        type: UUID
-        description: UUID of customer
-      birthdate:
-        type: DateTime
-        description: Mandatory birthdate.
-      first_name:
-        type: String
-        description: Mandatory first name.
-      first_name_pinyin:
-        type: String
-        description: Mandatory first name pinyin.
-      gender:
-        type: Number
-        description: Mandatory gender, 0 Male, 1 Female, 2 Other
-      last_name:
-        type: String
-        description: Mandatory last name.
-      last_name_pinyin:
-        type: String
-        description: Mandatory last name pinyin.
-      note:
-        type: optional<String>
-        description: Optional note.
-      passport:
-        type: String
-        description: Mandatory passport number.
-      relationship:
-        type: Number
-        description: Mandatory replationship with user, 0 Self, 1 Relative, 2 Other
-      user_id:
-        type: Number
-        description: Mandatory unique User ID.
-    returns:
-      id:
-        type: String
-        description: On Successful creation, return patient_id.
-    errors: {}
-  UpdatePatient:
-    path: /customer/:customer_id/patient/:patient_id
-    method: PUT
-    title: Update patient
-    params:
-      customer_id:
-        type: UUID
-        description: UUID of customer
-      patient_id:
-        type: UUID
-        description: UUID of patient
-      birthdate:
-        type: optional<DateTime>
-        description: Mandatory birthdate.
-      first_name:
-        type: optional<String>
-        description: Mandatory first name.
-      first_name_pinyin:
-        type: optional<String>
-        description: Mandatory first name pinyin.
-      gender:
-        type: optional<String>
-        description: Mandatory gender with default "M".
-      last_name:
-        type: optional<String>
-        description: Mandatory last name.
-      last_name_pinyin:
-        type: optional<String>
-        description: Mandatory last name pinyin.
-      note:
-        type: optional<String>
-        description: Optional note.
-      passport_number:
-        type: optional<String>
-        description: Mandatory passport number.
-      patient_id:
-        type: Number
-        description: Mandatory unique Patient ID.
-      relationship:
-        type: optional<String>
-        description: Mandatory replationship with user.
-    returns:
-      patient:
-        type: Object
-        description: Updated patient object
     errors: {}
   ListPatient:
     path: /customer/:customer_id/patient/:query

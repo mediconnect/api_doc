@@ -1,0 +1,6 @@
+DeleteQuestionnarie:
+http://api.yiconfirmed.com/api/questionnaire/admin/8fc2d362-4094-450b-815a-f98c0ab84e96
+Method: DELETE
+Data: {}
+Response: <Response [404]>
+

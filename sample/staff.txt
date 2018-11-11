@@ -1,0 +1,48 @@
+DeleteUser:
+http://api.yiconfirmed.com/api/staff/user/7ff6b9a4-0613-4e30-8148-c52a572678f7
+Method: DELETE
+Data: {'token': 'b7c2db61dfa546ccb37c17a8ca19dc5b'}
+Response: <Response [404]>
+
+StaffSummary:
+http://api.yiconfirmed.com/api/staff/summary/1230d469-ccbd-45ae-9754-5f02a21e738a
+Method: GET
+Data: {}
+Response: <Response [500]>
+
+StaffAssignment:
+http://api.yiconfirmed.com/api/staff/assignemnt/103cc9fc-f772-42bb-8581-bb883355d13e
+Method: GET
+Data: {}
+Response: <Response [404]>
+
+ListUser:
+http://api.yiconfirmed.com/api/staff/user/?name=demo&ordering=name
+Method: GET
+Data: {}
+Response: <Response [200]>
+
+UserInfo:
+http://api.yiconfirmed.com/api/supervisor/user/e9d0fcf5-98c1-4852-a8cf-c45c4cf7b9bc
+Method: GET
+Data: {}
+Response: <Response [404]>
+
+StaffLogin:
+http://api.yiconfirmed.com/api/staff/login
+Method: POST
+Data: {'email': 'zbradford@yahoo.com', 'password': '/.,Buz1234'}
+Response: <Response [415]>
+
+CreateUser:
+http://api.yiconfirmed.com/api/staff/user
+Method: POST
+Data: {'address': '54703 Jill Park Apt. 619\nRobinview, MO 86967', 'email': 'lewisalyssa@osborne-white.com', 'first_name': 'Lisa', 'last_name': 'Reed', 'password': '/.,Buz1234', 'confirmed_password': 'scoredecadestudent', 'tel': 'communitywomanpattern', 'role': 2}
+Response: <Response [500]>
+
+UpdateUser:
+http://api.yiconfirmed.com/api/supervisor/user/
+Method: POST
+Data: {'address': '700 Estrada Mission\nBarajasshire, NY 75299', 'age': 1, 'email': 'alison15@williams.com', 'first_name': 'Robert', 'gender': 'runmissperformance', 'id': '8998f334-c77d-4cea-8654-0158017637ca', 'last_name': 'Lewis', 'phone': 'guyprotectcut', 'qq': 'worldaheadcertain', 'token': 'f02c78752bcb4a17ade16037f09a3b55', 'wechat': 'callstrategyyet'}
+Response: <Response [404]>
+

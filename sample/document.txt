@@ -1,0 +1,30 @@
+DeleteDocument:
+http://api.yiconfirmed.com/api/document/a60fe5de-e35e-4e93-87e1-e0f1819a2707
+Method: DELETE
+Data: {}
+Response: <Response [404]>
+
+RequestDocument:
+http://api.yiconfirmed.com/api/document/6387194e-8b3f-4a2e-b96b-b1f26ebbf36b
+Method: GET
+Data: {}
+Response: <Response [404]>
+
+ListDocument:
+http://api.yiconfirmed.com/api/document/?name=demo&ordering=name
+Method: GET
+Data: {}
+Response: <Response [200]>
+
+UpdateDocument:
+http://api.yiconfirmed.com/api/document/de602dff-b984-407c-837f-6979b03b96a3
+Method: PUT
+Data: {'res': 'd76d6425-6541-4752-8150-fd4cd0910f84', 'description': 'tripfillsee', 'name': 'James Jones', 'upload_at': '2012-08-01 01:16:20', 'owner': '3524c4b3-b4a6-40af-830e-8f25344956a7', 'type': 2}
+Response: <Response [500]>
+
+CreateDocument:
+http://api.yiconfirmed.com/api/document/
+Method: POST
+Data: {'res': '7aa03243-741c-41a5-90ad-d72abd7571f1', 'description': 'nevermayopportunity', 'name': 'Lisa Brown', 'upload_at': '2014-07-04 23:53:23', 'owner': '3d940fad-ef10-428f-abdf-c085c2175b0f', 'type': 1}
+Response: <Response [415]>
+

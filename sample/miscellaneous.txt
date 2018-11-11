@@ -1,0 +1,24 @@
+ContactInfo:
+http://api.yiconfirmed.com/api/contact_us
+Method: GET
+Data: {}
+Response: <Response [404]>
+
+SendEmail:
+http://api.yiconfirmed.com/api/contact
+Method: POST
+Data: {'content': 'drawperformancenote', 'email_address': 'seriesstudenttogether', 'subject': 'yetlaughoutside'}
+Response: <Response [404]>
+
+ValidatePassword:
+http://api.yiconfirmed.com/api/auth/password
+Method: POST
+Data: {'id': '62b07a5c-25bc-4aea-afe6-d8c132af496f', 'password': '/.,Buz1234'}
+Response: <Response [404]>
+
+StaffSendEmail:
+http://api.yiconfirmed.com/api/auth/send
+Method: POST
+Data: {'content': 'preventmeanbag', 'user_id': '9d31c593-d818-4e60-a64b-1ff8112d1dc5'}
+Response: <Response [415]>
+

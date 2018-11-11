@@ -1,0 +1,12 @@
+SeachHospital:
+http://api.yiconfirmed.com/api/search/?name=demo&ordering=name
+Method: GET
+Data: {}
+Response: <Response [500]>
+
+SeachHospitalByDisease:
+http://api.yiconfirmed.com/api/search/?name=demo&ordering=name
+Method: GET
+Data: {}
+Response: <Response [500]>
+

@@ -1,0 +1,24 @@
+SlotDisplay:
+http://api.yiconfirmed.com/api/slot/availability
+Method: GET
+Data: {'disease': '61cb7e1e-7e64-4f6a-a5e7-1998b6df0e54', 'hospital': '2fe2df4a-4a36-4737-b698-da4a5dbf8a60'}
+Response: <Response [400]>
+
+ListSlot:
+http://api.yiconfirmed.com/api/slot/admin/
+Method: GET
+Data: {}
+Response: <Response [200]>
+
+UpdateSlot:
+http://api.yiconfirmed.com/api/slot/batch/create
+Method: PUT
+Data: {}
+Response: <Response [405]>
+
+AdminUpdateSlot:
+http://api.yiconfirmed.com/api/slot/admin/08b36119-aa31-4f10-bf91-3c891d11a9c3
+Method: PUT
+Data: {}
+Response: <Response [500]>
+

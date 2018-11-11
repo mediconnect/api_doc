@@ -1,6 +1,6 @@
 Miscellaneous:
   ContactInfo:
-    path: /contact
+    path: /contact_us
     method: GET
     title: Request contact info
     description: Display contact information of the website.

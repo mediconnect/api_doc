@@ -1,0 +1,36 @@
+DeletePatient:
+http://api.yiconfirmed.com/api/customer/930b5f5e-3fe2-406d-b061-437c8a9e5660/patient/c5828d6a-3510-4f87-8d1b-e78a3d1ca874
+Method: DELETE
+Data: {}
+Response: <Response [500]>
+
+PatientInfo:
+http://api.yiconfirmed.com/api/customer/1/patient/16dfba3b-f2e7-48d1-b660-c871f660202a
+Method: GET
+Data: {}
+Response: <Response [403]>
+
+ListPatient:
+http://api.yiconfirmed.com/api/customer/1/patient/?name=demo&ordering=name
+Method: GET
+Data: {}
+Response: <Response [403]>
+
+ListAllPatients:
+http://api.yiconfirmed.com/api/patients/?name=demo&ordering=name
+Method: GET
+Data: {}
+Response: <Response [200]>
+
+UpdatePatient:
+http://api.yiconfirmed.com/api/customer/1/patient/e7fb4394-120c-46fa-8512-d9b44a54f5f0
+Method: PUT
+Data: {'birthdate': '2010-05-26 05:55:11', 'first_name': 'Amanda', 'first_name_pinyin': 'tryguyfall', 'gender': 0, 'last_name': 'Davis', 'last_name_pinyin': 'doglocalfact', 'note': 'bigjoinparticularly', 'passport_number': 'somebodystreetnotice', 'relationship': 2}
+Response: <Response [500]>
+
+CreatePatient:
+http://api.yiconfirmed.com/api/customer/1/patient
+Method: POST
+Data: {'birthdate': '1971-12-26 16:25:59', 'first_name': 'Albert', 'first_name_pinyin': 'clearhaireverything', 'gender': 2, 'last_name': 'Mckenzie', 'last_name_pinyin': 'colorwaypattern', 'note': 'spacefishvarious', 'passport': 'ordersoldiercharacter', 'relationship': 3}
+Response: <Response [500]>
+

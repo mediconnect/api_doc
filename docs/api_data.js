@@ -1226,7 +1226,7 @@ define({ "api": [
   },
   {
     "type": "POST",
-    "url": "/customer/:customer_id/patient",
+    "url": "/customer/:customer_id/patient/",
     "title": "Create patient",
     "name": "CreatePatient",
     "group": "Customer_Patient",

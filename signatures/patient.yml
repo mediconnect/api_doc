@@ -47,7 +47,7 @@ Customer_Patient:
             description: Mandatory replationship with user, 0 Self, 1 Relative, 2 Other
     errors: {}
   CreatePatient:
-    path: /customer/:customer_id/patient
+    path: /customer/:customer_id/patient/
     method: POST
     title: Create patient
     params:

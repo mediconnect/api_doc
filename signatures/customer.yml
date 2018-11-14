@@ -14,7 +14,7 @@ Customer:
     returns: {}
     errors: {}
   CustomerInfo:
-    path: /customer/profile
+    path: /customer/profile?id=customer_id
     method: GET
     title: Request Customer Info
     description: Request customer infomation.

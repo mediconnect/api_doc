@@ -25,7 +25,7 @@ Customer_Patient:
       last_name_pinyin:
         type: String
         description: Mandatory last name pinyin.
-      note:
+      notes:
         type: optional<String>
         description: Optional note.
       passport:

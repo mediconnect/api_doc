@@ -2676,6 +2676,119 @@ define({ "api": [
   },
   {
     "type": "GET",
+    "url": "/info/like/:customer_id/:query",
+    "title": "List Like Info",
+    "name": "Like_Like_Info",
+    "description": "<p>List all like info of a customer</p>",
+    "group": "LikeInfo",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>query to filter/sort Liked Info</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/info.py",
+    "groupTitle": "LikeInfo"
+  },
+  {
+    "type": "POST",
+    "url": "/info/like/:customer_id/",
+    "title": "Like Info (Hospital-disease)",
+    "name": "Like_info",
+    "description": "<p>Create a Like Info</p>",
+    "group": "LikeInfo",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "info",
+            "description": "<p>Info Unique id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "LikeInfo",
+            "description": "<p>LikeInfo Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "LikeInfo.id",
+            "description": "<p>Info UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "LikeInfo.info",
+            "description": "<p>Like Info UUID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "LikeInfo.customer",
+            "description": "<p>Customer id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Datetime",
+            "optional": false,
+            "field": "LikeInfo.like_time",
+            "description": "<p>Date time of creation</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/info.py",
+    "groupTitle": "LikeInfo"
+  },
+  {
+    "type": "DELETE",
+    "url": "/info/like/:customer_id/:likeInfo_id/",
+    "title": "Un-Like Info (Hospital-disease)",
+    "name": "Un_Like_info",
+    "description": "<p>Delete a Like Info</p>",
+    "group": "LikeInfo",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "likeInfo_id",
+            "description": "<p>LikeInfo Unique id</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/info.py",
+    "groupTitle": "LikeInfo"
+  },
+  {
+    "type": "GET",
     "url": "/contact",
     "title": "Request contact info",
     "name": "ContactInfo",
@@ -5158,7 +5271,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "build/supervisor.py",
+    "filename": "build/staff.py",
     "groupTitle": "Staff"
   },
   {
@@ -5190,92 +5303,6 @@ define({ "api": [
             "optional": false,
             "field": "users",
             "description": "<p>List of filterd/sorted users.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/staff.py",
-    "groupTitle": "Staff"
-  },
-  {
-    "type": "GET",
-    "url": "staff/assignemnt/:id/:query",
-    "title": "Staff Assignemnt",
-    "name": "StaffAssignment",
-    "description": "<p>Request a list of staff's assignments (reservations).</p>",
-    "group": "Staff",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Staff UUID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "query",
-            "description": "<p>A qeury to filter/sort assignments.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "reservations",
-            "description": "<p>List of reservation objects</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reservations.disease_id",
-            "description": "<p>Unique ID for disease.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.res_id",
-            "description": "<p>Reservation ID</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.timeslot_id",
-            "description": "<p>ID for reservation slot.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.user_id",
-            "description": "<p>Unique ID for customer.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.patient_id",
-            "description": "<p>Unique ID for patient.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "reservations.hospital_id",
-            "description": "<p>Unique ID for hospital.</p>"
           }
         ]
       }
@@ -5371,6 +5398,136 @@ define({ "api": [
     "groupTitle": "Staff"
   },
   {
+    "type": "GET",
+    "url": "staff/assignemnt/:id/:query",
+    "title": "Staff Assignemnt",
+    "name": "StaffAssignment",
+    "description": "<p>Request a list of staff's assignments (reservations).</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Staff UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>A qeury to filter/sort assignments.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "reservations",
+            "description": "<p>List of reservation objects</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reservations.disease_id",
+            "description": "<p>Unique ID for disease.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.res_id",
+            "description": "<p>Reservation ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.timeslot_id",
+            "description": "<p>ID for reservation slot.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.user_id",
+            "description": "<p>Unique ID for customer.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.patient_id",
+            "description": "<p>Unique ID for patient.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservations.hospital_id",
+            "description": "<p>Unique ID for hospital.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "POST",
+    "url": "/staff/login/",
+    "title": "Staff Login",
+    "name": "StaffLogin",
+    "description": "<p>Handle staff login request.</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>UUID of authorized user.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Staff"
+  },
+  {
     "type": "POST",
     "url": "/staff/login/",
     "title": "Staff Login",
@@ -5430,50 +5587,6 @@ define({ "api": [
   },
   {
     "type": "POST",
-    "url": "/staff/login/",
-    "title": "Staff Login",
-    "name": "StaffLogin",
-    "description": "<p>Handle staff login request.</p>",
-    "group": "Staff",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "email",
-            "description": "<p>Mandatory email address.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>Mandatory password.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
-            "description": "<p>UUID of authorized user.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/supervisor.py",
-    "groupTitle": "Staff"
-  },
-  {
-    "type": "POST",
     "url": "/staff/logout",
     "title": "Staff Logout",
     "name": "StaffLogout",
@@ -5494,43 +5607,6 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/staff.py",
-    "groupTitle": "Staff"
-  },
-  {
-    "type": "GET",
-    "url": "staff/:id/summary",
-    "title": "Summarize Website Stats",
-    "name": "StaffSummary",
-    "description": "<p>Request a summary of the website's stats.</p>",
-    "group": "Staff",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Staff UUID</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "summary",
-            "description": "<p>Whatever summary we want to display for the supervisor.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/supervisor.py",
     "groupTitle": "Staff"
   },
   {
@@ -5589,6 +5665,43 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/staff.py",
+    "groupTitle": "Staff"
+  },
+  {
+    "type": "GET",
+    "url": "staff/:id/summary",
+    "title": "Summarize Website Stats",
+    "name": "StaffSummary",
+    "description": "<p>Request a summary of the website's stats.</p>",
+    "group": "Staff",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Staff UUID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "summary",
+            "description": "<p>Whatever summary we want to display for the supervisor.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
     "groupTitle": "Staff"
   },
   {

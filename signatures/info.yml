@@ -78,3 +78,61 @@ Info:
             type: String
             description: Feedback_time in weeks
     errors: {}
+LikeInfo:
+  Like-info:
+    path: /info/like/:customer_id/
+    method: POST
+    title: Like Info (Hospital-disease)
+    description: Create a Like Info
+    params:
+      info:
+        type: UUID
+        description: Info Unique id
+    returns:
+      LikeInfo:
+        type: Object
+        description: LikeInfo Object.
+        fields:
+          id:
+            type: UUID
+            description: Info UUID
+          info:
+            type: UUID
+            description: Like Info UUID
+          customer:
+            type: Number
+            description: Customer id
+          like_time:
+            type: Datetime
+            description: Date time of creation
+  Un-Like-info:
+    path: /info/like/:customer_id/:likeInfo_id/
+    method: DELETE
+    title: Un-Like Info (Hospital-disease)
+    description: Delete a Like Info
+    params:
+      likeInfo_id:
+        type: UUID
+        description: LikeInfo Unique id
+    returns: {}
+    errors: {}
+  Like-Like-Info:
+    path: /info/like/:customer_id/:query
+    method: GET
+    title: List Like Info
+    description: List all like info of a customer
+    params:
+      query:
+        type: String
+        description: query to filter/sort Liked Info
+    return:
+      LikeInfos:
+        type: Object[]
+        fields:
+          info:
+            type: UUID
+            description: Info Unqiue id
+          like_time:
+            type: Datetime
+            description: Date time of creation
+            

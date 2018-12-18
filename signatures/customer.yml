@@ -11,155 +11,148 @@ Customer:
       password:
         type: String
         description: Mandatory password.
-    returns: {}
-    errors: {}
   CustomerLogout:
     path: /customer/logout
     method: POST
     title: Customer Logout
     description: Handle customer logout request
-    params: {}
-    returns: 
-      msg:
-        type: String
-        description: message (in the future a redirect_to will be implemented)
-    errors: {}
-  CustomerInfo:
-    path: /customer/profile
-    method: GET
-    title: Request Customer Info
-    description: Request customer infomation.
-    params:
-      id:
-        type: Number
-        description: Mandatory unique Customer ID.
-    returns:
-      customer:
-        type: Object
-        description: Customer Object.
-        fields:
-          address:
-            type: String
-            description: Mandatory Customer address.
-          age:
-            type: Number
-            description: Optional Customer age.
-          email:
-            type: String
-            description: Mandatory Customer email.
-          first_name:
-            type: String
-            description: Mandatory Customer first name.
-          gender:
-            type: optional<String>
-            description: Optional Customer gender.
-          last_name:
-            type: String
-            description: Mandatory Customer last name.
-          phone:
-            type: String
-            description: Mandatory Customer phone.
-          qq:
-            type: optional<String>
-            description: Optional Customer qq.
-          wechat:
-            type: optional<String>
-            description: Optional Customer wechat.
-    errors:
-      CustomerNotFound:
-        description: The <code>id</code> of the customer was not found.
   CustomerRegister:
     path: /customer/register
     method: POST
     title: Customer Register
     description: Handle customer registration request.
     params:
-      address:
-        type: String
-        description: Mandatory address.
-      email:
-        type: String
-        description: Mandatory email address.
-      name:
-        type: String
-        description: Mandatory name.
-      password:
-        type: String
-        description: Mandatory password.
-      password_confirmation:
-        type: String
-        description: Mandatory confirmation password.
-      tel:
-        type: Number
-        description: Mandatory phone number.
+      auth:
+        type: Object
+        description: Data structure contains authorization infomation.
+        fields:
+          email:
+            type: String
+            description: Mandatory email address.
+          password:
+            type: String
+            description: Mandatory password.
+          password_confirmation:
+            type: String
+            description: Mandatory confirmation password.
+          first_name:
+            type: String
+            description: Mandatory user first name.
+          last_name:
+            type: String
+            description: Mandatory user last name.
+      customer:
+        type: Object
+        description: Data structure contains customer information.
+        fields:
+          address:
+            type: String
+            description: Mandatory address.
+          tel:
+            type: Number
+            description: Mandatory phone number.
     returns:
-      id:
+      user_id:
         type: Number
+        description: Registered user id.
+      customer_id:
+        type: UUID
         description: Registered customer id.
-    errors:
-      EmailAlreadyExists:
-        description: The email exists in the DB.
-      PasswordDoesNotMath:
-        description: The password does not match password_confirmation.
-      RequiredFieldBlank:
-        description: Any mandatory form is blank.
-  CustomerForgetPassword:
-    path: /customer/forget_password
-    method: POST
-    title: Forget Password (not ready yet)
-    description: Handle request from customer that forgets password.
+  CustomerGetProfile:
+    path: /customer/profile/:customer_id
+    method: GET
+    title: Customer Profile
+    description: Request customer infomation.
     params:
-      captcha:
-        type: String
-        description: Validation code for identifying robot.
-      email:
-        type: String
-        description: Mandatory email address.
-    returns: {}
-    errors:
-      CaptchaDoesNotMatch:
-        description: The captcha does not match database entry.
-      EmailDoesNotExist:
-        description: The queried email does not exist in the database.
+      customer_id:
+        type: UUID
+        description: Mandatory unique Customer ID.
+    returns:
+      customer:
+        type: Object
+        description: Customer Object.
+        fields:
+          email:
+            type: String
+            description: Customer email.
+          first_name:
+            type: String
+            description: Customer first name.
+          last_name:
+            type: String
+            description: Customer last name.
+          address:
+            type: String
+            description: Customer address.
+          tel:
+            type: String
+            description: Customer telephone.
   CustomerUpdateProfile:
     path: /customer/profile
     method: PUT
-    title: Update Customer Profile Information
+    title: Customer Update Profile
     description: Update customer profile information.
     params:
-      id:
-        type: Number
+      customer_id:
+        type: UUID
         description: Mandatory customer id.
       address:
         type: String
         description: Mandatory address.
+      tel:
+        type: String
+        description: Mandatory phone number.
+  CustomerResetPasswordRequest:
+    path: /customer/reset
+    method: POST
+    title: Customer Reset Password Request
+    description: Handle request from customer that forgets password.
+    params:
       email:
         type: String
         description: Mandatory email address.
-      name:
+  CustomerResetPassword:
+    path: /customer/reset/password
+    method: POST
+    title: Customer Reset Password
+    description: Handle request from customer that forgets password.
+    params:
+      token:
         type: String
-        description: Mandatory customer name.
-      old_password:
-        type: String
-        description: Mandatory old password.
+        description: Mandatory token key value.
       password:
         type: String
         description: Mandatory password.
       password_confirmation:
         type: String
         description: Mandatory confirmation password.
-      tel:
-        type: Number
-        description: Mandatory phone number.
-    returns: {}
-    errors:
-      EmailAlreadyExists:
-        description: The email address changes but also duplicate with another existing
-          email address.
-      PasswordDoesNotMath:
-        description: The password does not match password_confirmation.
-      RequiredFieldBlank:
-        description: Any mandatory form is blank.
-      WrongPassword:
-        description: The old password does not match the existing password in the
-          database.
+  CustomerVerifyRequest:
+    path: /customer/verify/:email
+    method: GET
+    title: Customer Verification Request
+    description: Handle new request for email verification
+    params:
+      email:
+        type: String
+        description: Mandatory email address.
+  CustomerVerify:
+    path: /customer/verify
+    method: POST
+    title: Customer Verification
+    description: Handle request for customer registration activation
+    params:
+      token:
+        type: String
+        description: Mandatory token key value.
+      email:
+        type: String
+        description: Mandatory email address.
+  CustomerDevVerify:
+    path: /customer/dev/verify
+    method: POST
+    title: Customer Verification
+    description: Handle request for customer registration activation in dev
+    params:
+      email:
+        type: String
+        description: Mandatory email address.

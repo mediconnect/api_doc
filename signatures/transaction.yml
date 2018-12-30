@@ -1,0 +1,130 @@
+Transaction:
+  TransactionInfo:
+    path: /transaction/:id
+    method: GET
+    title: Request Transaction Information
+    description: Display information about a transaction.
+    params:
+      id:
+        type: UUID
+        description: Transaction unique ID
+    returns:
+      transaction:
+        type: Object
+        description: Transaction Object.
+        fields:
+          id:
+            type: UUID
+            description: Transaction UUID. Used as out_trade_number for Alipay
+          customer:
+            type: UUID
+            description: ID of the customer under whom this transaction was created
+          trade_no:
+            type: String
+            description: Trade number returned by Alipay or Wechat
+          total_amount:
+            type: Number
+            description: Float number. Smallest unit is 0.01.
+          created_at: 
+            type: DateTime
+            description: Datetime at which transaction is created.
+          goods_type:
+            type: Number
+            description: 0 for initial, 1 for remain, 2 for full amount
+          payment_type:
+            type: Number
+            description: 0 - Alipay, 1 - Wechat Pay
+          payment_at:
+            type: DateTime
+            description: Datetime of a successful payment
+          payment_status:
+            type: String
+            description: PAYING, TRADE_SUCCESS, TRADE_CLOSED, WAIT_BUYER_PAY, TRADE_FINISHED
+    errors:
+      ObjectNotFound:
+        description: The <code>id</code> of the Transaction was not found.
+  TransactionList:
+    path: /transaction/:query
+    method: GET
+    title: Request List of Transactions
+    description: Dispaly all transactions based on query
+    params:
+      query:
+        type: String
+        description: Query to filter transactions
+    returns:
+      transactions:
+        type: Object[]
+        fields:
+          id:
+            type: UUID
+            description: Transaction UUID. Used as out_trade_number for Alipay
+          customer:
+            type: UUID
+            description: ID of the customer under whom this transaction was created
+          trade_no:
+            type: String
+            description: Trade number returned by Alipay or Wechat
+          total_amount:
+            type: Number
+            description: Float number. Smallest unit is 0.01.
+          created_at: 
+            type: DateTime
+            description: Datetime at which transaction is created.
+          goods_type:
+            type: Number
+            description: 0 for initial, 1 for remain, 2 for full amount
+          payment_type:
+            type: Number
+            description: 0 - Alipay, 1 - Wechat Pay
+          payment_at:
+            type: DateTime
+            description: Datetime of a successful payment
+          payment_status:
+            type: String
+            description: PAYING, TRADE_SUCCESS, TRADE_CLOSED, WAIT_BUYER_PAY, TRADE_FINISHED
+    errors: {}
+  CreateTransaction:
+    path: /transaction/
+    method: POST
+    title: Create a Transaction
+    description: Create a Transaction
+    params:
+      payment_type:
+        type: Number
+        description: 0 - Alipay, 1 - Wechat Pay
+      goods_type:
+        type: Number
+        description: 0 for initial, 1 for remain, 2 for full amount
+    returns:
+      transactions:
+        type: Object[]
+        fields:
+          id:
+            type: UUID
+            description: Transaction UUID. Used as out_trade_number for Alipay
+          customer:
+            type: UUID
+            description: ID of the customer under whom this transaction was created
+          trade_no:
+            type: String
+            description: Trade number returned by Alipay or Wechat
+          total_amount:
+            type: Number
+            description: Float number. Smallest unit is 0.01.
+          created_at: 
+            type: DateTime
+            description: Datetime at which transaction is created.
+          goods_type:
+            type: Number
+            description: 0 for initial, 1 for remain, 2 for full amount
+          payment_type:
+            type: Number
+            description: 0 - Alipay, 1 - Wechat Pay
+          payment_at:
+            type: DateTime
+            description: Datetime of a successful payment
+          payment_status:
+            type: String
+            description: PAYING, TRADE_SUCCESS, TRADE_CLOSED, WAIT_BUYER_PAY, TRADE_FINISHED
+    errors: {}

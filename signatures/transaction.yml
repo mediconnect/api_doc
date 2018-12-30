@@ -40,6 +40,9 @@ Transaction:
           payment_status:
             type: String
             description: PAYING, TRADE_SUCCESS, TRADE_CLOSED, WAIT_BUYER_PAY, TRADE_FINISHED
+          url:
+            type: String
+            description: URL returned by Alipay or WeChat Pay
     errors:
       ObjectNotFound:
         description: The <code>id</code> of the Transaction was not found.
@@ -83,6 +86,9 @@ Transaction:
           payment_status:
             type: String
             description: PAYING, TRADE_SUCCESS, TRADE_CLOSED, WAIT_BUYER_PAY, TRADE_FINISHED
+          url:
+            type: String
+            description: URL returned by Alipay or WeChat Pay
     errors: {}
   CreateTransaction:
     path: /transaction/
@@ -127,4 +133,7 @@ Transaction:
           payment_status:
             type: String
             description: PAYING, TRADE_SUCCESS, TRADE_CLOSED, WAIT_BUYER_PAY, TRADE_FINISHED
+          url:
+            type: String
+            description: URL returned by Alipay or WeChat Pay
     errors: {}

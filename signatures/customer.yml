@@ -132,9 +132,9 @@ Customer:
     title: Customer Verification Request
     description: Handle new request for email verification
     params:
-      email:
+      customer_id:
         type: String
-        description: Mandatory email address.
+        description: Mandatory customer UUID.
   CustomerVerify:
     path: /customer/verify
     method: POST
@@ -144,15 +144,15 @@ Customer:
       token:
         type: String
         description: Mandatory token key value.
-      email:
+      customer_id:
         type: String
-        description: Mandatory email address.
+        description: Mandatory customer UUID.
   CustomerDevVerify:
     path: /customer/dev/verify
     method: POST
     title: Customer Dev Verification
     description: Handle request for customer registration activation in dev
     params:
-      email:
+      customer_id:
         type: String
-        description: Mandatory email address.
+        description: Mandatory customer UUID.

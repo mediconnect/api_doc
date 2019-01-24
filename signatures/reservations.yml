@@ -146,7 +146,7 @@ Reservation/admin:
     params:
       res_id:
         type: UUID
-        description: Reservation UUID
+        description: Mandatory Reservation UUID
       translator_e2c_id:
         type: UUID
         description: New E2C_Translator id.

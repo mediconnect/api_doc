@@ -4329,7 +4329,7 @@
             "type": "UUID",
             "optional": false,
             "field": "res_id",
-            "description": "<p>Reservation UUID</p>"
+            "description": "<p>Mandatory Reservation UUID</p>"
           },
           {
             "group": "Parameter",
@@ -5589,6 +5589,13 @@
             "optional": false,
             "field": "goods_type",
             "description": "<p>0 for initial, 1 for remain, 2 for full amount</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservation",
+            "description": "<p>The id of the reservation to which the transaction belongs</p>"
           }
         ]
       }
@@ -5614,15 +5621,22 @@
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "transactions.customer",
-            "description": "<p>ID of the customer under whom this transaction was created</p>"
+            "field": "transactions.reservation",
+            "description": "<p>ID of the reservation under whom this transaction was created</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "transactions.trade_no",
+            "field": "transactions.provider_transaction_no",
             "description": "<p>Trade number returned by Alipay or Wechat</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "transactions.out_trade_no",
+            "description": "<p>Unique transaction number in our system (consumed by Alipay/WeChat Pay)</p>"
           },
           {
             "group": "Success 200",
@@ -5721,15 +5735,22 @@
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "transaction.customer",
-            "description": "<p>ID of the customer under whom this transaction was created</p>"
+            "field": "transaction.reservation",
+            "description": "<p>ID of the reservation under whom this transaction was created</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "transaction.trade_no",
+            "field": "transaction.provider_transaction_no",
             "description": "<p>Trade number returned by Alipay or Wechat</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "transaction.out_trade_no",
+            "description": "<p>Unique transaction number in our system (consumed by Alipay/WeChat Pay)</p>"
           },
           {
             "group": "Success 200",
@@ -5841,15 +5862,22 @@
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "transactions.customer",
-            "description": "<p>ID of the customer under whom this transaction was created</p>"
+            "field": "transactions.reservation",
+            "description": "<p>ID of the reservation under whom this transaction was created</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "transactions.trade_no",
+            "field": "transactions.provider_transaction_no",
             "description": "<p>Trade number returned by Alipay or Wechat</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "transactions.out_trade_no",
+            "description": "<p>Unique transaction number in our system (consumed by Alipay/WeChat Pay)</p>"
           },
           {
             "group": "Success 200",

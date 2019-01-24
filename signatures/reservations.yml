@@ -158,10 +158,22 @@ Reservation/admin:
         description: New reservation status.
       trans_status:
         type: Number
+        description: New reservation status.
+      trans_status:
+        type: Number
         description: New translating status.
-      token:
+      first_hospital:
         type: String
-        description: Token to verify authorization.
+        description: New first hospital
+      first_doctor_contact:
+        type: String
+        description: New Diagnose-doctor contact info.
+      first_doctor_name:
+        type: String
+        description: New Diagnose-doctor name.
+      first_hospital:
+        type: String
+        description: New Diagnose-hospital name.
     returns:
       res_id:
         type: UUID

@@ -16,12 +16,15 @@ Transaction:
           id:
             type: UUID
             description: Transaction UUID. Used as out_trade_number for Alipay
-          customer:
+          reservation:
             type: UUID
-            description: ID of the customer under whom this transaction was created
-          trade_no:
+            description: ID of the reservation under whom this transaction was created
+          provider_transaction_no:
             type: String
             description: Trade number returned by Alipay or Wechat
+          out_trade_no:
+            type: String
+            description: Unique transaction number in our system (consumed by Alipay/WeChat Pay)
           total_amount:
             type: Number
             description: Float number. Smallest unit is 0.01.
@@ -62,12 +65,15 @@ Transaction:
           id:
             type: UUID
             description: Transaction UUID. Used as out_trade_number for Alipay
-          customer:
+          reservation:
             type: UUID
-            description: ID of the customer under whom this transaction was created
-          trade_no:
+            description: ID of the reservation under whom this transaction was created
+          provider_transaction_no:
             type: String
             description: Trade number returned by Alipay or Wechat
+          out_trade_no:
+            type: String
+            description: Unique transaction number in our system (consumed by Alipay/WeChat Pay)
           total_amount:
             type: Number
             description: Float number. Smallest unit is 0.01.
@@ -102,6 +108,9 @@ Transaction:
       goods_type:
         type: Number
         description: 0 for initial, 1 for remain, 2 for full amount
+      reservation:
+        type: UUID
+        description: The id of the reservation to which the transaction belongs
     returns:
       transactions:
         type: Object[]
@@ -109,12 +118,15 @@ Transaction:
           id:
             type: UUID
             description: Transaction UUID. Used as out_trade_number for Alipay
-          customer:
+          reservation:
             type: UUID
-            description: ID of the customer under whom this transaction was created
-          trade_no:
+            description: ID of the reservation under whom this transaction was created
+          provider_transaction_no:
             type: String
             description: Trade number returned by Alipay or Wechat
+          out_trade_no:
+            type: String
+            description: Unique transaction number in our system (consumed by Alipay/WeChat Pay)
           total_amount:
             type: Number
             description: Float number. Smallest unit is 0.01.

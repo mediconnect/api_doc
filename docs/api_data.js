@@ -4357,7 +4357,7 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "trans_status",
-            "description": "<p>New translating status.</p>"
+            "description": "<p>New translation status.</p>"
           },
           {
             "group": "Parameter",

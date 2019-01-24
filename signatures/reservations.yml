@@ -158,10 +158,7 @@ Reservation/admin:
         description: New reservation status.
       trans_status:
         type: Number
-        description: New reservation status.
-      trans_status:
-        type: Number
-        description: New translating status.
+        description: New translation status.
       first_hospital:
         type: String
         description: New first hospital

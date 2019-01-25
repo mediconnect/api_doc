@@ -1,6 +1,6 @@
 Document:
   CreateDocument:
-    path: /document/
+    path: reservation/:res/:ftype/document/
     method: POST
     title: Create Document
     description: Create document.
@@ -8,17 +8,20 @@ Document:
       res:
         type: UUID
         description: UUID of reservation this document belongs to
+      ftype:
+        type: UUID
+        description: UUID of filetype returned from requirement
       description:
         type: String
         description: Mandatory document description
-      file:
-        type: File
-        description: File Object
+      files:
+        type: File[]
+        description: File Object List
       name:
         type: String
         description: Mandatory document name
       description:
-        type: optional<String>
+        type: String
         description: Optional description for document.
       upload_at:
         type: DateTime
@@ -29,6 +32,9 @@ Document:
       type:
         type: Number
         description: Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate
+      obslete:
+        type: Boolean
+        description: Whether this document is outdated, pass False for now.
     returns:
       id:
         type: Number
@@ -36,11 +42,17 @@ Document:
       RequiredFieldBlank:
         description: Any mandatory form is blank.
   RequestDocument:
-    path: /document/:id
+    path: reservation/:res/:ftype/document/:id
     method: GET
     title: Request Document Info
     description: Request document information.
     params: 
+      res:
+        type: UUID
+        description: UUID of reservation this document belongs to
+      ftype:
+        type: UUID
+        description: UUID of filetype returned from requirement
       id:
         type: UUID
         description: UUID of document
@@ -80,11 +92,17 @@ Document:
       DocumentNotFound:
         description: The <code>id</code> of the document doesn't exist.
   DeleteDocument:
-    path: /document/:id
+    path: reservation/:res/:ftype/document/:id
     method: DELETE
     title: Delete Document
     description: Delete a document.
     params: 
+      res:
+        type: UUID
+        description: UUID of reservation this document belongs to
+      ftype:
+        type: UUID
+        description: UUID of filetype returned from requirement
       id:
         type: UUID
         description: UUID of document
@@ -96,13 +114,19 @@ Document:
       DocumentNotFound:
         description: The <code>id</code> of the document doesn't exist.
   ListDocument:
-    path: /document/:query
+    path: reservation/:res/:ftype/document/?owner=:user_id
     method: GET
     title: List All Documents
     params:
-      query:
-        type: String
-        description: query to filter Documents
+      res:
+        type: UUID
+        description: UUID of reservation this document belongs to
+      ftype:
+        type: UUID
+        description: UUID of filetype returned from requirement
+      user_id:
+        type: UUID
+        description: UUID of owner of a document
     returns:
       documents:
         type: Object
@@ -133,17 +157,20 @@ Document:
             type: Number
             description: Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate
   UpdateDocument:
-    path: /document/:id
+    path: reservation/:res/:ftype/document/:id
     method: PUT
     title: Update Document
     description: Update a dicument
     params:
+      res:
+        type: UUID
+        description: UUID of reservation this document belongs to
+      ftype:
+        type: UUID
+        description: UUID of filetype returned from requirement
       id:
         type: UUID
         description: UUID of document
-      res:
-        type: UUID
-        description: Reservation UUID
       description:
         type: Stinrg
         description: Document description

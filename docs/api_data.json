@@ -1798,7 +1798,7 @@
   },
   {
     "type": "POST",
-    "url": "/document/",
+    "url": "reservation/:res/:ftype/document/",
     "title": "Create Document",
     "name": "CreateDocument",
     "description": "<p>Create document.</p>",
@@ -1815,17 +1815,24 @@
           },
           {
             "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "ftype",
+            "description": "<p>UUID of filetype returned from requirement</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "String",
-            "optional": true,
+            "optional": false,
             "field": "description",
             "description": "<p>Optional description for document.</p>"
           },
           {
             "group": "Parameter",
-            "type": "File",
+            "type": "File[]",
             "optional": false,
-            "field": "file",
-            "description": "<p>File Object</p>"
+            "field": "files",
+            "description": "<p>File Object List</p>"
           },
           {
             "group": "Parameter",
@@ -1854,6 +1861,13 @@
             "optional": false,
             "field": "type",
             "description": "<p>Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "obslete",
+            "description": "<p>Whether this document is outdated, pass False for now.</p>"
           }
         ]
       }
@@ -1890,7 +1904,7 @@
   },
   {
     "type": "DELETE",
-    "url": "/document/:id",
+    "url": "reservation/:res/:ftype/document/:id",
     "title": "Delete Document",
     "name": "DeleteDocument",
     "description": "<p>Delete a document.</p>",
@@ -1898,6 +1912,20 @@
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res",
+            "description": "<p>UUID of reservation this document belongs to</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "ftype",
+            "description": "<p>UUID of filetype returned from requirement</p>"
+          },
           {
             "group": "Parameter",
             "type": "UUID",
@@ -1940,7 +1968,7 @@
   },
   {
     "type": "GET",
-    "url": "/document/:query",
+    "url": "reservation/:res/:ftype/document/?owner=:user_id",
     "title": "List All Documents",
     "name": "ListDocument",
     "group": "Document",
@@ -1949,10 +1977,24 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "UUID",
             "optional": false,
-            "field": "query",
-            "description": "<p>query to filter Documents</p>"
+            "field": "res",
+            "description": "<p>UUID of reservation this document belongs to</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "ftype",
+            "description": "<p>UUID of filetype returned from requirement</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>UUID of owner of a document</p>"
           }
         ]
       }
@@ -2025,7 +2067,7 @@
   },
   {
     "type": "GET",
-    "url": "/document/:id",
+    "url": "reservation/:res/:ftype/document/:id",
     "title": "Request Document Info",
     "name": "RequestDocument",
     "description": "<p>Request document information.</p>",
@@ -2033,6 +2075,20 @@
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res",
+            "description": "<p>UUID of reservation this document belongs to</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "ftype",
+            "description": "<p>UUID of filetype returned from requirement</p>"
+          },
           {
             "group": "Parameter",
             "type": "UUID",
@@ -2131,7 +2187,7 @@
   },
   {
     "type": "PUT",
-    "url": "/document/:id",
+    "url": "reservation/:res/:ftype/document/:id",
     "title": "Update Document",
     "name": "UpdateDocument",
     "description": "<p>Update a dicument</p>",
@@ -2143,15 +2199,22 @@
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "id",
-            "description": "<p>UUID of document</p>"
+            "field": "res",
+            "description": "<p>UUID of reservation this document belongs to</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "res",
-            "description": "<p>Reservation UUID</p>"
+            "field": "ftype",
+            "description": "<p>UUID of filetype returned from requirement</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>UUID of document</p>"
           },
           {
             "group": "Parameter",

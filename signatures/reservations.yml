@@ -234,3 +234,91 @@ Reservation/admin:
       res_id:
         type: UUID
         description: Updated reservation UUID.
+  Declare Reservation:
+    path: /reservation/admin/:res_id/declare
+    method: PUT
+    title: Translator's operation to declare a Reservation. (Trans status NOT_STARTED -> ONGOING)
+    description: Translator decalre  a reservation.
+    params:
+      res_id:
+        type: UUID
+        description: Mandatory Reservation UUID
+      translator_id:
+        type: UUID
+        description: Translator id.
+    returns:
+      res_id:
+        type: UUID
+        description: Updated reservation UUID.
+  Declare Reservation:
+    path: /reservation/admin/:res_id/declare
+    method: PUT
+    title: Translator's operation to declare a Reservation. (Trans status NOT_STARTED -> ONGOING)
+    description: Translator decalre  a reservation.
+    params:
+      res_id:
+        type: UUID
+        description: Mandatory Reservation UUID
+      translator_id:
+        type: UUID
+        description: Translator id.
+    returns:
+      res_id:
+        type: UUID
+        description: Updated reservation UUID.
+  Submit Translation for Approval Reservation:
+    path: /reservation/admin/:res_id/submit
+    method: PUT
+    title: Translator's operation to submit a Reservation translation for approval. (Trans status ONGOING -> APPROVING)
+    description: Translator submit a reservation translation for approval.
+    params:
+      res_id:
+        type: UUID
+        description: Mandatory Reservation UUID
+      translator_id:
+        type: UUID
+        description: Translator id.
+    returns:
+      res_id:
+        type: UUID
+        description: Updated reservation UUID.
+  Approve Reservation Translation:
+    path: /reservation/admin/:res_id/approve
+    method: PUT
+    title: Supervisor's operation to approve a Reservation translation. (Trans status APPROVING -> (DIS)APPROVED)
+    description: Translator decalre  a reservation.
+    params:
+      res_id:
+        type: UUID
+        description: Mandatory Reservation UUID
+      approval:
+        type: Boolean
+        description: Whther approve or disapprove.
+    returns:
+      res_id:
+        type: UUID
+        description: Updated reservation UUID.
+  Finish Reservation Translation:
+    path: /reservation/admin/:res_id/finish
+    method: PUT
+    title: Supervisor's operation to finish a Reservation translation. (Trans status APPROVED -> FINISHED)
+    description: Supervisor finish  a reservation translation.
+    params:
+      res_id:
+        type: UUID
+        description: Mandatory Reservation UUID
+      res_id:
+        type: UUID
+        description: Updated reservation UUID.
+  Bulk Update Reservation:
+    path: /reservation/admin/:res_id/bulk
+    method: PUT
+    title: Supervisor's operation to update multiple reseravtions.
+    description: Supervisor update multiple reservations.
+    params:
+      reservations:
+        type: UUID[]
+        description: Mandatory Reservation UUIDs
+      updated_fields:
+        type: Object[]
+        description: Updated reservation fields list, e.g, [{'status':2,'translator_c2e_id':1}], updatable field same as Update API.

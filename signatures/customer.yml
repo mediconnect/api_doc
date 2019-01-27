@@ -52,6 +52,9 @@ Customer:
             type: Number
             description: Mandatory phone number.
     returns:
+      msg:
+        type: String
+        description: Returns "success" if registration is successful
       user_id:
         type: Number
         description: Registered user id.
@@ -59,7 +62,7 @@ Customer:
         type: UUID
         description: Registered customer id.
   CustomerGetProfile:
-    path: /customer/profile/:customer_id
+    path: /customer/profile?id=:customer_id
     method: GET
     title: Customer Get Profile
     description: Request customer infomation.
@@ -93,7 +96,7 @@ Customer:
     title: Customer Update Profile
     description: Update customer profile information.
     params:
-      customer_id:
+      id:
         type: UUID
         description: Mandatory customer id.
       address:

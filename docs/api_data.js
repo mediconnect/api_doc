@@ -4284,6 +4284,125 @@ define({ "api": [
     "groupTitle": "Reservation"
   },
   {
+    "type": "PUT",
+    "url": "/reservation/admin/:res_id/approve",
+    "title": "Supervisor's operation to approve a Reservation translation. (Trans status APPROVING -> (DIS)APPROVED)",
+    "name": "Approve_Reservation_Translation",
+    "description": "<p>Translator decalre  a reservation.</p>",
+    "group": "Reservation_admin",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>Mandatory Reservation UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "approval",
+            "description": "<p>Whther approve or disapprove.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>Updated reservation UUID.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/reservations.py",
+    "groupTitle": "Reservation_admin"
+  },
+  {
+    "type": "PUT",
+    "url": "/reservation/admin/:res_id/bulk",
+    "title": "Supervisor's operation to update multiple reseravtions.",
+    "name": "Bulk_Update_Reservation",
+    "description": "<p>Supervisor update multiple reservations.</p>",
+    "group": "Reservation_admin",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID[]",
+            "optional": false,
+            "field": "reservations",
+            "description": "<p>Mandatory Reservation UUIDs</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object[]",
+            "optional": false,
+            "field": "updated_fields",
+            "description": "<p>Updated reservation fields list, e.g, [{'status':2,'translator_c2e_id':1}], updatable field same as Update API.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/reservations.py",
+    "groupTitle": "Reservation_admin"
+  },
+  {
+    "type": "PUT",
+    "url": "/reservation/admin/:res_id/declare",
+    "title": "Translator's operation to declare a Reservation. (Trans status NOT_STARTED -> ONGOING)",
+    "name": "Declare_Reservation",
+    "description": "<p>Translator decalre  a reservation.</p>",
+    "group": "Reservation_admin",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>Mandatory Reservation UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "translator_id",
+            "description": "<p>Translator id.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>Updated reservation UUID.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/reservations.py",
+    "groupTitle": "Reservation_admin"
+  },
+  {
     "type": "DELETE",
     "url": "/reservation/admin/:res_id",
     "title": "Supervisor's operation to delete a Reservation",
@@ -4341,6 +4460,30 @@ define({ "api": [
     "groupTitle": "Reservation_admin"
   },
   {
+    "type": "PUT",
+    "url": "/reservation/admin/:res_id/finish",
+    "title": "Supervisor's operation to finish a Reservation translation. (Trans status APPROVED -> FINISHED)",
+    "name": "Finish_Reservation_Translation",
+    "description": "<p>Supervisor finish  a reservation translation.</p>",
+    "group": "Reservation_admin",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>Updated reservation UUID.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/reservations.py",
+    "groupTitle": "Reservation_admin"
+  },
+  {
     "type": "GET",
     "url": "/reservation/admin/:query",
     "title": "Staff's operation to list reservations",
@@ -4356,6 +4499,50 @@ define({ "api": [
             "optional": false,
             "field": "query",
             "description": "<p>Query to filter/sort reservation, e.g. /reservation/admin/?first_doctor_name=asd&amp;ordering=-translator_id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>Updated reservation UUID.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/reservations.py",
+    "groupTitle": "Reservation_admin"
+  },
+  {
+    "type": "PUT",
+    "url": "/reservation/admin/:res_id/submit",
+    "title": "Translator's operation to submit a Reservation translation for approval. (Trans status ONGOING -> APPROVING)",
+    "name": "Submit_Translation_for_Approval_Reservation",
+    "description": "<p>Translator submit a reservation translation for approval.</p>",
+    "group": "Reservation_admin",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "res_id",
+            "description": "<p>Mandatory Reservation UUID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "translator_id",
+            "description": "<p>Translator id.</p>"
           }
         ]
       }

@@ -179,8 +179,11 @@ def main(source, cache="build/"):
 
     for fname in all_files:
         module = os.path.basename(fname).split(".")[0]
-        with open(fname, 'r') as yin:
-            y = yaml.load(yin)
+        try:
+            with open(fname, 'r', encoding='utf-8') as yin:
+                y = yaml.load(yin)
+        except Exception as e:
+            raise Exception("%s at %s: %s" % (e.__class__.__name__, fname, e))
             
         apis = [API(*api, group=group) for group, apis in y.items() for api in apis.items()]
         with open(os.path.join(cache, "%s.py" % module), 'w') as fout:

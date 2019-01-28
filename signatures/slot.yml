@@ -28,6 +28,9 @@ Slot:
           week_start:
             type: Date
             description: time of week start
+          timeslot_id:
+            type: UUID
+            description: Time slot id
     errors:
       SlotNotFound:
         description: The combination of <code>hospital_id</code> and <code>disease_id</code>
@@ -42,10 +45,16 @@ Slot:
         type: Object[]
         description: hospital list
         fields:
+          hospital_id:
+            type: UUID
+            description: hospital ID
           disease_list:
             type: Object[]
             description: disease list
             fields:
+              disease_id:
+                type: UUID
+                description: disease ID
               date_slots:
                 type: Object[]
                 description: available slots on dates
@@ -53,22 +62,19 @@ Slot:
                   type:
                     type: String
                     description: '"add" or "change"'
-                  dates:
+                  date:
                     type: Date
                     description: slot date
                   quantity:
                     type: Number
                     description: slot total availablity
-              disease_id:
-                type: UUID
-                description: disease ID
-          hospital_id:
-            type: UUID
-            description: hospital ID
     returns:
       created:
         type: UUID[]
         description: Successfully created slots
+      updated:
+        type: UUID[]
+        description: Successfully updated slots
       error:
         type: Object[]
         description: Slots runs into errors
@@ -82,9 +88,6 @@ Slot:
           time_slot:
             type: UUID
             description: Slot ID runs into errors
-      updated:
-        type: UUID[]
-        description: Successfully updated slots
     errors:
       InvalidAuthorization:
         description: This operation is invalid at this stage.
@@ -114,4 +117,27 @@ Slot:
       slots:
         type: Object[]
         description: Successfully reset slot
+    errors: {}
+  AdminSlotReset:
+    path: /slot/admin/reset
+    method: POST
+    title: Admin reset Slot availablity
+    description: reset a slot
+    params:
+      hospital:
+        type: UUID
+        description: hospital_id
+      disease:
+        type: UUID
+        description: disease_id
+      date:
+        type: Optional<Date>
+        description: date of time_slot to reset
+    returns:
+      time_slot:
+        type: Object
+        description: Successfully reset slot
+      msg:
+        type: String
+        description: communication message
     errors: {}

@@ -5,22 +5,25 @@ Reservation:
     title: Create Reservation
     description: Create Reservation instance, also record the creation time
     params:
-      disease_id:
+      disease:
         type: Number
         description: Mandatory disease ID.
-      hospital_id:
+      hospital:
         type: UUID
         description: Mandatory hospital ID.
-      patient_id:
+      patient:
         type: UUID
         description: Mandatory patient ID.
-      timeslot_id:
+      timeslot:
         type: UUID
         description: Mandatory reservation slot ID.
-      user_id:
+      customer:
         type: UUID
         description: Mandatory customer ID.
-    returns: {}
+    returns:
+      rid:
+        type: String
+        description: reservation ID created
     errors:
       RequiredFieldBlank:
         description: Any mandatory form is blank.
@@ -137,7 +140,7 @@ Reservation:
     errors:
       PaymentFailed:
         description: The payment is not able to be processed.
-Reservation/admin:
+Reservation_admin:
   Update Reservation:
     path: /reservation/admin/:res_id
     method: PUT
@@ -234,7 +237,7 @@ Reservation/admin:
       res_id:
         type: UUID
         description: Updated reservation UUID.
-  Declare Reservation:
+  DeclareReservation:
     path: /reservation/admin/:res_id/declare
     method: PUT
     title: Translator's operation to declare a Reservation. (Trans status NOT_STARTED -> ONGOING)
@@ -250,23 +253,7 @@ Reservation/admin:
       res_id:
         type: UUID
         description: Updated reservation UUID.
-  Declare Reservation:
-    path: /reservation/admin/:res_id/declare
-    method: PUT
-    title: Translator's operation to declare a Reservation. (Trans status NOT_STARTED -> ONGOING)
-    description: Translator decalre  a reservation.
-    params:
-      res_id:
-        type: UUID
-        description: Mandatory Reservation UUID
-      translator_id:
-        type: UUID
-        description: Translator id.
-    returns:
-      res_id:
-        type: UUID
-        description: Updated reservation UUID.
-  Submit Translation for Approval Reservation:
+  SubmitTranslationForApprovalReservation:
     path: /reservation/admin/:res_id/submit
     method: PUT
     title: Translator's operation to submit a Reservation translation for approval. (Trans status ONGOING -> APPROVING)
@@ -282,7 +269,7 @@ Reservation/admin:
       res_id:
         type: UUID
         description: Updated reservation UUID.
-  Approve Reservation Translation:
+  ApproveReservationTranslation:
     path: /reservation/admin/:res_id/approve
     method: PUT
     title: Supervisor's operation to approve a Reservation translation. (Trans status APPROVING -> (DIS)APPROVED)
@@ -298,7 +285,7 @@ Reservation/admin:
       res_id:
         type: UUID
         description: Updated reservation UUID.
-  Finish Reservation Translation:
+  FinishReservationTranslation:
     path: /reservation/admin/:res_id/finish
     method: PUT
     title: Supervisor's operation to finish a Reservation translation. (Trans status APPROVED -> FINISHED)
@@ -307,11 +294,15 @@ Reservation/admin:
       res_id:
         type: UUID
         description: Mandatory Reservation UUID
-      res_id:
-        type: UUID
-        description: Updated reservation UUID.
-  Bulk Update Reservation:
-    path: /reservation/admin/:res_id/bulk
+    returns:
+      msg:
+        type: String
+        description: communication message
+      res_obj:
+        type: Object
+        description: Finalized Reservation Object
+  BulkUpdateReservation:
+    path: /reservation/admin/bulk
     method: PUT
     title: Supervisor's operation to update multiple reseravtions.
     description: Supervisor update multiple reservations.
@@ -322,3 +313,8 @@ Reservation/admin:
       updated_fields:
         type: Object[]
         description: Updated reservation fields list, e.g, [{'status':2,'translator_c2e_id':1}], updatable field same as Update API.
+    returns:
+      reservations:
+        type: Object[]
+        description: Updated reservation.
+  

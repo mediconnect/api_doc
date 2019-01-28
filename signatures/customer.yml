@@ -156,3 +156,15 @@ Customer:
       customer_id:
         type: String
         description: Mandatory customer UUID.
+  ContactUs:
+    path: /customer/contact
+    method: POST
+    title: Customer Contact Us
+    description: Handle request for customer contact us
+    params:
+      email:
+        type: String
+        description: Mandatory customer email for reply.
+      message:
+        type: String
+        description: Customer filled message in the frontend contact us page.

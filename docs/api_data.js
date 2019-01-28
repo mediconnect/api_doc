@@ -801,6 +801,37 @@ define({ "api": [
   },
   {
     "type": "POST",
+    "url": "/customer/contact",
+    "title": "Customer Contact Us",
+    "name": "ContactUs",
+    "description": "<p>Handle request for customer contact us</p>",
+    "group": "Customer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory customer email for reply.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Customer filled message in the frontend contact us page.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/customer.py",
+    "groupTitle": "Customer"
+  },
+  {
+    "type": "POST",
     "url": "/customer/dev/verify",
     "title": "Customer Dev Verification",
     "name": "CustomerDevVerify",
@@ -1653,7 +1684,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "disease.types",
-            "description": "<p>Disease type 就诊科室</p>"
+            "description": "<p>Disease type �������</p>"
           },
           {
             "group": "Success 200",
@@ -1766,7 +1797,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "diseases.types",
-            "description": "<p>Disease type 就诊科室</p>"
+            "description": "<p>Disease type �������</p>"
           },
           {
             "group": "Success 200",
@@ -3460,6 +3491,105 @@ define({ "api": [
   },
   {
     "type": "POST",
+    "url": "/supervisor/questionnaire/:hospital_id/:disease_id/:category",
+    "title": "Create Questionnaire",
+    "name": "CreateQuestionnaire",
+    "description": "<p>Create a Questionnaire.</p>",
+    "group": "Questionnaire",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "category",
+            "description": "<p>Mandatory questionnaire category.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String[]",
+            "optional": false,
+            "field": "choices",
+            "description": "<p>Mandatory quesiton choices.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String[]",
+            "optional": false,
+            "field": "contents",
+            "description": "<p>Mandatory quesiton contents.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "disease_id",
+            "description": "<p>Mandatory Disease ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String[]",
+            "optional": false,
+            "field": "formats",
+            "description": "<p>Mandatory question formats.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "hospital_id",
+            "description": "<p>Mandatory Hospital ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory translator assigned ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "questionnaire_id",
+            "description": "<p>Questionnaire ID.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "RequiredFieldBlank",
+            "description": "<p>Any mandatory form is blank.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "TranslatorNotFound",
+            "description": "<p>The requested <code>id</code> of translator is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Questionnaire"
+  },
+  {
+    "type": "POST",
     "url": "/questionnaire/admin",
     "title": "Create Questionnaire",
     "name": "CreateQuestionnaire",
@@ -3759,6 +3889,155 @@ define({ "api": [
   },
   {
     "type": "GET",
+    "url": "/supervisor/questionnaire/:hospital_id/:disease_id/:category",
+    "title": "Request Questionnaire",
+    "name": "RequestQuestionnaire",
+    "description": "<p>Request questionnaire information.</p>",
+    "group": "Questionnaire",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "category",
+            "description": "<p>Mandatory questionnaire category.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "disease_id",
+            "description": "<p>Mandatory Disease ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "hospital_id",
+            "description": "<p>Mandatory Hospital ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "choices",
+            "description": "<p>Quesiton choices.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "contents",
+            "description": "<p>Quesiton contents.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "document",
+            "description": "<p>Questionnaire Document.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "formats",
+            "description": "<p>Question formats.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>The id of translator assigned.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "translated",
+            "description": "<p>Whther the questionnaire has been translated.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "QuestionnaireNotFound",
+            "description": "<p>The requested <code>id</code> of questionnaire is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Questionnaire"
+  },
+  {
+    "type": "GET",
+    "url": "/translator/questionnaire/:id",
+    "title": "Request Questionnaire",
+    "name": "RequestQuestionnaire",
+    "description": "<p>Request questionnaire information.</p>",
+    "group": "Questionnaire",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique Questionnaire ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "document",
+            "description": "<p>Questionnaire Document.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "QuestionnaireNotFound",
+            "description": "<p>The requested <code>id</code> of questionnaire is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/translator.py",
+    "groupTitle": "Questionnaire"
+  },
+  {
+    "type": "GET",
     "url": "/questionnaire/:token",
     "title": "Questionnaire based on token",
     "name": "RequestQuetionnaire",
@@ -3871,6 +4150,156 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "build/questionnaire.py",
+    "groupTitle": "Questionnaire"
+  },
+  {
+    "type": "PUT",
+    "url": "/supervisor/questionnaire/:hospital_id/:disease_id/:category",
+    "title": "Update Questionnaire",
+    "name": "UpdateQuestionnaire",
+    "description": "<p>Update a Questionnaire.</p>",
+    "group": "Questionnaire",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "category",
+            "description": "<p>Mandatory questionnaire category.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String[]",
+            "optional": true,
+            "field": "choices",
+            "description": "<p>Optional quesiton choices.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String[]",
+            "optional": true,
+            "field": "contents",
+            "description": "<p>Optional quesiton contents.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "disease_id",
+            "description": "<p>Mandatory Disease ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String[]",
+            "optional": true,
+            "field": "formats",
+            "description": "<p>Optional question formats.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "hospital_id",
+            "description": "<p>Mandatory Hospital ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "id",
+            "description": "<p>Optional translator assigned ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "questionnaire_id",
+            "description": "<p>Questionnaire ID.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "QuestionnaireNotFound",
+            "description": "<p>The requested <code>id</code> of questionnaire is not found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "TranslatorNotFound",
+            "description": "<p>The requested <code>id</code> of translator is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Questionnaire"
+  },
+  {
+    "type": "PUT",
+    "url": "/translator/questionnaire/:id",
+    "title": "Update Questionnaire",
+    "name": "UpdateQuestionnaire",
+    "description": "<p>Update questionnaire with translated document.</p>",
+    "group": "Questionnaire",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "document",
+            "description": "<p>Mandatory Questionnaire Document.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique Questionnaire ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Mandatory token for authorization.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "QuestionnaireNotFound",
+            "description": "<p>The requested <code>id</code> of questionnaire is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/translator.py",
     "groupTitle": "Questionnaire"
   },
   {
@@ -4153,36 +4582,49 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "disease_id",
+            "field": "disease",
             "description": "<p>Mandatory disease ID.</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "hospital_id",
+            "field": "hospital",
             "description": "<p>Mandatory hospital ID.</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "patient_id",
+            "field": "patient",
             "description": "<p>Mandatory patient ID.</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "timeslot_id",
+            "field": "timeslot",
             "description": "<p>Mandatory reservation slot ID.</p>"
           },
           {
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "user_id",
+            "field": "customer",
             "description": "<p>Mandatory customer ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rid",
+            "description": "<p>reservation ID created</p>"
           }
         ]
       }
@@ -4287,7 +4729,7 @@ define({ "api": [
     "type": "PUT",
     "url": "/reservation/admin/:res_id/approve",
     "title": "Supervisor's operation to approve a Reservation translation. (Trans status APPROVING -> (DIS)APPROVED)",
-    "name": "Approve_Reservation_Translation",
+    "name": "ApproveReservationTranslation",
     "description": "<p>Translator decalre  a reservation.</p>",
     "group": "Reservation_admin",
     "parameter": {
@@ -4329,9 +4771,9 @@ define({ "api": [
   },
   {
     "type": "PUT",
-    "url": "/reservation/admin/:res_id/bulk",
+    "url": "/reservation/admin/bulk",
     "title": "Supervisor's operation to update multiple reseravtions.",
-    "name": "Bulk_Update_Reservation",
+    "name": "BulkUpdateReservation",
     "description": "<p>Supervisor update multiple reservations.</p>",
     "group": "Reservation_admin",
     "parameter": {
@@ -4354,6 +4796,19 @@ define({ "api": [
         ]
       }
     },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "reservations",
+            "description": "<p>Updated reservation.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "build/reservations.py",
     "groupTitle": "Reservation_admin"
@@ -4362,7 +4817,7 @@ define({ "api": [
     "type": "PUT",
     "url": "/reservation/admin/:res_id/declare",
     "title": "Translator's operation to declare a Reservation. (Trans status NOT_STARTED -> ONGOING)",
-    "name": "Declare_Reservation",
+    "name": "DeclareReservation",
     "description": "<p>Translator decalre  a reservation.</p>",
     "group": "Reservation_admin",
     "parameter": {
@@ -4463,7 +4918,7 @@ define({ "api": [
     "type": "PUT",
     "url": "/reservation/admin/:res_id/finish",
     "title": "Supervisor's operation to finish a Reservation translation. (Trans status APPROVED -> FINISHED)",
-    "name": "Finish_Reservation_Translation",
+    "name": "FinishReservationTranslation",
     "description": "<p>Supervisor finish  a reservation translation.</p>",
     "group": "Reservation_admin",
     "parameter": {
@@ -4474,7 +4929,27 @@ define({ "api": [
             "type": "UUID",
             "optional": false,
             "field": "res_id",
-            "description": "<p>Updated reservation UUID.</p>"
+            "description": "<p>Mandatory Reservation UUID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>communication message</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "res_obj",
+            "description": "<p>Finalized Reservation Object</p>"
           }
         ]
       }
@@ -4524,7 +4999,7 @@ define({ "api": [
     "type": "PUT",
     "url": "/reservation/admin/:res_id/submit",
     "title": "Translator's operation to submit a Reservation translation for approval. (Trans status ONGOING -> APPROVING)",
-    "name": "Submit_Translation_for_Approval_Reservation",
+    "name": "SubmitTranslationForApprovalReservation",
     "description": "<p>Translator submit a reservation translation for approval.</p>",
     "group": "Reservation_admin",
     "parameter": {
@@ -4857,6 +5332,64 @@ define({ "api": [
     "groupTitle": "Search"
   },
   {
+    "type": "POST",
+    "url": "/slot/admin/reset",
+    "title": "Admin reset Slot availablity",
+    "name": "AdminSlotReset",
+    "description": "<p>reset a slot</p>",
+    "group": "Slot",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "hospital",
+            "description": "<p>hospital_id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "disease",
+            "description": "<p>disease_id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Date",
+            "optional": true,
+            "field": "date",
+            "description": "<p>date of time_slot to reset</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "time_slot",
+            "description": "<p>Successfully reset slot</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>communication message</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/slot.py",
+    "groupTitle": "Slot"
+  },
+  {
     "type": "PUT",
     "url": "/slot/admin/:slot_id",
     "title": "Admin Update Slot availablity",
@@ -4981,6 +5514,13 @@ define({ "api": [
             "optional": false,
             "field": "available.week_start",
             "description": "<p>time of week start</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "available.timeslot_id",
+            "description": "<p>Time slot id</p>"
           }
         ]
       }
@@ -5021,10 +5561,24 @@ define({ "api": [
           },
           {
             "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "hospital_list.hospital_id",
+            "description": "<p>hospital ID</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "Object[]",
             "optional": false,
             "field": "hospital_list.disease_list",
             "description": "<p>disease list</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "hospital_list.disease_list.disease_id",
+            "description": "<p>disease ID</p>"
           },
           {
             "group": "Parameter",
@@ -5044,7 +5598,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "Date",
             "optional": false,
-            "field": "hospital_list.disease_list.date_slots.dates",
+            "field": "hospital_list.disease_list.date_slots.date",
             "description": "<p>slot date</p>"
           },
           {
@@ -5053,20 +5607,6 @@ define({ "api": [
             "optional": false,
             "field": "hospital_list.disease_list.date_slots.quantity",
             "description": "<p>slot total availablity</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "hospital_list.disease_list.disease_id",
-            "description": "<p>disease ID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "UUID",
-            "optional": false,
-            "field": "hospital_list.hospital_id",
-            "description": "<p>hospital ID</p>"
           }
         ]
       }
@@ -5080,6 +5620,13 @@ define({ "api": [
             "optional": false,
             "field": "created",
             "description": "<p>Successfully created slots</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID[]",
+            "optional": false,
+            "field": "updated",
+            "description": "<p>Successfully updated slots</p>"
           },
           {
             "group": "Success 200",
@@ -5108,13 +5655,6 @@ define({ "api": [
             "optional": false,
             "field": "error.time_slot",
             "description": "<p>Slot ID runs into errors</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "UUID[]",
-            "optional": false,
-            "field": "updated",
-            "description": "<p>Successfully updated slots</p>"
           }
         ]
       }
@@ -5818,6 +6358,1102 @@ define({ "api": [
   },
   {
     "type": "POST",
+    "url": "/supervisor/register",
+    "title": "Create Supervisor",
+    "name": "CreateSupervisor",
+    "description": "<p>Create a supervisor type of user.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>Mandatory address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Mandatory name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password_confirmation",
+            "description": "<p>Mandatory confirmation password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "tel",
+            "description": "<p>Mandatory phone number.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Registered supervisor id.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "EmailAlreadyExists",
+            "description": "<p>The email exists in the DB.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "PasswordDoesNotMath",
+            "description": "<p>The password does not match password_confirmation.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "RequiredFieldBlank",
+            "description": "<p>Any mandatory form is blank.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "POST",
+    "url": "/supervisor/register/translator",
+    "title": "SUpervisor's operation to create Translator",
+    "name": "CreateTranslator",
+    "description": "<p>Create a translator type of user.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>Mandatory address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Mandatory name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password_confirmation",
+            "description": "<p>Mandatory confirmation password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "tel",
+            "description": "<p>Mandatory phone number.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Registered translator id.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "EmailAlreadyExists",
+            "description": "<p>The email exists in the DB.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "PasswordDoesNotMath",
+            "description": "<p>The password does not match password_confirmation.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "RequiredFieldBlank",
+            "description": "<p>Any mandatory form is blank.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "POST",
+    "url": "/supervisor/create",
+    "title": "Create User",
+    "name": "CreateUser",
+    "description": "<p>Create a supervisor type of user.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>Mandatory address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Mandatory name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password_confirmation",
+            "description": "<p>Mandatory confirmation password.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "role",
+            "description": "<p>Mandatory user type.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "tel",
+            "description": "<p>Mandatory phone number.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Registered supervisor id.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "EmailAlreadyExists",
+            "description": "<p>The email exists in the DB.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "PasswordDoesNotMath",
+            "description": "<p>The password does not match password_confirmation.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "RequiredFieldBlank",
+            "description": "<p>Any mandatory form is blank.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "DELETE",
+    "url": "/supervisor/user/",
+    "title": "Delete",
+    "name": "Delete",
+    "description": "<p>Delete user.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory unique User ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Mandatory token for authorizing operation.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "AuthorizationFailed",
+            "description": "<p>The operation is not authorized.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The <code>id</code> of the user was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "GET",
+    "url": "/supervisor/user/:role/:query",
+    "title": "Request list of User",
+    "name": "ListCustomers",
+    "description": "<p>Request a list of customers based on query.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter/sort the customers.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "role",
+            "description": "<p>Type of users to list.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Pagination.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "total_page",
+            "description": "<p>Total pages.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "users",
+            "description": "<p>List of filterd/sorted users.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "GET",
+    "url": "/supervisor/reservations/:query",
+    "title": "Request list of Reservations",
+    "name": "ListReservation",
+    "description": "<p>Request a list of reservation based on query.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter/sort the reservations.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Pagination.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "reservations",
+            "description": "<p>List of filtered/sorted reservations.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "total_page",
+            "description": "<p>Total pages.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "GET",
+    "url": "/supervisor/reservation/documents/:id/:type",
+    "title": "Request Documents associated with a Reservation",
+    "name": "ReservationDocuments",
+    "description": "<p>Request the documents associated with a reservation.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Document type</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Reservation unique ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "documents",
+            "description": "<p>List of Document Objects</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "ReservationNotFound",
+            "description": "<p>The required <code>id</code> of reservation is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "GET",
+    "url": "/supervisor/reservation/:id",
+    "title": "Request info of a Reservation",
+    "name": "ReservationInfo",
+    "description": "<p>Request the inf of a Reservation.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID of a Reservation.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "reservation",
+            "description": "<p>Reservation Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "reservation.deadline",
+            "description": "<p>Reservation deadline to upload to hospital.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reservation.id",
+            "description": "<p>Reservation unique id.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "reservation.last_upload",
+            "description": "<p>Last upload DateTime of documents associated.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.name",
+            "description": "<p>Reservation_patient name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "reservation.re_assigned",
+            "description": "<p>Whether reservation has been reassigned.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.status",
+            "description": "<p>Reservation status.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "reservation.trans_deadline",
+            "description": "<p>Reservation translating deadline.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.trans_status",
+            "description": "<p>Reservation translating status.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.translator_C2E_name",
+            "description": "<p>C2E_Translator name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.translator_E2C_name",
+            "description": "<p>E2C_Translaotr name.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "ReservationNotFound",
+            "description": "<p>The required <code>id</code> of reservation is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "POST",
+    "url": "/supervisor/questionnaire_link",
+    "title": "Send qestionnaire link via email",
+    "name": "SendQuestionnaireLink",
+    "description": "<p>Send reset link to users.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email_address",
+            "description": "<p>Mandatory to_email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory unique User id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "reservation_id",
+            "description": "<p>Mandatory unique Reservation id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Mandatory hashed token for temporary reset link.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "RequiredFieldBlank",
+            "description": "<p>Any mandatory form is blank.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "POST",
+    "url": "/supervisor/reset_link",
+    "title": "Send reset link via email",
+    "name": "SendResetLink",
+    "description": "<p>Send reset link to users.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email_address",
+            "description": "<p>Mandatory to_email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory unique User id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Mandatory hashed token for temporary reset link.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "RequiredFieldBlank",
+            "description": "<p>Any mandatory form is blank.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "POST",
+    "url": "/supervisor/login/",
+    "title": "Supervisor Login",
+    "name": "SupervisorLogin",
+    "description": "<p>Handle supervisor login request.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "GET",
+    "url": "/summary",
+    "title": "Summarize Website Stats",
+    "name": "SupervisorSummary",
+    "description": "<p>Request a summary of the website's stats.</p>",
+    "group": "Supervisor",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "summary",
+            "description": "<p>Whatever summary we want to display for the supervisor.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "PUT",
+    "url": "/supervisor/user/",
+    "title": "Update User Info",
+    "name": "UpdateUser",
+    "description": "<p>Update user info.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "address",
+            "description": "<p>Optional User address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "age",
+            "description": "<p>Optional] Optional User age.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "email",
+            "description": "<p>Optional User email.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "first_name",
+            "description": "<p>Optional User first name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "gender",
+            "description": "<p>Optional User gender.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory unique User ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "last_name",
+            "description": "<p>Optional User last name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "phone",
+            "description": "<p>Optional User phone.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "qq",
+            "description": "<p>Optional User qq.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Mandatory token for authorizing operation.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "wechat",
+            "description": "<p>Optional User wechat.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "AuthorizationFailed",
+            "description": "<p>The operation is not authorized.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The <code>id</code> of the user was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "GET",
+    "url": "/supervisor/user/",
+    "title": "Request User Info",
+    "name": "UserInfo",
+    "description": "<p>Request user info.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory unique User ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>User Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.address",
+            "description": "<p>Mandatory User address.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "user.age",
+            "description": "<p>Optional User age.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.email",
+            "description": "<p>Mandatory User email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.first_name",
+            "description": "<p>Mandatory User first name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "user.gender",
+            "description": "<p>Optional User gender.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.last_name",
+            "description": "<p>Mandatory User last name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.phone",
+            "description": "<p>Mandatory User phone.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "user.qq",
+            "description": "<p>Optional User qq.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "user.wechat",
+            "description": "<p>Optional User wechat.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>The <code>id</code> of the user was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "POST",
+    "url": "/supervisor/password",
+    "title": "Validate password",
+    "name": "ValidatePassword",
+    "description": "<p>Validate supervisor's password input to authorize operations.</p>",
+    "group": "Supervisor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique Supervisor ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "status_code",
+            "description": "<p>Optional status code for stage control</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "token",
+            "description": "<p>A token that can be verified at backend to grant operation</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "SupervisorNotFound",
+            "description": "<p>The requested <code>id</code> of supervisor is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/supervisor.py",
+    "groupTitle": "Supervisor"
+  },
+  {
+    "type": "POST",
     "url": "/transaction/",
     "title": "Create a Transaction",
     "name": "CreateTransaction",
@@ -6184,5 +7820,257 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "build/transaction.py",
     "groupTitle": "Transaction"
+  },
+  {
+    "type": "GET",
+    "url": "/translator/reservations/:query",
+    "title": "Request list of Reservations",
+    "name": "ListReservation",
+    "description": "<p>Request a list of reservation based on query.</p>",
+    "group": "Translator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "query",
+            "description": "<p>Query to filter/sort the reservations.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Pagination.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "reservations",
+            "description": "<p>List of filterd/sorted reservations.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "total_page",
+            "description": "<p>Total pages.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/translator.py",
+    "groupTitle": "Translator"
+  },
+  {
+    "type": "GET",
+    "url": "/translator/reservation/:id",
+    "title": "Request info of a Reservation",
+    "name": "ReservationInfo",
+    "description": "<p>Request the informaiton of a Reservation.</p>",
+    "group": "Translator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID of a Reservation.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Reservation_patient name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "reservation",
+            "description": "<p>Reservation Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reservation.id",
+            "description": "<p>Reservation unique id.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "reservation.last_upload",
+            "description": "<p>Last upload DateTime of documents associated.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.name",
+            "description": "<p>Hospital name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "reservation.trans_deadline",
+            "description": "<p>Reservation translating deadline.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "reservation.translator_C2E_name",
+            "description": "<p>C2E_Translator name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "reservation.translator_E2C_name",
+            "description": "<p>E2C_Translaotr name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "trans_status",
+            "description": "<p>Reservation translating status.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "ReservationNotFound",
+            "description": "<p>The required <code>id</code> of reservation is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/translator.py",
+    "groupTitle": "Translator"
+  },
+  {
+    "type": "POST",
+    "url": "/translator/login/",
+    "title": "Translator Login",
+    "name": "TranslatorLogin",
+    "description": "<p>Handle translator login request.</p>",
+    "group": "Translator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/translator.py",
+    "groupTitle": "Translator"
+  },
+  {
+    "type": "POST",
+    "url": "/translator/password",
+    "title": "Validate password",
+    "name": "ValidatePassword",
+    "description": "<p>Validate translaotr's password input to authorize operations.</p>",
+    "group": "Translator",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique Translator ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "status_code",
+            "description": "<p>Optional status code for stage control</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token generated for authorization</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "TranslatorNotFound",
+            "description": "<p>The requested <code>id</code> of translator is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/translator.py",
+    "groupTitle": "Translator"
   }
 ] });

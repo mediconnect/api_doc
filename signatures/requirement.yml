@@ -1,20 +1,59 @@
 Requirement:
-  DocumentRequirement:
-    path: /requirement/:hospital_id/:disease_id
-    method: GET
-    title: Request Document Requirement
-    description: Display document requirement.
+  AlterRequirement:
+    path: /requirement/alter
+    method: POST
+    title: Alter/Create a document requirement
+    description: Alter/Create a document requirement.
     params:
       disease_id:
-        type: Number
+        type: UUID
         description: Disease ID
       hospital_id:
-        type: Number
+        type: UUID
+        description: Hospital ID
+      types:
+        type: Number[]
+        description: List of IDs of file type (ftype) for this requirement
+    returns:
+      obsolete_types:
+        type: Number[]
+        description: List of IDs of obsolete file types
+      created:
+        type: Object
+        description: Current status of the requirement
+        fields:
+          disease_id:
+            type: UUID
+            description: Disease ID
+          hospital_id:
+            type: UUID
+            description: Hospital ID
+          types:
+            type: Number[]
+            description: IDs of required document types. This field will be changed to UUID[] soon.
+
+  GetRequirement:
+    path: /requirement/:hospital_id/:disease_id
+    method: GET
+    title: Get a specific document requirement
+    description: Display a document requirement.
+    params:
+      disease_id:
+        type: UUID
+        description: Disease ID
+      hospital_id:
+        type: UUID
         description: Hospital ID
     returns:
-      requirements:
-        type: String[]
-        description: Document requirements for this combination of Hospital and Disease.
+      disease_id:
+        type: UUID
+        description: Disease ID
+      hospital_id:
+        type: UUID
+        description: Hospital ID
+      types:
+        type: Number[]
+        description: IDs of required document types. This field will be changed to UUID soon.
     errors:
       RequirementNotFound:
         description: The combination of <code>hospital_id</code> and <code>disease_id</code>

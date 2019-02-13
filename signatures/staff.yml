@@ -60,9 +60,9 @@ Staff:
         description: Total number of reservations.
     errors: {}
   StaffAssignment:
-    path: staff/assignemnt/:staff_id/:query
+    path: staff/:staff_id/assignment
     method: GET
-    title: Staff Assignemnt
+    title: Staff Assignmnt
     description: Request a list of staff's assignments (reservations).
     params: 
       staff_id:

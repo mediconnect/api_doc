@@ -170,7 +170,7 @@ Question:
     path: questionnaire/admin/:questionnaire/question/:question
     method: GET
     title: Question Info
-    description: Request information about a quesiton
+    description: Request information about a 
     params:
       questionnaire:
         type: UUID
@@ -188,7 +188,7 @@ Question:
             description: Question content
           format:
             type: Number
-            description: Quesiton format code.
+            description:  format code.
     errors:
       QuestionnaireNotFound:
         description: The required <code>id</code> of questionnaire is not found.
@@ -253,7 +253,7 @@ Question:
   ListQuestion:
     path: questionnaire/admin/:questionnaire/question/:query
     method: GET
-    title: List of Quesiton of Questionnaire
+    title: List of Question of Questionnaire
     description: Request a list of questions of a questionnaire.
     params:
       questionnaire:

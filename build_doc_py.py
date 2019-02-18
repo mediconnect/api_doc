@@ -186,7 +186,7 @@ def main(source, cache="build/"):
             raise Exception("%s at %s: %s" % (e.__class__.__name__, fname, e))
             
         apis = [API(*api, group=group) for group, apis in y.items() for api in apis.items()]
-        with open(os.path.join(cache, "%s.py" % module), 'w') as fout:
+        with open(os.path.join(cache, "%s.py" % module), 'w',encoding='utf-8') as fout:
             for api in apis:
                 _ = fout.write('"""\n%s\n"""\n\n' % api)
                 fout.flush()

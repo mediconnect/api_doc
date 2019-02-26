@@ -21,6 +21,9 @@ Staff:
       role:
         type: String
         description: Role of  authorized staff
+      msg:
+        type: String
+        description: I don't know what it is nor why we are returning it
     errors: {}
   StaffLogout:
     path: /staff/logout
@@ -37,7 +40,7 @@ Staff:
     path: staff/:staff_id/summary
     method: GET
     title: Summarize Website Stats
-    description: Request a summary of the website's stats.
+    description: Request a summary of the staff's stats.
     params: 
       staff_id:
         type: UUID
@@ -57,9 +60,9 @@ Staff:
         description: Total number of reservations.
     errors: {}
   StaffAssignment:
-    path: staff/assignemnt/:staff_id/:query
+    path: staff/:staff_id/assignment
     method: GET
-    title: Staff Assignemnt
+    title: Staff Assignmnt
     description: Request a list of staff's assignments (reservations).
     params: 
       staff_id:
@@ -93,14 +96,11 @@ Staff:
             description: Unique ID for hospital.
     errors: {}
   CreateUser:
-    path: /supervisor/user
+    path: /staff/user
     method: POST
     title: Create a User
     description: Create a user.
     params:
-      address:
-        type: optional<String>
-        description: Optional address.
       email:
         type: String
         description: Mandatory email address.
@@ -126,9 +126,46 @@ Staff:
         type: Optional<Number>
         description: 0 for customer, 1 for c2e trans, 2 for e2c trans, 3 for sup, default 0
     returns:
-      user_id:
-        type: UUID
-        description: Created user id.
+      user:
+        type: Object
+        description: User Object.
+        fields:
+          id:
+            type: UUID
+            description: Created user id.
+          username:
+            type: String
+            description: 
+          first_name:
+            type: String
+            description: 
+          last_name:
+            type: String
+            description: 
+          email:
+            type: String
+            description: 
+          is_active:
+            type: Boolean
+            description: Whether this user has been verified and is active
+          is_staff:
+            type: Boolean
+            description: Whether this user is a is staff
+          is_superuser:
+            type: Boolean
+            description: Whether this user is a superuser
+          date_joined:
+            type: Datetime
+            description: 
+          last_login:
+            type: Datetime
+            description: 
+          groups:
+            type: String[]
+            description: Groups that this user belongs to
+          user_permissions:
+            type: String[]
+            description: Permissions that this user has
     errors:
       EmailAlreadyExists:
         description: The email exists in the DB.
@@ -137,7 +174,7 @@ Staff:
       RequiredFieldBlank:
         description: Any mandatory form is blank.
   ListUser:
-    path: /supervisor/user/:query
+    path: /staff/user/:query
     method: GET
     title: Request list of User
     description: Request a list of users based on query.
@@ -151,7 +188,7 @@ Staff:
         description: List of filterd/sorted users.
     errors: {}
   UserInfo:
-    path: /supervisor/user/:id
+    path: /staff/user/:id
     method: GET
     title: Request User Info
     description: Request user info.
@@ -163,39 +200,11 @@ Staff:
       user:
         type: Object
         description: User Object.
-        fields:
-          address:
-            type: String
-            description: Mandatory User address.
-          age:
-            type: Optional<Number>
-            description: Optional User age.
-          email:
-            type: String
-            description: Mandatory User email.
-          first_name:
-            type: String
-            description: Mandatory User first name.
-          gender:
-            type: Optional<String>
-            description: Optional User gender.
-          last_name:
-            type: String
-            description: Mandatory User last name.
-          phone:
-            type: String
-            description: Mandatory User phone.
-          qq:
-            type: Optional<String>
-            description: Optional User qq.
-          wechat:
-            type: Optional<String>
-            description: Optional User wechat.
     errors:
       UserNotFound:
         description: The <code>id</code> of the user was not found.
   UpdateUser:
-    path: /supervisor/user/
+    path: /staff/user/
     method: POST
     title: Update User Info
     description: Update user info.
@@ -234,16 +243,16 @@ Staff:
         type: optional<String>
         description: Optional User wechat.
     returns: 
-      user_id:
-        type: UUID
-        description: Updated user UUID
+      msg:
+        type: String
+        description: I don't know what it is nor why we are returning it
     errors:
       AuthorizationFailed:
         description: The operation is not authorized.
       UserNotFound:
         description: The <code>id</code> of the user was not found.
   DeleteUser:
-    path: /supervisor/user/:id
+    path: /staff/user/:id
     method: DELETE
     title: Delete User
     description: Delete user.
@@ -255,9 +264,9 @@ Staff:
         type: String
         description: Mandatory token for authorizing operation.
     returns: 
-      user_id:
-        type: UUID
-        description: Deleted user UUID
+      msg:
+        type: String
+        description: I don't know what it is nor why we are returning it
     errors:
       UserNotFound:
         description: The <code>id</code> of the user was not found.

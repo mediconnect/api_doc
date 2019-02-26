@@ -1,0 +1,93 @@
+Filetype:
+  CreateFileType:
+    path: /ftype/create
+    method: POST
+    title: Create a file type
+    description: Create a file type
+    params:
+      name:
+        type: String
+        description: name of the ftype. e.g. passport
+      description:
+        type: String
+        description: Description of the file type. e.g. 护照扫描件
+    returns:
+      id:
+        type: Number
+        description: Ftype ID. This will be changed to UUID soon.
+      name:
+        type: String
+        description: Name of the ftype. e.g. passport 
+      description:
+        type: String
+        description: Description of the file type. e.g. 护照扫描件
+      obsolete:
+        type: Boolean
+        description: Whether this ftype is obsolete and not used anymore.
+      extensions:
+        type: String
+        description: This field is currently unused
+      limit:
+        type: Number
+        description: This field is currently unused
+
+  GetFileType:
+    path: /ftype/:ftid/get
+    method: GET
+    title: Get a specific file type
+    description: et a specific file type
+    params:
+      ftid:
+        type: Number
+        description: ID of the file type to get
+    returns:
+      id:
+        type: Number
+        description: Ftype ID. This will be changed to UUID soon.
+      name:
+        type: String
+        description: Name of the ftype. e.g. passport 
+      description:
+        type: String
+        description: Description of the file type. e.g. 护照扫描件
+      obsolete:
+        type: Boolean
+        description: Whether this ftype is obsolete and not used anymore.
+      extensions:
+        type: String
+        description: This field is currently unused
+      limit:
+        type: Number
+        description: This field is currently unused
+    errors:
+      FTypeNotFound:
+        description: The requested ftype was not found.
+
+  RetireFileType:
+    path: /ftype/:ftid/retire
+    method: POST
+    title: Retire (obsolete) a file type
+    description: Retire (obsolete) a file type.
+    params:
+      ftid:
+        type: Number
+        description: ID of the file type to retire
+    returns:
+      id:
+        type: Number
+        description: Ftype ID. This will be changed to UUID soon.
+      name:
+        type: String
+        description: Name of the ftype. e.g. passport 
+      description:
+        type: String
+        description: Description of the file type. e.g. 护照扫描件
+      obsolete:
+        type: Boolean
+        description: Whether this ftype is obsolete and not used anymore.
+      extensions:
+        type: String
+        description: This field is currently unused
+      limit:
+        type: Number
+        description: This field is currently unused

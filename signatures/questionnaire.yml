@@ -85,8 +85,6 @@ Questionnaire:
         type: UUID
         description: Questionnaire ID.
     errors:
-      QuestionnaireNotFound:
-        description: The requested <code>id</code> of questionnaire is not found.
       TranslatorNotFound:
         description: The requested <code>id</code> of translator is not found.
   UpdateQuestionnaire:
@@ -172,7 +170,7 @@ Question:
     path: questionnaire/admin/:questionnaire/question/:question
     method: GET
     title: Question Info
-    description: Request information about a quesiton
+    description: Request information about a 
     params:
       questionnaire:
         type: UUID
@@ -190,14 +188,14 @@ Question:
             description: Question content
           format:
             type: Number
-            description: Quesiton format code.
+            description:  format code.
     errors:
       QuestionnaireNotFound:
         description: The required <code>id</code> of questionnaire is not found.
       QuestionNotFound:
         description: The required <code>id</code> of question is not found.
   CreateQuestion:
-    path: questionnaire/admin/:questionnaire/question
+    path: questionnaire/admin/:questionnaire_id/question
     method: POST
     title: Create Question
     description: Create a question
@@ -205,9 +203,9 @@ Question:
       content:
         type: String
         description: Question content
-      formaat:
+      format:
         type: Number
-        description: Quesiton format code.
+        description: Question format code.
       # token:
       #   type: String
       #   description: Toekn to authorize operation.
@@ -237,7 +235,7 @@ Question:
         description: Question content
       formaat:
         type: Number
-        description: Quesiton format code.
+        description: Question format code.
       # token:
       #   type: String
       #   description: Token to authorize operation.
@@ -255,7 +253,7 @@ Question:
   ListQuestion:
     path: questionnaire/admin/:questionnaire/question/:query
     method: GET
-    title: List of Quesiton of Questionnaire
+    title: List of Question of Questionnaire
     description: Request a list of questions of a questionnaire.
     params:
       questionnaire:

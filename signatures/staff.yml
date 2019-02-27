@@ -60,7 +60,7 @@ Staff:
         description: Total number of reservations.
     errors: {}
   StaffAssignment:
-    path: staff/:staff_id/assignment
+    path: staff/:staff_id/assignment/?:query
     method: GET
     title: Staff Assignmnt
     description: Request a list of staff's assignments (reservations).
@@ -70,7 +70,10 @@ Staff:
         description: Staff UUID
       query:
         type: String
-        description: A qeury to filter/sort assignments.
+        description: A qeury to filter/sort assignments, 
+                      filter -> key = value, 
+                      order -> ordering=-key, 
+                      search -> search=key:value
     returns:
       reservations:
         type: Object[]

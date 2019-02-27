@@ -5914,7 +5914,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "staff/:staff_id/assignment",
+    "url": "staff/:staff_id/assignment/?:query",
     "title": "Staff Assignmnt",
     "name": "StaffAssignment",
     "description": "<p>Request a list of staff's assignments (reservations).</p>",
@@ -5934,7 +5934,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "query",
-            "description": "<p>A qeury to filter/sort assignments.</p>"
+            "description": "<p>A qeury to filter/sort assignments, filter -&gt; key = value, order -&gt; ordering=-key, search -&gt; search=key:value</p>"
           }
         ]
       }

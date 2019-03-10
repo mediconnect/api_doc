@@ -103,6 +103,9 @@ Slot:
       slot_id:
         type: UUID
         description: slot_id
+      availablity:
+        type: Number
+        description: Number of  available slot at this week.
     returns:
       slot:
         type: Object

@@ -165,9 +165,12 @@ Customer:
     title: Customer Contact Us
     description: Handle request for customer contact us
     params:
-      email:
+      to_address:
         type: String
         description: Mandatory customer email for reply.
+      subject:
+        type: String
+        description: Subject of the email
       message:
         type: String
         description: Customer filled message in the frontend contact us page.

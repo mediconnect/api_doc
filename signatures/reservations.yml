@@ -142,7 +142,7 @@ Reservation:
         description: The payment is not able to be processed.
 Reservation_admin:
   Update Reservation:
-    path: /reservation/admin/:res_id
+    path: /reservation/admin/:res_id/
     method: PATCH
     title: Staff's operation to update a Reservation
     description: Update the info of a Reservation.

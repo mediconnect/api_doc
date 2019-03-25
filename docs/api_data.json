@@ -4979,7 +4979,7 @@
   },
   {
     "type": "PATCH",
-    "url": "/reservation/admin/:res_id",
+    "url": "/reservation/admin/:res_id/",
     "title": "Staff's operation to update a Reservation",
     "name": "Update_Reservation",
     "description": "<p>Update the info of a Reservation.</p>",

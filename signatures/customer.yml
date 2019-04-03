@@ -129,15 +129,11 @@ Customer:
       password_confirmation:
         type: String
         description: Mandatory confirmation password.
-  CustomerVerifyRequest:
-    path: /customer/verify/:email
+  CustomerVerifyResend:
+    path: /customer/verify
     method: GET
-    title: Customer Verification Request
+    title: Resend Customer Verification Token
     description: Handle new request for email verification
-    params:
-      customer_id:
-        type: String
-        description: Mandatory customer UUID.
   CustomerVerify:
     path: /customer/verify
     method: POST

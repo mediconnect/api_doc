@@ -1215,24 +1215,11 @@
   },
   {
     "type": "GET",
-    "url": "/customer/verify/:email",
-    "title": "Customer Verification Request",
-    "name": "CustomerVerifyRequest",
+    "url": "/customer/verify",
+    "title": "Resend Customer Verification Token",
+    "name": "CustomerVerifyResend",
     "description": "<p>Handle new request for email verification</p>",
     "group": "Customer",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "customer_id",
-            "description": "<p>Mandatory customer UUID.</p>"
-          }
-        ]
-      }
-    },
     "version": "0.0.0",
     "filename": "build/customer.py",
     "groupTitle": "Customer"

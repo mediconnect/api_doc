@@ -25,7 +25,7 @@ task produceApiDoc {
     group "CompileDoc"
 
     doLast {
-        def taskCmd = "apidoc -i build -o docs";
+        def taskCmd = "apidoc.cmd -i build -o docs";
         println taskCmd;
         def process = Runtime.getRuntime().exec(taskCmd);
         def stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));

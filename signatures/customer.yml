@@ -106,19 +106,19 @@ Customer:
         type: String
         description: Mandatory phone number.
   CustomerResetPasswordRequest:
-    path: /customer/reset
+    path: /customer/forget
     method: POST
     title: Customer Reset Password Request
-    description: Handle request from customer that forgets password.
+    description: Resend a password reset email to the user
     params:
       email:
         type: String
         description: Mandatory email address.
   CustomerResetPassword:
-    path: /customer/reset/password
+    path: /customer/reset
     method: POST
     title: Customer Reset Password
-    description: Handle request from customer that forgets password.
+    description: Reset the user's password if provided with a valid token
     params:
       token:
         type: String

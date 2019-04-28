@@ -181,7 +181,7 @@ def main(source, cache="build/"):
         module = os.path.basename(fname).split(".")[0]
         try:
             with open(fname, 'r', encoding='utf-8') as yin:
-                y = yaml.load(yin)
+                y = yaml.safe_load(yin)
         except Exception as e:
             raise Exception("%s at %s: %s" % (e.__class__.__name__, fname, e))
             

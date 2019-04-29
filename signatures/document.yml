@@ -246,8 +246,8 @@ Document_NEW:
             type: String
             description: Mandatory document description
           file:
-            type: File
-            description: File Object List
+            type: String
+            description: URL of the actual file
           name:
             type: String
             description: Mandatory document name
@@ -296,8 +296,8 @@ Document_NEW:
             type: Stinrg
             description: Document description
           file:
-            type: File
-            description: file object
+            type: String
+            description: URL of the actual file
           name:
             type: String
             description: Document name
@@ -361,8 +361,8 @@ Document_NEW:
             type: Stinrg
             description: Document description
           file:
-            type: File
-            description: file object
+            type: String
+            description: URL of the actual file
           ftype:
             type: UUID
             description: UUID of filetype returned from requirement
@@ -400,8 +400,8 @@ Document_NEW:
         type: String
         description: Document description
       file:
-        type: File
-        description: file object
+        type: String
+        description: URL of the actual file
       name:
         type: String
         description: Document name

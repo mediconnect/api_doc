@@ -221,10 +221,7 @@ Document_NEW:
       upload_at:
         type: DateTime
         description: Mandatory document upload time.
-      owner:
-        type: UUID
-        description: UUID of user uploaded the document
-      obslete:
+      obsolete:
         type: Boolean
         description: Whether this document is outdated, pass False for now.
     returns:
@@ -240,17 +237,17 @@ Document_NEW:
             type: UUID
             description: UUID of reservation this document belongs to
           ftype:
-            type: UUID
-            description: UUID of filetype returned from requirement
+            type: Number
+            description: ID of filetype returned from requirement
           description:
             type: String
             description: Mandatory document description
           file:
             type: String
-            description: URL of the actual file
-          name:
+            description: name of the actual file
+          file_url:
             type: String
-            description: Mandatory document name
+            description: URL of the actual file
           description:
             type: String
             description: Optional description for document.
@@ -258,12 +255,12 @@ Document_NEW:
             type: DateTime
             description: Mandatory document upload time.
           owner:
-            type: UUID
-            description: UUID of user uploaded the document
+            type: Number
+            description: ID of user uploaded the document
           type:
             type: Number
             description: Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate
-          obslete:
+          obsolete:
             type: Boolean
             description: Whether this document is outdated, pass False for now.
     errors:
@@ -297,10 +294,10 @@ Document_NEW:
             description: Document description
           file:
             type: String
-            description: URL of the actual file
-          name:
+            description: name of the actual file
+          file_url:
             type: String
-            description: Document name
+            description: URL of the actual file
           description:
             type: optional<String>
             description: description for document
@@ -308,14 +305,14 @@ Document_NEW:
             type: DateTime
             description: Document upload time.
           owner:
-            type: UUID
-            description: UUID of owner uploaded this document
+            type: Number
+            description: ID of owner uploaded this document
           type:
             type: Number
             description: Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate
           ftype:
-            type: UUID
-            description: UUID of filetype returned from requirement
+            type: Number
+            description: ID of filetype returned from requirement
     errors:
       DocumentNotFound:
         description: The <code>id</code> of the document doesn't exist.
@@ -362,13 +359,13 @@ Document_NEW:
             description: Document description
           file:
             type: String
+            description: name of the actual file
+          file_url:
+            type: String
             description: URL of the actual file
           ftype:
-            type: UUID
-            description: UUID of filetype returned from requirement
-          name:
-            type: String
-            description: Document name
+            type: Number
+            description: ID of filetype returned from requirement
           description:
             type: optional<String>
             description: description for document
@@ -376,46 +373,10 @@ Document_NEW:
             type: DateTime
             description: Document upload time.
           owner:
-            type: UUID
+            type: Number
             description: UUID of owner uploaded this document
           type:
             type: Number
             description: Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate
-  UpdateDocument_NEW:
-    path: reservation/:res/document/:id
-    method: PATCH
-    title: Update Document
-    description: Update a dicument
-    params:
-      res:
-        type: UUID
-        description: UUID of reservation this document belongs to
-      id:
-        type: UUID
-        description: UUID of document
-      ftype:
-        type: UUID
-        description: UUID of filetype returned from requirement
-      description:
-        type: String
-        description: Document description
-      file:
-        type: String
-        description: URL of the actual file
-      name:
-        type: String
-        description: Document name
-      description:
-        type: optional<String>
-        description: description for document
-      upload_at:
-        type: DateTime
-        description: Document upload time.
-      owner:
-        type: UUID
-        description: UUID of owner uploaded this document
-      type:
-        type: Number
-        description: Document type, 0 Original, 1 C2E translate, 2 feedback, 3 E2C translate
       
 

@@ -1,38 +1,90 @@
 Requirement:
-  AlterRequirement:
-    path: /requirement/alter
+  CreateRequirement:
+    path: /requirement/
     method: POST
-    title: Alter/Create a document requirement
-    description: Alter/Create a document requirement.
+    title: Create a document requirement
+    description: Create a document requirement.
     params:
-      disease_id:
+      disease:
         type: UUID
         description: Disease ID
-      hospital_id:
+      hospital:
         type: UUID
         description: Hospital ID
-      types:
+      ftypes_id:
         type: Number[]
         description: List of IDs of file type (ftype) for this requirement
     returns:
-      obsolete_types:
-        type: Number[]
-        description: List of IDs of obsolete file types
-      created:
-        type: Object
-        description: Current status of the requirement
+      id:
+        type: Number
+        description: ID of the newly created requirement
+      disease:
+        type: UUID
+        description: Disease ID
+      hospital:
+        type: UUID
+        description: Hospital ID
+      ftypes:
+        type: Object[]
+        description: Associated ftypes
         fields:
-          disease_id:
-            type: UUID
-            description: Disease ID
-          hospital_id:
-            type: UUID
-            description: Hospital ID
-          types:
-            type: Number[]
-            description: IDs of required document types. This field will be changed to UUID[] soon.
-
-  GetRequirement:
+          id:
+            type: Number
+            description: Ftype ID
+          name:
+            type: String
+            description: Ftype name
+          description:
+            type: String
+            description: 
+          limit:
+            type: Number
+            description: Size limit of the Ftype
+          obsolete:
+            type: Boolean
+            description: This field is not currently used
+          extensions:
+            type: String
+            description: This field is not currently used
+  Delete Requirement:
+    path: /requirement/:req_id/
+    method: DELETE
+    title: Delete a document requirement
+    description: Delete a document requirement.
+    params:
+      req_id:
+        type: Number
+        description: ID of the requirement to be deleted
+  ListAllRequirements:
+    path: /requirement/?hospital=:hospital&?disease=:disease
+    method: GET
+    title: List all requirements
+    description: 
+    params:
+      disease:
+        type: UUID
+        description: Disease ID
+      hospital:
+        type: UUID
+        description: Hospital ID
+    returns:
+      requirements:
+        type: Object[]
+        description: 
+  GetOneRequirement:
+    path: /requirement/:req_id
+    method: GET
+    title: List all requirements
+    description: 
+    params:
+      req_id:
+        type: Number
+        description: Requirement ID
+    returns:
+      requirement:
+        type: Object
+        description: 
+  GetOneRequirement2:
     path: /requirement/:hospital_id/:disease_id
     method: GET
     title: Get a specific document requirement
@@ -45,15 +97,15 @@ Requirement:
         type: UUID
         description: Hospital ID
     returns:
-      disease_id:
+      disease:
         type: UUID
         description: Disease ID
-      hospital_id:
+      hospital:
         type: UUID
         description: Hospital ID
-      types:
+      ftypes_id:
         type: Number[]
-        description: IDs of required document types. This field will be changed to UUID soon.
+        description: List of IDs of file type (ftype) for this requirement
     errors:
       RequirementNotFound:
         description: The combination of <code>hospital_id</code> and <code>disease_id</code>

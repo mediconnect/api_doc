@@ -111,6 +111,9 @@ Transaction:
       reservation:
         type: UUID
         description: The id of the reservation to which the transaction belongs
+      cancel_ongoing:
+        type: Boolean
+        description: Whether to cancel all ongoing transactions before creating a new one. Only one active transaction is allowed for a single reservation at any moment.
     returns:
       transactions:
         type: Object[]

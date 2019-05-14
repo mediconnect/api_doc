@@ -114,7 +114,7 @@ Document:
       DocumentNotFound:
         description: The <code>id</code> of the document doesn't exist.
   ListDocument:
-    path: reservation/:res/:ftype/document/?owner=:user_id&owner_uuid=:user_uuid
+    path: reservation/:res/:ftype/document/?owner=:user_id
     method: GET
     title: List All Documents
     params:
@@ -126,9 +126,6 @@ Document:
         description: UUID of filetype returned from requirement
       user_id:
         type: Number
-        description: ID of owner of a document
-      user_uuid:
-        type: UUID
         description: ID of owner of a document
     returns:
       documents:
@@ -339,7 +336,7 @@ Document_NEW:
       DocumentNotFound:
         description: The <code>id</code> of the document doesn't exist.
   ListDocument_NEW:
-    path: reservation/:res/document/?owner=:user_id
+    path: reservation/:res/document/?owner=:user_id&owner_uuid=:user_uuid
     method: GET
     title: List All Documents
     params:
@@ -347,8 +344,11 @@ Document_NEW:
         type: UUID
         description: UUID of reservation this document belongs to
       user_id:
+        type: Number
+        description: ID of owner of a document
+      user_uuid:
         type: UUID
-        description: UUID of owner of a document
+        description: ID of owner of a document
     returns:
       documents:
         type: Object[]
